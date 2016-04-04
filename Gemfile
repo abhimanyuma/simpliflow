@@ -36,6 +36,10 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # Custom Gems Start from here
+group :test do
+  gem "shoulda-matchers", '3.1.1', require: false
+end
+
 
 group :test do
   gem "rspec-rails", "~> 2.14"
