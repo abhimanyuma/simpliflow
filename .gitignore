@@ -30,3 +30,5 @@ backend/tmp/.keep
 
 # Ignore Byebug command history file.
 backend/.byebug_history
+
+backend/.idea
