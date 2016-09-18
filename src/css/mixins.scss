@@ -1,0 +1,9 @@
+@mixin box-sizing($box-type) {
+    -webkit-box-sizing: $box-type;
+    -moz-box-sizing: $box-type;
+    box-sizing: $box-type;
+}
+
+@mixin background-opacity($color, $alpha) {
+  background-color: rgba(red($color), green($color), blue($color), $alpha);
+}

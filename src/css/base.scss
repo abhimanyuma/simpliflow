@@ -1,0 +1,27 @@
+//Changes to base elements will be here.
+
+div {
+  display: block;
+}
+
+ul, menu, dir {
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+$primary-color: #E5482E;
+$primary-text: #1E282A;
+$secondary-color: #E8C795;
+$secondary-text: #485F6E;
+$inverse-text: #F2F2F2;
+$primary-black: #0E0E0E;
