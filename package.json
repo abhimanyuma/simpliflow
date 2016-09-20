@@ -4,7 +4,7 @@
   "description": "The front-end for Project FLox",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src/app -d dist/app"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +13,11 @@
     "react-dom": "^15.3.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-preset-react": "^6.11.1",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2"
   }
