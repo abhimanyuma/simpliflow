@@ -8,9 +8,9 @@ class NavBar extends React.Component {
   render () {
     return (
       <div className="nav-bar">
-        <Logo />
+        <Logo show_logo={this.props.show_logo}/>
         <Links />
-        <LoginInfo />
+        <LoginInfo show_login={this.props.show_login}/>
       </div>
     );
   }
