@@ -1,26 +1,19 @@
 .nav-bar-list {
-  position: relative;
+  display: inline-flex;
   list-style: none;
   margin: 0;
   padding: 0;
   height: 100%;
-  display: inline-block;
-  height: 100%;
-  vertical-align: top;
 
   > .item {
-    position: relative;
-    margin: 0;
-    height: $nav-bar-height;
-    line-height: $nav-bar-height;
-    display: inherit;
-    zoom: 1;
+    display: inline-flex;
     min-width: 100px;
     @include box-sizing(border-box);
-    text-align: center;
 
-    vertical-align: middle;
+    align-items: center;
+    justify-content: center;
     padding: 0em 1em;
+
     color: $inverse-text;
 
     &:hover {

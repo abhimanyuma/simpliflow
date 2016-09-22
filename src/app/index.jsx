@@ -6,7 +6,9 @@ import Home from './components/Home.jsx'
 class App extends React.Component {
   render () {
     return(
-      <Home compiler="Babel" framework="React"/>
+      <div className="main-container">
+        <Home compiler="Babel" framework="React"/>
+      </div>
     );
   }
 }

@@ -6,7 +6,7 @@ import NavBar from './nav_bar/NavBar.jsx'
 class Home extends React.Component {
   render () {
     return (
-      <div>
+      <div className="home-container">
         <NavBar />
         <h1>Totally from {this.props.compiler} and {this.props.framework}!</h1>
       </div>

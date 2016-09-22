@@ -1,8 +1,11 @@
 $nav-bar-height: 50px;
 
 .nav-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
   @include box-sizing(border-box);
-  width: 100%;
   height: $nav-bar-height;
   white-space: nowrap;
   background-color: $primary-black;
@@ -10,3 +13,4 @@ $nav-bar-height: 50px;
 
 @import './Links';
 @import './Logo';
+@import './LoginInfo'

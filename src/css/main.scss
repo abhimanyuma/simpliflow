@@ -1,6 +1,13 @@
-@import '../../bower_components/purecss-sass/vendor/assets/stylesheets/_purecss';
+//@import '../../bower_components/purecss-sass/vendor/assets/stylesheets/_purecss';
+
 
 @import 'base';
 @import 'mixins';
+
+.main-container{
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
 @import '../app/component_scss/Home';
