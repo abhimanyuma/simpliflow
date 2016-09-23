@@ -32,3 +32,4 @@ backend/tmp/.keep
 backend/.byebug_history
 
 backend/.idea
+backend/shared
