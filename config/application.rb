@@ -39,7 +39,12 @@ module Espresso
       g.helper = false
     end
 
-
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins 'flox.dev'
+        resource '*', :headers => :any, :methods => :any
+      end
+    end
 
   end
 end

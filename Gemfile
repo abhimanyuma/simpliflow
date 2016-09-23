@@ -52,3 +52,5 @@ gem 'pg'
 gem 'omniauth', '>= 1.0.0'
 gem 'devise'
 gem 'devise_token_auth'
+
+gem 'rack-cors'
