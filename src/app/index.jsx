@@ -1,7 +1,10 @@
 import React from 'react';
 import {render} from 'react-dom';
+import Backbone from 'backbone';
 
 import Home from './components/Home.jsx'
+
+
 
 class App extends React.Component {
   render () {
