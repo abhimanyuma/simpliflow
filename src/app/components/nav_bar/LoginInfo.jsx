@@ -7,20 +7,23 @@ class LoginInfo extends React.Component {
     super();
     this.state = {};
 
-    this.state = {user_model: new UserModel()};
+    this.setState({user_model: new UserModel(1, this)});
     this.name = this.name.bind(this);
   }
 
   name() {
     if(this.state.user_model && this.state.user_model.name) {
-      return(this.state.user_model.name);
+      return(this.state.user_model.name());
     } else {
       return(null);
     }
   }
 
+  update_model(model) {
+    this.setState({user_model: model});
+  }
+
   render() {
-    console.log(this);
     return (
       <div className="nav-bar-login-info">
         <p>{this.name() || "Login/Signup"}</p>
