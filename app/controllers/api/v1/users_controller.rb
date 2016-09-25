@@ -3,7 +3,12 @@ class Api::V1::UsersController < ApplicationController
   respond_to :json
 
   def show
-    respond_with User.find(params[:id])
+    if params[:id] == "me"
+      respond_with User.find(1)
+    else
+      respond_with User.find(params[:id])
+    end
+
   end
 
   def create
