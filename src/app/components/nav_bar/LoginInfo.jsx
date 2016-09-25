@@ -1,32 +1,47 @@
 import React from 'react';
-import UserModel from '../../models/user_model.js';
+import ProfileStore from '../../store/profile/ProfileStore.js';
 
 class LoginInfo extends React.Component {
 
   constructor() {
     super();
     this.state = {};
-
-    this.setState({user_model: new UserModel(1, this)});
-    this.name = this.name.bind(this);
+    this.getStateFromStores = this.getStateFromStores.bind(this);
+    this.profileName = this.profileName.bind(this);
+    this._onChange = this._onChange.bind(this);
   }
 
-  name() {
-    if(this.state.user_model && this.state.user_model.name) {
-      return(this.state.user_model.name());
+  componentDidMount() {
+    window.Dispatcher.dispatch({type:"Profile::Get"});
+    window.Store.ProfileStore.addChangeListener(this._onChange);
+  }
+
+  componentWillUnmount() {
+    window.Store.ProfileStore.removeChangeListener(this._onChange);
+  }
+
+  _onChange() {
+    this.setState(this.getStateFromStores());
+  }
+
+  getStateFromStores() {
+    return({
+      profile: window.Store.ProfileStore
+    });
+  }
+
+  profileName() {
+    if(this.state.profile) {
+      return(this.state.profile.name());
     } else {
       return(null);
     }
   }
 
-  update_model(model) {
-    this.setState({user_model: model});
-  }
-
   render() {
     return (
       <div className="nav-bar-login-info">
-        <p>{this.name() || "Login/Signup"}</p>
+        <p>{this.profileName() || "Login/Signup"}</p>
       </div>
     )
   }
