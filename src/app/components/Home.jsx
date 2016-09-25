@@ -1,6 +1,7 @@
 import React from 'react';
 
-import NavBar from './nav_bar/NavBar.jsx'
+import NavBar from './nav_bar/NavBar.jsx';
+import HomeHero from './static_components/HomeHero.jsx';
 
 
 class Home extends React.Component {
@@ -8,7 +9,7 @@ class Home extends React.Component {
     return (
       <div className="home-container">
         <NavBar show_logo={true} show_login={true} />
-        <h1>Totally from {this.props.compiler} and {this.props.framework}!</h1>
+        <HomeHero/>
       </div>
     );
   }

@@ -1,0 +1,17 @@
+.home-hero {
+  display: flex;
+  height: 100vh;
+  background-image: url("~/assets/images/home-hero-bkg.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  flex-direction: column;
+  > .splashtext {
+    color: $inverse-text;
+    font-size: 56px;
+    padding-top: 100px;
+    text-align: center;
+    -webkit-text-stroke: 1px black;
+  }
+
+}
