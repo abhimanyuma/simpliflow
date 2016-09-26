@@ -1,8 +1,10 @@
 .home-container {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 
 @import './nav_bar/NavBar';
 @import './static_components/HomeHero';
+@import './footer/Footer';

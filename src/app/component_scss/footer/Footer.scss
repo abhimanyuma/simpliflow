@@ -1,0 +1,16 @@
+.footer-total {
+  display: flex;
+  background-color: $primary-white;
+  min-height: 150px;
+  text-align: center;
+  > .section {
+    width: 33.333%;
+    &:not(:last-child) {
+      border-right: 2px solid $primary-black;
+    }
+    > h3 {
+      font-variant: small-caps;
+    }
+  }
+
+}
