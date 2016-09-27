@@ -2,12 +2,13 @@ import React from 'react';
 import {render} from 'react-dom';
 import Backbone from 'backbone';
 
-import Router from 'react-router';
+import { Router, Route, hashHistory } from 'react-router'
 import Store from './store/BasicStore.js';
 import AppDispatcher from './dispatcher/AppDispatcher.js';
 
 
-import Home from './components/Home.jsx'
+import Home from './pages/Home.jsx';
+import Login from './pages/Login.jsx';
 
 
 
@@ -19,11 +20,11 @@ class App extends React.Component {
   }
 
   render () {
-
     return(
-      <div className="main-container">
-        <Home compiler="Babel" framework="React"/>
-      </div>
+      <Router history={hashHistory}>
+        <Route path="/" component={Home}/>
+        <Route path="/login" component={Login}/>
+      </Router>
     );
   }
 }

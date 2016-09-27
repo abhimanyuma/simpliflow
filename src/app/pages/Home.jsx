@@ -1,8 +1,8 @@
 import React from 'react';
 
-import NavBar from './nav_bar/NavBar.jsx';
-import HomeHero from './static_components/HomeHero.jsx';
-import Footer from './footer/Footer.jsx';
+import NavBar from '../components/nav_bar/NavBar.jsx';
+import HomeHero from '../components/static_components/HomeHero.jsx';
+import Footer from '../components/footer/Footer.jsx';
 
 
 class Home extends React.Component {
