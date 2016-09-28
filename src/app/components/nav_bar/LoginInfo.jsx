@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileStore from '../../store/profile/ProfileStore.js';
+import { Link } from 'react-router';
 
 class LoginInfo extends React.Component {
 
@@ -41,7 +42,14 @@ class LoginInfo extends React.Component {
   render() {
     return (
       <div className="nav-bar-login-info">
-        <p>{this.profileName() || "Login/Signup"}</p>
+        {
+          this.profileName() ||
+          <Link to="/login">
+            <button className="pure-button">
+              Login
+            </button>
+          </Link>
+        }
       </div>
     )
   }
