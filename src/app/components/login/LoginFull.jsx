@@ -11,7 +11,6 @@ class LoginFull extends React.Component {
     event.preventDefault();
     let username = this.refs.username.value;
     let password = this.refs.password.value;
-    console.log(`Trying to log on with ${username} and ${password}`);
     this.setState({
       username: username,
       password: password
