@@ -16,6 +16,6 @@
     "tests"
   ],
   "dependencies": {
-    "pure": "^0.6.0"
+    "purecss-sass": "0.6.0"
   }
 }

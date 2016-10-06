@@ -1,34 +1,27 @@
 import React from 'react';
-import ProfileStore from '../../store/profile/ProfileStore.js';
 import { Link } from 'react-router';
+import store from '../../store/Store.js';
 
 class LoginInfo extends React.Component {
 
   constructor() {
     super();
     this.state = {};
-    this.getStateFromStores = this.getStateFromStores.bind(this);
     this.profileName = this.profileName.bind(this);
     this._onChange = this._onChange.bind(this);
   }
 
   componentDidMount() {
-    window.Dispatcher.dispatch({type:"Profile::Get"});
-    window.Store.ProfileStore.addChangeListener(this._onChange);
+    store.dispatch({
+      type:"Profile::Get"
+    });
   }
 
   componentWillUnmount() {
-    window.Store.ProfileStore.removeChangeListener(this._onChange);
+    store.ProfileStore.removeChangeListener(this._onChange);
   }
 
   _onChange() {
-    this.setState(this.getStateFromStores());
-  }
-
-  getStateFromStores() {
-    return({
-      profile: window.Store.ProfileStore
-    });
   }
 
   profileName() {
