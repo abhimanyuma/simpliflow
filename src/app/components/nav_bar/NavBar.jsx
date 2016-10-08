@@ -6,6 +6,7 @@ import Links from './Links.jsx';
 
 class NavBar extends React.Component {
   render () {
+    console.log(this.props);
     return (
       <div className="nav-bar">
         <Logo show_logo={this.props.show_logo}/>

@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import store from '../../store/Store.js';
 
+import { GetProfile } from '../../actions/ProfileActions.js';
+
 class LoginInfo extends React.Component {
 
   constructor() {
@@ -12,13 +14,10 @@ class LoginInfo extends React.Component {
   }
 
   componentDidMount() {
-    store.dispatch({
-      type:"Profile::Get"
-    });
+    store.dispatch(GetProfile());
   }
 
   componentWillUnmount() {
-    store.ProfileStore.removeChangeListener(this._onChange);
   }
 
   _onChange() {

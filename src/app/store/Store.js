@@ -7,7 +7,15 @@ class BasicStore {
   }
 
   dispatch(action) {
-    this.store.dispatch(action);
+    return this.store.dispatch(action);
+  }
+  
+  getState() {
+    return this.store.getState();
+  }
+
+  subscribe(callback) {
+    return this.store.subscribe(callback);
   }
 
 }
