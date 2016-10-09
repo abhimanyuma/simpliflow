@@ -1,49 +1,31 @@
 import React from 'react';
-import { Link } from 'react-router';
-import store from '../../store/Store.js';
 
-import { GetProfile } from '../../actions/ProfileActions.js';
+import LoginButton from "../common/LoginButton.jsx";
 
 class LoginInfo extends React.Component {
 
-  constructor() {
-    super();
-    this.state = {};
-    this.profileName = this.profileName.bind(this);
-    this._onChange = this._onChange.bind(this);
+  constructor(props) {
+    super(props);
   }
 
-  componentDidMount() {
-    store.dispatch(GetProfile());
-  }
-
-  componentWillUnmount() {
-  }
-
-  _onChange() {
-  }
-
-  profileName() {
-    if(this.state.profile) {
-      return(this.state.profile.name());
-    } else {
-      return(null);
+  computeNameFromProfile(profile) {
+    if(profile.synced && profile.get) {
+      return profile.get("name");
     }
+    return null;
   }
 
   render() {
-    return (
-      <div className="nav-bar-login-info">
-        {
-          this.profileName() ||
-          <Link to="/login">
-            <button className="pure-button">
-              Login
-            </button>
-          </Link>
-        }
-      </div>
-    )
+    let name = this.computeNameFromProfile(this.props.profile);
+    if(name) {
+      return( 
+        <div className="nav-bar-login-info">
+          { name }
+        </div>
+      );
+    } else {
+      return(<LoginButton />);
+    }
   }
 }
 

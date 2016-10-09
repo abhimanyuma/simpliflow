@@ -1,17 +1,16 @@
 import React from 'react';
 
 import Logo from './Logo.jsx';
-import LoginInfo from './LoginInfo.jsx';
+import LoginInfoContainer from './LoginInfoContainer.jsx';
 import Links from './Links.jsx';
 
 class NavBar extends React.Component {
   render () {
-    console.log(this.props);
     return (
       <div className="nav-bar">
         <Logo show_logo={this.props.show_logo}/>
         <Links />
-        <LoginInfo show_login={this.props.show_login}/>
+        <LoginInfoContainer show_login={this.props.show_login}/>
       </div>
     );
   }

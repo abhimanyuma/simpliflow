@@ -1,7 +1,7 @@
 import ProfileModel from '../models/ProfileModel.js';
 
 
-var profile_reducer = function(state={}, action) {
+export const profile = function(state={}, action) {
   let object = action.type.split("::")[0]
   let method = action.type.split("::")[1]
   if(object && object == "Profile" && method) {
@@ -26,4 +26,3 @@ var profile_reducer = function(state={}, action) {
 
   return state;
 }
-export default profile_reducer;

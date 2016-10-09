@@ -4,10 +4,10 @@ import {render} from 'react-dom';
 import { Router, Route, hashHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
-import store from './store/Store.js';
-
 import Workspace from './components/Workspace.jsx';
 
+import { createStore } from 'redux';
+import reducer from './reducers/Reducer.js';
 
 import HomeHero from './components/static_components/HomeHero.jsx';
 import LoginFull from './components/login/LoginFull.jsx';
@@ -24,6 +24,8 @@ class App extends React.Component {
     );
   }
 }
+
+let store = createStore(reducer);
 
 render(
   <Provider store={store}>
