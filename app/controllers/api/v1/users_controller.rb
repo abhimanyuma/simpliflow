@@ -4,7 +4,11 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     if params[:id] == "me"
-      respond_with User.find(1)
+      if current_user
+        render json: {status: true, data: current_user}, status: 200
+      else
+        render json: {}, status: 200
+      end
     else
       respond_with User.find(params[:id])
     end
@@ -16,7 +20,7 @@ class Api::V1::UsersController < ApplicationController
     if user.save
       render json: user, status: 201, location: [:api, user]
     else
-      render json: { errors: user.errors }, status: 422
+      render json: { error: user.errors }, status: 422
     end
   end
 

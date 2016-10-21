@@ -1,5 +1,7 @@
 class Api::V1::SessionsController < ApplicationController
 
+  skip_before_filter :verify_authenticity_token, :only => :create
+
   def create
 
     user_password = session_params[:password]
