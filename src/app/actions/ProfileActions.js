@@ -11,7 +11,6 @@ export function requestProfile(refresh = false) {
 
 export const SET_PROFILE = 'Profile::Set';
 export function setProfile(profile) {
-  console.log("Atleast here");
   return {
     type: SET_PROFILE,
     data: profile
@@ -23,7 +22,6 @@ export function fetchProfile(profile) {
     dispatch(requestProfile(profile));
     let url = "/users/me";
     let success_cb = (data) => {
-      console.log("Ding dong");
       dispatch(setProfile(data));
     }
     let error_cb = (errors) => {

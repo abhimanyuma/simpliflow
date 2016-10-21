@@ -1,4 +1,4 @@
-import ModelGenerator from '../ModelGenerator.js';
+import ModelActions from '../ModelActions.js';
 import Immutable from 'immutable';
 
 
@@ -10,16 +10,14 @@ export const profile = function(state=Immutable.Map({}), action) {
       case "Request":
         //Set state to emptry profile
         if (Immutable.is(Immutable.Map.empty, state)) {
-          state = ModelGenerator.from_data({},"profile");
+          state = ModelActions.from_data({},"profile");
         }
-        state = state.set('loading', true);
+        state = ModelActions.set_loading(state);
         
         break;
       case "Set":
-        console.log("Here");
-        action.data['loading'] = false;
-        state = Immutable.Map(action.data)
-        console.log(state);
+        state = ModelActions.set_data(state, action.data);
+        state = ModelActions.set_loaded(state);
         break;
       default:
        break;
