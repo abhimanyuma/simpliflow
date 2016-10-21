@@ -1,27 +1,29 @@
-import ProfileModel from '../models/ProfileModel.js';
+import ModelGenerator from '../ModelGenerator.js';
+import Immutable from 'immutable';
 
 
-export const profile = function(state={}, action) {
+export const profile = function(state=Immutable.Map({}), action) {
   let object = action.type.split("::")[0]
   let method = action.type.split("::")[1]
   if(object && object == "Profile" && method) {
     switch (method) {
-      case "Get":
-        let fetch = false;
+      case "Request":
+        //Set state to emptry profile
+        if (Immutable.is(Immutable.Map.empty, state)) {
+          state = ModelGenerator.from_data({},"profile");
+        }
+        state = state.set('loading', true);
         
-        if(!(state.profile_model)) {
-          state.profile_model = new ProfileModel();
-          fetch = true
-        }
-
-        if(action.reset == true || fetch){
-          state.profile_model.fetch();
-        }
-
+        break;
+      case "Set":
+        console.log("Here");
+        action.data['loading'] = false;
+        state = Immutable.Map(action.data)
+        console.log(state);
         break;
       default:
-        return state;
-    }
+       break;
+   }  
   }
 
   return state;

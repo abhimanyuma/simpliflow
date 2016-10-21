@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import LoginInfo from './LoginInfo.jsx';
 
-import { GetProfile } from '../../actions/ProfileActions.js';
+import { fetchProfile } from '../../actions/ProfileActions.js';
 
 let LoginInfoContainer  = connect(
   function mapStateToProps(state) {
@@ -13,8 +13,8 @@ let LoginInfoContainer  = connect(
   },
   function mapDispatchToProps(dispatch) {
     return {
-      getProfile: () => {
-        dispatch(GetProfile())
+      loadProfile: () => {
+        dispatch(fetchProfile())
       }
     }
   }

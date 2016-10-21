@@ -6,10 +6,13 @@ class LoginInfo extends React.Component {
 
   constructor(props) {
     super(props);
+    if(!props.profile || !props.profile["loaded"]) {
+      props.loadProfile();
+    }
   }
 
   computeNameFromProfile(profile) {
-    if(profile.synced && profile.get) {
+    if(profile["sync"] && profile.get) {
       return profile.get("name");
     }
     return null;

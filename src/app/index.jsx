@@ -6,8 +6,10 @@ import { Provider } from 'react-redux';
 
 import Workspace from './components/Workspace.jsx';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers/Reducer.js';
+import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 
 import HomeHero from './components/static_components/HomeHero.jsx';
 import LoginFull from './components/login/LoginFull.jsx';
@@ -25,7 +27,15 @@ class App extends React.Component {
   }
 }
 
-let store = createStore(reducer);
+const loggerMiddleware = createLogger();
+
+let store = createStore(
+  reducer, 
+  applyMiddleware(
+    thunkMiddleware,
+    loggerMiddleware
+  )
+);
 
 render(
   <Provider store={store}>
