@@ -1,3 +1,5 @@
+import { get_auth_token } from './authentication.js';
+
 function clean(str, character) {
     let clean_str = ""
     let broken = false;
@@ -70,8 +72,7 @@ export function fetch_object(url, success_cb, error_cb) {
         error_cb(http_status, status, errors);
     })
     req.open("GET", full_url);
-    console.log(store);
-    req.setRequestHeader("Authorization", "RNXxPybmsWceBr7FkZLZ");
+    req.setRequestHeader("Authorization", get_auth_token());
     req.send();
     //r.open("GET",url)
 }

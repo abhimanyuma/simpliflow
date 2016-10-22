@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import URLDictionary from './urls.js';
-import { fetch_object } from './common/utils.js';
+import { fetch_object } from './utils.js';
 
 let ModelActions = {
   from_data: (data, name = "") => {
