@@ -12,7 +12,7 @@ import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
 import HomeHero from './components/static_components/HomeHero.jsx';
-import LoginFull from './components/login/LoginFull.jsx';
+import LoginFormContainer from './components/login/LoginFormContainer.jsx';
 
 class App extends React.Component {
 
@@ -20,7 +20,7 @@ class App extends React.Component {
     return(
       <Router history={hashHistory}>
         <Route path="/" component={Workspace}>
-          <Route path="/login" component={LoginFull} />
+          <Route path="/login" component={LoginFormContainer} />
         </Route>
       </Router>
     );
