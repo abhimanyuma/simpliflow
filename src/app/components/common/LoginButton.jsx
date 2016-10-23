@@ -11,13 +11,12 @@ class LoginButton extends React.Component {
 
   render() {
     return (
-      <div className="nav-bar-login-info">
-          <Link to="/login">
-            <button className="pure-button">
-              Login
-            </button>
-          </Link>
-      </div>
+      <Link to="/login" className="button"> 
+        <span className="icon">
+          <i className="fa fa-user"></i>
+        </span>
+        <span>Login</span>
+      </Link>
     )
   }
 }

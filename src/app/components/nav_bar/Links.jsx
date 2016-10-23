@@ -3,11 +3,11 @@ import React from 'react';
 class Links extends React.Component {
   render () {
     return (
-      <ul className="nav-bar-list">
-        <li className="item"><a>Two</a></li>
-        <li className="item"><a>One</a></li>
-        <li className="item"><a>Four</a></li>
-      </ul>
+      <div className="nav-center">
+        <a className="nav-item is-tab is-active">One</a>
+        <a className="nav-item is-tab">Four</a>
+        <a className="nav-item is-tab">Two</a>
+    </div>
     );
   }
 }

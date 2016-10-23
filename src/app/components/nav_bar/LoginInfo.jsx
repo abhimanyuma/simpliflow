@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LoginButton from "../common/LoginButton.jsx";
+import UserButtonContainer from "../common/UserButtonContainer.jsx";
 
 class LoginInfo extends React.Component {
 
@@ -22,12 +23,20 @@ class LoginInfo extends React.Component {
     let name = this.computeNameFromProfile(this.props.profile);
     if(name) {
       return( 
-        <div className="nav-bar-login-info">
-          { name }
+        <div className="nav-right nav-menu">
+          <span className="nav-item">
+            <UserButtonContainer/>
+          </span>
         </div>
       );
     } else {
-      return(<LoginButton />);
+      return(
+        <div className="nav-right nav-menu">
+          <span className="nav-item">
+            <LoginButton/>
+          </span>
+        </div>
+      );
     }
   }
 }

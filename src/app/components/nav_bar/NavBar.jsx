@@ -7,11 +7,11 @@ import Links from './Links.jsx';
 class NavBar extends React.Component {
   render () {
     return (
-      <div className="nav-bar">
+      <nav className="nav has-shadow">
         <Logo show_logo={this.props.show_logo}/>
         <Links />
         <LoginInfoContainer show_login={this.props.show_login}/>
-      </div>
+      </nav>
     );
   }
 }
