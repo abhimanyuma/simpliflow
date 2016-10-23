@@ -6,15 +6,6 @@ class LoginForm extends React.Component {
     super(props);
   }
 
-  loginSubmit(event) {
-    event.preventDefault();
-    let username = this.refs.username.value;
-    let password = this.refs.password.value;
-    this.props.login(username, password);
-    this.refs.username.value = "";
-    this.refs.password.value = "";
-  }
-
   render () {
     if(this.props.profile.get("user_name")) {
       return (
@@ -25,7 +16,7 @@ class LoginForm extends React.Component {
     } else {
       return (
         <div className="login-form-container">
-          <form className="pure-form login-form" onSubmit={this.loginSubmit.bind(this)}>
+          <form className="pure-form login-form" onSubmit={e => this.props.loginSubmit(e, this.refs)}>
             <h3>Login</h3>
             <fieldset className="pure-group input-fields">
                 <input type="text" className="pure-input-1" ref="username" placeholder="Username" />

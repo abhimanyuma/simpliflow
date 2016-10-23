@@ -13,8 +13,13 @@ let LoginFormContainer  = connect(
   },
   function mapDispatchToProps(dispatch) {
     return {
-      login: (username, password) => {
+      loginSubmit: (event, values) => {
+        event.preventDefault();
+        let username = values.username.value;
+        let password = values.password.value;
         dispatch(loginUser(username, password));
+        values.username.value = "";
+        values.password.value = "";
       }
     }
   }
