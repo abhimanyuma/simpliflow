@@ -26,6 +26,10 @@ module.exports = [
         {
           test: /\.scss$/,
           loaders: ["style","css","sass"]
+        },
+        {
+            test: /\.(jpe|jpg|woff|woff2|eot|ttf|svg)(\?.*$|$)/,
+            loader: 'file?limit=100000&name=./assets/[ext]/[hash].[ext]'
         }
       ]
     }

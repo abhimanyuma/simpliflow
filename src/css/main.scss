@@ -6,7 +6,10 @@ $family-serif: "Georgia", serif; // Add a serif family
 // For example, by default, the $danger color is $red and the font is sans-serif
 // You can change these values:
 
-@import "../../node_modules/bulma/bulma";
+@import "~bulma/bulma";
+
+$fa-font-path: "~font-awesome/fonts";
+@import "~font-awesome/scss/font-awesome";
 
 @import 'mixins';
 
@@ -15,5 +18,3 @@ $family-serif: "Georgia", serif; // Add a serif family
   min-height: 100vh;
   flex-direction: column;
 }
-
-@import '../app/component_scss/Home';
