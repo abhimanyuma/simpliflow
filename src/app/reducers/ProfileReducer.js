@@ -20,6 +20,9 @@ export const profile = function(state=Immutable.Map({}), action) {
         state = ModelActions.set_loaded(state);
         set_auth_from_user(state);
         break;
+      case "Unset":
+        state = ModelActions.from_data({},"profile");
+        state = ModelActions.set_loaded(state);
       default:
        break;
    }  

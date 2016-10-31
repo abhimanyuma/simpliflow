@@ -1,0 +1,20 @@
+.user-button {
+  align-items: flex-start;
+
+  > .dropdown {
+    display: none;
+  }
+}
+
+.user-button:hover {
+
+  > .dropdown {
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    margin-top: 50%;
+    display: block;
+    padding: 5px;
+    
+  }
+}

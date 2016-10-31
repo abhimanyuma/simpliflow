@@ -13,6 +13,8 @@ $fa-font-path: "~font-awesome/fonts";
 
 @import 'mixins';
 
+@import './components/user_button.scss';
+
 .main-container{
   display: flex;
   min-height: 100vh;

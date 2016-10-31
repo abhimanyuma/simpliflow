@@ -1,4 +1,4 @@
-import { fetch_object, create_object } from '../common/utils.js'
+import { fetch_object, create_object, delete_object } from '../common/utils.js'
 
 const REQUEST_PROFILE = 'Profile::Response';
 
@@ -14,6 +14,28 @@ export function setProfile(profile) {
   return {
     type: SET_PROFILE,
     data: profile
+  }
+}
+
+const UNSET_PROFILE = 'Profile::Unset';
+export function unsetProfile() {
+  return {
+    type: UNSET_PROFILE
+  }
+}
+
+const LOGOUT_PROFILE = 'Profile::Logout'
+export function logoutCurrentProfile(profile) {
+ return function(dispatch) {
+    dispatch(requestProfile());
+    let url = `/sessions/${profile.get('auth_token')}`;
+    let success_cb = (data) => {
+      dispatch(unsetProfile(data));
+    }
+    let error_cb = (errors) => {
+      console.log(errors);
+    }
+    delete_object(url, null, success_cb, error_cb);
   }
 }
 
@@ -49,7 +71,6 @@ export function loginUser(username, password) {
         "password": password
       }
     }
-    console.log(data);
     create_object(url, data, success_cb,error_cb);
   }
 }

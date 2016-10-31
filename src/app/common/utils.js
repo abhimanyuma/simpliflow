@@ -24,6 +24,9 @@ function clean(str, character) {
 
 export function process_response(request) {
   let http_status = request.status;
+  if (!(request.response)) {
+    return([http_status, null, null]);
+  }
   let full_response = JSON.parse(request.response);
   let status = full_response["status"] || false;
   if(status == true) {
@@ -59,7 +62,7 @@ function ajax_request(method, url, options) {
   let req = new XMLHttpRequest();
   req.addEventListener("load", (event) => {
     let [http_status, status, response] = process_response(req);
-    if(req.status == 200 && options.success_cb) {
+    if(((req.status == 200)||(req.status == 204)) && options.success_cb) {
       options.success_cb(response, status, http_status);
     } else if(options.error_cb)  {
       options.error_cb(response, status, http_status);
@@ -99,4 +102,13 @@ export function create_object(url, data, success_cb, error_cb) {
     data: data 
   };
   ajax_request("POST", url, options);
+}
+
+export function delete_object(url, data, success_cb, error_cb) {
+  let options = {
+    success_cb: success_cb,
+    error_cb: error_cb,
+    data: data
+  };
+  ajax_request("DELETE", url, options);
 }
