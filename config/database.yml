@@ -4,7 +4,7 @@ development:
   database: flox_development
   pool: 5
   username: flox_development
-  password: postgresql
+  password: helloworld
 
 test:
   adapter: postgresql

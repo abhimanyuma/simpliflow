@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20160923232402) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "auth_token",             default: ""
     t.string   "name"
     t.string   "user_name"
-    t.string   "auth_token",             default: ""
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
