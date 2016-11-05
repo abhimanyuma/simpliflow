@@ -13,6 +13,7 @@ import createLogger from 'redux-logger';
 
 import HomeHero from './components/static_components/HomeHero.jsx';
 import LoginPage from './components/login/LoginPage.jsx';
+import SignupPage from './components/signup/SignupPage.jsx';
 
 class App extends React.Component {
 
@@ -21,6 +22,7 @@ class App extends React.Component {
       <Router history={hashHistory}>
         <Route path="/" component={Workspace}>
           <Route path="/login" component={LoginPage} />
+          <Route path="/signup" component={SignupPage} />
         </Route>
       </Router>
     );
