@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 class LoginForm extends React.Component {
 
@@ -29,7 +30,8 @@ class LoginForm extends React.Component {
                   <i className="fa fa-user"></i>
                 </p>
                 <p className="control has-icon">
-                  <input className="input" type="password" ref="password" placeholder="Password"/>
+                  <input className="input" type="password" ref="password" placeholder="Password"
+                   onKeyPress={e => this.props.passwordKeyPress(e, this.refs, this.props.loginSubmit)}/>
                   <i className="fa fa-lock"></i>
                 </p>
               </div>
@@ -39,6 +41,9 @@ class LoginForm extends React.Component {
                 </a>
               </footer>
             </div>
+            <Link to="/signup" className="button is-outlined is-pulled-right m2t">
+              Sign Up
+            </Link>
           </div>
         </div>
       );

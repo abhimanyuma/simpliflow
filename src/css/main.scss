@@ -11,6 +11,7 @@ $family-serif: "Georgia", serif; // Add a serif family
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
 
+@import 'base';
 @import 'mixins';
 
 @import './components/user_button.scss';

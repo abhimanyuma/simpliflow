@@ -12,7 +12,7 @@ class LoginPage extends React.Component {
       <section className="section is-medium">
         <div className="container ">
           <div className="heading">
-            <h1 className="title has-text-centered">Login/Sign Up</h1>
+            <h1 className="title has-text-centered">Login</h1>
               <LoginFormContainer />
           </div>
         </div>
