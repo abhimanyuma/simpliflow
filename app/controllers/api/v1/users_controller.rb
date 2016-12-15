@@ -1,5 +1,7 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :authenticate_with_token!, only: [:update, :destroy]
+  
+  skip_before_filter :verify_authenticity_token, :only => :create
+
   respond_to :json
 
   def show
@@ -16,11 +18,15 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      render json: user, status: 201, location: [:api, user]
+    if current_user
+      render json: {status: false, error: "You are already logged in"}, status: 400
     else
-      render json: { error: user.errors }, status: 422
+      user = User.new(user_params)
+      if user.save
+        render json: user, status: 201, location: [:api, user]
+      else
+        render json: { error: user.errors }, status: 400
+      end
     end
   end
 
@@ -42,6 +48,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:email, :password, :password_confirmation)
+      params.require(:user).permit(:email, :name, :password, :password_confirmation)
     end
 end
