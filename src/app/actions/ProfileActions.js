@@ -74,3 +74,35 @@ export function loginUser(username, password) {
     create_object(url, data, success_cb,error_cb);
   }
 }
+
+const CREATE_PROFILE = "Profile::Create"
+export function createUser(name, password, password_confirmation, email) {
+  return function(dispatch) {
+    let url = "/users";
+    let success_cb = (data) => {
+      dispatch(setProfile(data));
+    }
+    let error_cb = (errors) => {
+      console.log(errors);
+    }
+    let data = {
+      "user": {
+        "name": name,
+        "password": password,
+        "password_confirmation": password_confirmation,
+        "email": email
+      }
+    }
+    let errors = null // validate_user(username, password, password_confirmation, email)
+
+    if (errors) {
+      dispatch(singupFail({
+        status: false, 
+        errors: errors
+      }))
+    } else {
+      create_object(url, data, success_cb, error_cb);
+    }
+  }
+}
+

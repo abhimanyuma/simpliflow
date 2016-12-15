@@ -26,7 +26,7 @@ class SignupForm extends React.Component {
               </header>
               <form className="card-content" onSubmit={e => this.props.signupSubmit(this.refs)}>
                 <p className="control has-icon">
-                  <input className="input" type="text" ref="username" placeholder="Name"/>
+                  <input className="input" type="text" ref="name" placeholder="Name"/>
                   <i className="fa fa-user"></i>
                 </p>
                 <p className="control has-icon">
