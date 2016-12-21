@@ -23,9 +23,9 @@ class Api::V1::UsersController < ApplicationController
     else
       user = User.new(user_params)
       if user.save
-        render json: user, status: 201, location: [:api, user]
+        render json: {status: true, data: user}, status: 201, location: [:api, user]
       else
-        render json: { error: user.errors }, status: 400
+        render json: { status: false, error: user.errors }, status: 400
       end
     end
   end
