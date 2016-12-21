@@ -57,12 +57,29 @@ export function get_full_url(partial) {
   return `${window.location.protocol}//${safe_join(host, partial)}`;
 }
 
+function http_code_kind(code) {
+  let code_num = parseInt(code)
+  if (code_num < 200) {
+    return "INFO"
+  } else if (code_num < 300) {
+    return "SUCCESS"
+  } else if (code_num < 400) {
+    return "REDIRECT"
+  } else if (code_num < 500) {
+    return "CLIENT_ERROR"
+  } else if (code_num < 600) {
+    return "SERVER_ERROR"
+  } else {
+    return "UNKNOWN_ERROR"
+  }
+}
+
 function ajax_request(method, url, options) {
   let full_url = get_full_url(url);
   let req = new XMLHttpRequest();
   req.addEventListener("load", (event) => {
     let [http_status, status, response] = process_response(req);
-    if(((req.status == 200)||(req.status == 204)) && options.success_cb) {
+    if((http_code_kind(req.status) == "SUCCESS") && options.success_cb) {
       options.success_cb(response, status, http_status);
     } else if(options.error_cb)  {
       options.error_cb(response, status, http_status);
