@@ -1,0 +1,7 @@
+[ignore]
+.*/node_modules/flux/.*
+[include]
+
+[libs]
+
+[options]

@@ -1,8 +1,10 @@
+// @flow
+// TODO: Add a dispatch function type
 import { fetch_object, create_object, delete_object } from '../common/utils.js'
 
 const REQUEST_PROFILE = 'Profile::Response';
 
-export function requestProfile(refresh = false) {
+export function requestProfile(refresh: boolean = false): {type: string, refresh: boolean} {
   return {
     type: REQUEST_PROFILE,
     refresh: false    
@@ -10,7 +12,7 @@ export function requestProfile(refresh = false) {
 }
 
 const SET_PROFILE = 'Profile::Set';
-export function setProfile(profile) {
+export function setProfile(profile: Object): {type: string, data: Object} {
   return {
     type: SET_PROFILE,
     data: profile
@@ -18,14 +20,14 @@ export function setProfile(profile) {
 }
 
 const UNSET_PROFILE = 'Profile::Unset';
-export function unsetProfile() {
+export function unsetProfile(): {type: string} {
   return {
     type: UNSET_PROFILE
   }
 }
 
 const LOGOUT_PROFILE = 'Profile::Logout'
-export function logoutCurrentProfile(profile) {
+export function logoutCurrentProfile(profile: Object): Function {
  return function(dispatch) {
     dispatch(requestProfile());
     let url = `/sessions/${profile.get('auth_token')}`;
@@ -39,9 +41,9 @@ export function logoutCurrentProfile(profile) {
   }
 }
 
-export function fetchProfile(profile) {
+export function fetchProfile(profile: Object): Function {
   return function(dispatch) {
-    dispatch(requestProfile(profile));
+    dispatch(requestProfile());
     let url = "/users/me";
     let success_cb = (data) => {
       dispatch(setProfile(data));
@@ -55,7 +57,7 @@ export function fetchProfile(profile) {
 }
 
 const LOGIN_PROFILE = "Profile::Login"
-export function loginUser(username, password) {
+export function loginUser(username: string, password: string): Function {
   return function(dispatch) {
     dispatch(requestProfile());
     let url = "/sessions";
@@ -76,7 +78,7 @@ export function loginUser(username, password) {
 }
 
 const CREATE_PROFILE = "Profile::Create"
-export function createUser(name, password, password_confirmation, email) {
+export function createUser(name: string, password: string, password_confirmation: string, email: string): Function {
   return function(dispatch) {
     let url = "/users";
     let success_cb = (data) => {
@@ -96,10 +98,7 @@ export function createUser(name, password, password_confirmation, email) {
     let errors = null // validate_user(username, password, password_confirmation, email)
 
     if (errors) {
-      dispatch(singupFail({
-        status: false, 
-        errors: errors
-      }))
+      console.log(errors);
     } else {
       create_object(url, data, success_cb, error_cb);
     }

@@ -1,8 +1,9 @@
+// @flow
 import { get_auth_token } from './authentication.js';
 
-function clean(str, character) {
-  let clean_str = ""
-  let broken = false;
+function clean(str: string, character: string): string {
+  let clean_str: string = ""
+  let broken: boolean = false;
   for (let i = 0, counter=0; i < str.length; i++) {
     if((str[i] !== character) || broken) {
       clean_str += str[i];
@@ -22,10 +23,11 @@ function clean(str, character) {
 
 }
 
-export function process_response(request) {
+// TODO: Change from object type
+export function process_response(request: Object): [number, boolean, Array<number>] {
   let http_status = request.status;
   if (!(request.response)) {
-    return([http_status, null, null]);
+    return([http_status, false, []]);
   }
   let full_response = JSON.parse(request.response);
   let status = full_response["status"] || false;
@@ -38,27 +40,26 @@ export function process_response(request) {
   }
 }
 
-export function reverse_string(str) {
-  let reversed_string = "";
+export function reverse_string(str: string): string {
+  let reversed_string: string = "";
   for (let i = str.length - 1; i >= 0; i--) {
     reversed_string += str[i];
   }
   return reversed_string;
 }
 
-export function safe_join() {
-  let arg_array = Array.from(arguments);
-  let clean_args = arg_array.map(str => clean(str, "/"));
+export function safe_join(...strs: string[]): string {
+  let clean_args: string[] = strs.map(str => clean(str, "/"));
   return clean_args.join("/");
 }
 
-export function get_full_url(partial) {
-  let host = `api.${window.location.host}`;
+export function get_full_url(partial: string): string {
+  let host: string = `api.${window.location.host}`;
   return `${window.location.protocol}//${safe_join(host, partial)}`;
 }
 
-function http_code_kind(code) {
-  let code_num = parseInt(code)
+function http_code_kind(code: number | string):string  {
+  let code_num: number = parseInt(code)
   if (code_num < 200) {
     return "INFO"
   } else if (code_num < 300) {
@@ -74,8 +75,8 @@ function http_code_kind(code) {
   }
 }
 
-function ajax_request(method, url, options) {
-  let full_url = get_full_url(url);
+function ajax_request(method: string, url: string, options: Object): void {
+  let full_url: string = get_full_url(url);
   let req = new XMLHttpRequest();
   req.addEventListener("load", (event) => {
     let [http_status, status, response] = process_response(req);
@@ -104,7 +105,7 @@ function ajax_request(method, url, options) {
   //r.open("GET",url)
 }
 
-export function fetch_object(url, success_cb, error_cb) {
+export function fetch_object(url: string, success_cb: Function, error_cb: Function) {
   let options = {
     success_cb: success_cb,
     error_cb: error_cb
@@ -112,7 +113,7 @@ export function fetch_object(url, success_cb, error_cb) {
   ajax_request("GET", url, options);
 }
 
-export function create_object(url, data, success_cb, error_cb) {
+export function create_object(url: string, data: Object, success_cb: Function, error_cb: Function) {
   let options = {
     success_cb: success_cb,
     error_cb: error_cb,
@@ -121,7 +122,7 @@ export function create_object(url, data, success_cb, error_cb) {
   ajax_request("POST", url, options);
 }
 
-export function delete_object(url, data, success_cb, error_cb) {
+export function delete_object(url: string, data: ?Object, success_cb: Function, error_cb: Function)  {
   let options = {
     success_cb: success_cb,
     error_cb: error_cb,

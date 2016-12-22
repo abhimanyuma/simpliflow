@@ -12,7 +12,7 @@ class LoginInfo extends React.Component {
     }
   }
 
-  computeNameFromProfile(profile) {
+  computeNameFromProfile(profile): string {
     if(profile.get("sync") && profile.get) {
       return profile.get("name");
     }
