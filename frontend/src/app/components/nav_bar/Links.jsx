@@ -1,3 +1,5 @@
+//@flow
+
 import React from 'react';
 
 class Links extends React.Component {

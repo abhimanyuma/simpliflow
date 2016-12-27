@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 
 class HomeHero extends React.Component {

@@ -1,11 +1,12 @@
+//@flow
+
 import React from 'react';
 import { Link } from 'react-router';
 
 
-
 class LoginButton extends React.Component {
 
-  constructor(props) {
+  constructor(props: EmptyObject) {
     super(props);
   }
 

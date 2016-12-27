@@ -1,9 +1,17 @@
+// @flow
+
 import React from 'react';
 import { Link } from 'react-router';
 
+type SignupFormProps = {
+  profile: UserProfileType,
+  errors: Object,
+  signupSubmit: (Object) => any
+}
+
 class SignupForm extends React.Component {
 
-  constructor(props) {
+  constructor(props: SignupFormProps): void {
     super(props);
   }
 

@@ -1,9 +1,17 @@
+// @flow
+
 import React from 'react';
 import { Link } from 'react-router';
 
+type LoginFormProps = {
+  loginSubmit: (any) => any,
+  passwordKeyPress: (any, any, any) => any,
+  profile: UserProfileType 
+}
+
 class LoginForm extends React.Component {
 
-  constructor(props) {
+  constructor(props: LoginFormProps) {
     super(props);
   }
 

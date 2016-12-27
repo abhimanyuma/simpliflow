@@ -1,9 +1,12 @@
+// @flow
+
 import React from 'react';
 import LoginFormContainer from './LoginFormContainer.jsx';
 
 class LoginPage extends React.Component {
 
-  constructor(props) {
+  constructor(props: Object) {
+    console.log("LFC", props)
     super(props);
   }
 

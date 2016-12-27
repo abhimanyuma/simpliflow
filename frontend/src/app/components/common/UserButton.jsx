@@ -1,11 +1,16 @@
+// @flow
+
 import React from 'react';
 import { Link } from 'react-router';
 
-
+type PropType = {
+  logout: (UserProfileType) => Function,
+  profile: UserProfileType
+}
 
 class UserButton extends React.Component {
 
-  constructor(props) {
+  constructor(props: PropType) {
     super(props);
   }
 

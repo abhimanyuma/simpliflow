@@ -8,13 +8,13 @@ import SignupForm from './SignupForm.jsx';
 import { createUser } from '../../actions/ProfileActions.js';
 
 let SignupFormContainer  = connect(
-  function mapStateToProps(state) {
+  function mapStateToProps(state: {profile: UserProfileType, errors: EmptyObject}) {
     return {
         profile: state.profile,
         errors: {}
     }
   },
-  function mapDispatchToProps(dispatch) {
+  function mapDispatchToProps(dispatch: Dispatch) {
     return {
       signupSubmit: (values) => {
         let name = values.name.value;

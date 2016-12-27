@@ -1,3 +1,5 @@
+//@flow
+
 import React from 'react';
 import { connect } from 'react-redux';
 
@@ -6,12 +8,12 @@ import LoginForm from './LoginForm.jsx';
 import { loginUser } from '../../actions/ProfileActions.js';
 
 let LoginFormContainer  = connect(
-  function mapStateToProps(state) {
+  function mapStateToProps(state: {profile: UserProfileType}) {
     return {
       profile: state.profile,
     }
   },
-  function mapDispatchToProps(dispatch) {
+  function mapDispatchToProps(dispatch: Dispatch) {
     return {
       loginSubmit: (values) => {
         let username = values.username.value;

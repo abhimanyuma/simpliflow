@@ -41,7 +41,7 @@ export function logoutCurrentProfile(profile: Object): Function {
   }
 }
 
-export function fetchProfile(profile: Object): Function {
+export function fetchProfile(): Function {
   return function(dispatch) {
     dispatch(requestProfile());
     let url = "/users/me";

@@ -1,3 +1,5 @@
+// @flow
+
 import {combineReducers} from 'redux';
 import { profile } from './ProfileReducer.js';
 

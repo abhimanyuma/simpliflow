@@ -1,18 +1,25 @@
+//@flow
+
 import React from 'react';
 
 import LoginButton from "../common/LoginButton.jsx";
 import UserButtonContainer from "../common/UserButtonContainer.jsx";
 
+type LoginInfoPropType = {
+  profile: UserProfileType,
+  loadProfile: () => Function
+}
+
 class LoginInfo extends React.Component {
 
-  constructor(props) {
+  constructor(props: LoginInfoPropType): void {
     super(props);
-    if(!props.profile || !props.profile["loaded"]) {
+    if(!props.profile || !props.profile.get("loaded")) {
       props.loadProfile();
     }
   }
 
-  computeNameFromProfile(profile): string {
+  computeNameFromProfile(profile: UserProfileType): ?string {
     if(profile.get("sync") && profile.get) {
       return profile.get("name");
     }
