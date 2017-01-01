@@ -25,6 +25,13 @@ export const profile = function(state: Object = Map({}), action: Object) {
       case "Unset":
         state = ModelActions.from_data({},"profile");
         state = ModelActions.set_loaded(state);
+        break;
+      case "SetErrors":
+        state = ModelActions.set_errors(state, action.errors)
+        break;
+      case "UnsetErrors":
+        state = ModelActions.unset_errors(state)
+        break;
       default:
        break;
    }  

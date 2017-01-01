@@ -35,7 +35,7 @@ export function process_response(request: Object): [number, boolean, Array<numbe
     let data = full_response["data"];
     return([http_status, status, data ]);
   } else {
-    let errors = full_response["error"];
+    let errors = full_response["errors"];
     return([http_status, status, errors]);
   }
 }
@@ -82,16 +82,16 @@ function ajax_request(method: string, url: string, options: Object): void {
     let [http_status, status, response] = process_response(req);
     if((http_code_kind(req.status) == "SUCCESS") && options.success_cb) {
       options.success_cb(response, status, http_status);
-    } else if(options.error_cb)  {
+    } else if(options.error_cb) {
       options.error_cb(response, status, http_status);
     }
   });
   req.addEventListener("error", (event) => {
     let http_status = null;
     let status = null;
-    let errors = ["The connection has timed out"];
+    let errors = {"global":["The connection has timed out"]};
     if(options.error_cb) {
-      options.error_cb(http_status, status, errors);
+      options.error_cb(errors, status, http_status);
     };
   })
   req.open(method, full_url);

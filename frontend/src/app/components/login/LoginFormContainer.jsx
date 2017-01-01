@@ -19,8 +19,6 @@ let LoginFormContainer  = connect(
         let username = values.username.value;
         let password = values.password.value;
         dispatch(loginUser(username, password));
-        values.username.value = "";
-        values.password.value = "";
       },
       passwordKeyPress: (event, values, callback) => {
         if (event.charCode == 13) {

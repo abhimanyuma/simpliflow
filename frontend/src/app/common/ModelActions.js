@@ -27,6 +27,16 @@ let ModelActions = {
 
   set_data: (map: Object, data: Object): Object => {
     return map.merge(data);
+  },
+
+  set_errors: (map: Object, errors: any): Object => {
+    map = map.set("errors", errors);
+    return map;
+  },
+
+  unset_errors: (map: Object): Object => {
+    map = map.delete("errors");
+    return map;
   }
 }
 

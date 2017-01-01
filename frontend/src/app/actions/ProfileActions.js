@@ -1,6 +1,7 @@
 // @flow
 // TODO: Add a dispatch function type
 import { fetch_object, create_object, delete_object } from '../common/utils.js'
+import { validate } from '../common/validator.js'
 
 const REQUEST_PROFILE = 'Profile::Response';
 
@@ -19,10 +20,25 @@ export function setProfile(profile: Object): {type: string, data: Object} {
   }
 }
 
+const SET_PROFILE_ERROR = 'Profile::SetErrors';
+export function setProfileErrors(errors: Object): {type: string, errors: Object} {
+  return {
+    type: SET_PROFILE_ERROR,
+    errors: errors
+  }
+}
+
 const UNSET_PROFILE = 'Profile::Unset';
 export function unsetProfile(): {type: string} {
   return {
     type: UNSET_PROFILE
+  }
+}
+
+const UNSET_PROFILE_ERROR = 'Profile::UnsetErrors';
+export function unsetProfileErrors(errors: Object): {type: string} {
+  return {
+    type: UNSET_PROFILE_ERROR
   }
 }
 
@@ -49,7 +65,7 @@ export function fetchProfile(): Function {
       dispatch(setProfile(data));
     }
     let error_cb = (errors) => {
-      console.log(errors);
+      dispatch(setProfileErrors(errors));
     }
     fetch_object(url, success_cb, error_cb);
   }
@@ -60,12 +76,13 @@ const LOGIN_PROFILE = "Profile::Login"
 export function loginUser(username: string, password: string): Function {
   return function(dispatch) {
     dispatch(requestProfile());
+    dispatch(unsetProfileErrors());
     let url = "/sessions";
     let success_cb = (data) => {
       dispatch(setProfile(data));
     }
     let error_cb = (errors) => {
-      console.log(errors);
+      dispatch(setProfileErrors(errors));
     }
     let data = {
       "user": {
@@ -73,7 +90,12 @@ export function loginUser(username: string, password: string): Function {
         "password": password
       }
     }
-    create_object(url, data, success_cb,error_cb);
+    let errors:{[id:string]: Array< string >} = validate_login(username, password)
+    if (errors) {
+      dispatch(setProfileErrors(errors));
+    } else {
+      create_object(url, data, success_cb, error_cb);
+    }
   }
 }
 
@@ -102,6 +124,23 @@ export function createUser(name: string, password: string, password_confirmation
     } else {
       create_object(url, data, success_cb, error_cb);
     }
+  }
+}
+
+export function validate_login(username: string, password: string): ?{[id:string]: Array< string >}  {
+  let errors:  {[id:string]: Array< string >} = {}
+  errors = validate(errors, "username", username, "presence")
+  errors = validate(errors, "username", username, "min_length", 3)
+  errors = validate(errors, "username", username, "max_length", 500)
+  errors = validate(errors, "username", username, "like", "username_or_email")
+  errors = validate(errors, "password", password, "presence")
+  errors = validate(errors, "password", password, "min_length", 3)
+  errors = validate(errors, "password", password, "max_length", 500)
+
+  if (Object.keys(errors).length === 0) {
+    return(null);
+  } else {
+    return(errors);
   }
 }
 
