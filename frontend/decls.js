@@ -9,4 +9,5 @@ declare type JSONArrayType = Array<JSONType>;
 // Types of Objects
 
 
-declare type UserProfileType = Map<string, JSONType>
+declare type UserProfileType = Map<string, JSONType>;
+declare type ErrorListType = {[id:string]: Array< string >} | null;

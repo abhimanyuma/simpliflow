@@ -21,7 +21,7 @@ class LoginForm extends React.Component {
     return (this.props.profile.get("errors") && this.props.profile.get("errors")[key]);
   }
 
-  get_errors (key: string): string {
+  get_errors (key: string): ?string {
     let errors = this.props.profile.get("errors")[key];
     if ((typeof(errors) == "string") || (errors instanceof String)) {
       return (errors);

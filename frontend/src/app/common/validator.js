@@ -50,15 +50,28 @@ function validate_likeness(value: string, regex_key: string): ?string {
     values = [regex_key]
   }
 
-  for (var regex_value of values) {
-    if (!regex[regex_value].test(value)) {
-      errors.push << regex_errors[regex_value]
-    }  
+  let flag: boolean = true
+
+  if ((operation === "or") && (values.length > 0)) {
+    flag = false
   }
 
-  if (operation) {
-    error = errors.join(` $(operation) `)
-  } else if (errors.length > 0) {
+  for (var regex_value of values) {
+    if (!regex[regex_value].test(value)) {
+      errors.push(regex_errors[regex_value])
+      if ( operation === "and" ) {
+        flag = flag && false
+      }
+    } else {
+      if ( operation === "or" ) {
+        flag = flag || true
+      }
+    }
+  }
+
+  if (operation && !flag) {
+    error = errors.join(` ${operation} `)
+  } else if ((errors.length > 0) && !flag) {
     error = errors[0]
   } else {
     error = null
@@ -67,7 +80,14 @@ function validate_likeness(value: string, regex_key: string): ?string {
   return(error)
 }
 
-export function validate (errors: Map < string, Array<string> >, field_name: string, field_value: any, rule: string, rule_variable: any ) {
+export function validate (
+  errors: ErrorListType,
+  field_name: string,
+  field_value: any,
+  rule: string,
+  rule_variable: any
+  ): ErrorListType {
+
   let error: ?string = null
   switch (rule) {
     case "presence": 

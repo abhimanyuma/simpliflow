@@ -36,7 +36,7 @@ export function unsetProfile(): {type: string} {
 }
 
 const UNSET_PROFILE_ERROR = 'Profile::UnsetErrors';
-export function unsetProfileErrors(errors: Object): {type: string} {
+export function unsetProfileErrors(): {type: string} {
   return {
     type: UNSET_PROFILE_ERROR
   }
@@ -90,7 +90,7 @@ export function loginUser(username: string, password: string): Function {
         "password": password
       }
     }
-    let errors:{[id:string]: Array< string >} = validate_login(username, password)
+  let errors: ErrorListType = validate_login(username, password)
     if (errors) {
       dispatch(setProfileErrors(errors));
     } else {
@@ -127,8 +127,8 @@ export function createUser(name: string, password: string, password_confirmation
   }
 }
 
-export function validate_login(username: string, password: string): ?{[id:string]: Array< string >}  {
-  let errors:  {[id:string]: Array< string >} = {}
+export function validate_login(username: string, password: string): ErrorListType  {
+  let errors: ErrorListType = {}
   errors = validate(errors, "username", username, "presence")
   errors = validate(errors, "username", username, "min_length", 3)
   errors = validate(errors, "username", username, "max_length", 500)
