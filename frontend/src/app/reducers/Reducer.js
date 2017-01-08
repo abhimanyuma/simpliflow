@@ -2,9 +2,13 @@
 
 import {combineReducers} from 'redux';
 import { profile } from './ProfileReducer.js';
+import { form_state } from './FormStateReducer.js';
+import { form_config } from './FormConfigReducer.js';
 
 let reducer = combineReducers({
-  profile
+  profile,
+  form_state,
+  form_config
 });
 
 export default reducer;

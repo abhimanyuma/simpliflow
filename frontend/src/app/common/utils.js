@@ -130,3 +130,15 @@ export function delete_object(url: string, data: ?Object, success_cb: Function, 
   };
   ajax_request("DELETE", url, options);
 }
+
+export function generateUnsafeUniqueId(length: number):string {
+  
+  let result: string = '' 
+  let charMap = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
+
+  for (let i = 0; i < length; i++ ) {
+    result += charMap[Math.floor(Math.random() * charMap.length)]
+  }
+  
+  return result;
+}

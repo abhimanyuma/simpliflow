@@ -20,7 +20,7 @@ export function setProfile(profile: Object): {type: string, data: Object} {
   }
 }
 
-const SET_PROFILE_ERROR = 'Profile::SetErrors';
+const SET_PROFILE_ERROR =  'Profile::SetErrors';
 export function setProfileErrors(errors: Object): {type: string, errors: Object} {
   return {
     type: SET_PROFILE_ERROR,

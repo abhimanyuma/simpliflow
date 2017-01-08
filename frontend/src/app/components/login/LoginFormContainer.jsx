@@ -9,23 +9,13 @@ import { loginUser } from '../../actions/ProfileActions.js';
 
 let LoginFormContainer  = connect(
   function mapStateToProps(state: {profile: UserProfileType}) {
-    return {
-      profile: state.profile,
+    let props = {
+      profile: state.profile
     }
+    return(props);
   },
   function mapDispatchToProps(dispatch: Dispatch) {
-    return {
-      loginSubmit: (values) => {
-        let username = values.username.value;
-        let password = values.password.value;
-        dispatch(loginUser(username, password));
-      },
-      passwordKeyPress: (event, values, callback) => {
-        if (event.charCode == 13) {
-          callback(values);
-        }
-      }
-    }
+    return {}
   }
 )(LoginForm);
 export default LoginFormContainer;

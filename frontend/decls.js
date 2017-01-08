@@ -11,3 +11,11 @@ declare type JSONArrayType = Array<JSONType>;
 
 declare type UserProfileType = Map<string, JSONType>;
 declare type ErrorListType = {[id:string]: Array< string >} | null;
+declare type FormElementState = {
+  state: "LOCKED" | "FREE",
+  value: JSONType,
+  committed_value: JSONType,
+  type: "INDEPENDENT" | "LOCKED" | "SEMI",
+  formula: ?Function
+}
+declare type FormState = {[id:string]: FormElementState}
