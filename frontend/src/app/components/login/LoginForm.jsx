@@ -27,6 +27,8 @@ class LoginForm extends React.Component {
           "key": "username",
           "order": 1,
           "name": "username",
+          "label": "Username or Email",
+          "placeholder": "Please Enter Your username/email",
           "type": "text",
           "variable": ["username"],
           "icon": "user",
@@ -52,6 +54,8 @@ class LoginForm extends React.Component {
           "key": "password",
           "order": 2,
           "name": "password",
+          "label": "Password",
+          "placeholder":"Please enter your password",
           "type": "password",
           "variable": ["password"],
           "icon": "lock",
@@ -68,6 +72,16 @@ class LoginForm extends React.Component {
               value: 500
             }
           ]
+        },
+        {
+          "key": "submit",
+          "order": 3,
+          "type" : "submit",
+          "label": "Login",
+          "callback": (state) => {
+            console.log(state);
+            console.log(this)
+          }
         }
       ]
     }

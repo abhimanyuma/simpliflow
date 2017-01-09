@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import FormTextComponent from './FormTextComponent.jsx';
+import {TextComponentContainer, PasswordComponentContainer, SubmitButtonComponentContainer} from './CoreComponents.jsx';
 
 type FormComponentContainerProps = {
   config: any,
@@ -18,7 +18,11 @@ class FormComponentContainer extends React.Component {
   render() {
     switch(this.props.config["type"]) {
       case "text":
-        return(<FormTextComponent config={this.props.config} />)
+        return(<TextComponentContainer config={this.props.config} />)
+      case "password":
+        return(<PasswordComponentContainer config={this.props.config} />)
+      case "submit":
+        return(<SubmitButtonComponentContainer config={this.props.config} />)
       default:
         return(null);
     }
