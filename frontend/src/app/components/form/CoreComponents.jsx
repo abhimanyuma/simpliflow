@@ -33,7 +33,7 @@ export class PasswordComponentContainer extends React.Component {
  
   render() {
     return(
-      <div>
+      <div className="m2t">
         <label className="label">{this.props.config["label"]}</label>
         <p className="control">
           <input className="input" type="password" placeholder={this.props.config["placeholder"] || "Text"}/>
@@ -53,9 +53,9 @@ export class SubmitButtonComponentContainer extends React.Component {
  
   render() {
     return(
-      <div className="control is-grouped">
-        <p className="control">
-          <button className="button is-primary" type="submit" onClick={(e) => console.log(e)}>{this.props.config["lablel"]||"Submit"}</button>
+      <div className="columns is-grouped m2t">
+        <p className="control column is-2 is-offset-10">
+          <button className="button is-primary is-fullwidth" type="submit" onClick={(e) => this.props.config["callback"](e) }>{this.props.config["lablel"]||"Submit"}</button>
         </p>
       </div>
     );

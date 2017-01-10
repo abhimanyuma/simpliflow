@@ -78,9 +78,11 @@ class LoginForm extends React.Component {
           "order": 3,
           "type" : "submit",
           "label": "Login",
-          "callback": (state) => {
-            console.log(state);
-            console.log(this)
+          "align": "right",
+          "callback": (event) => {
+            event.preventDefault()
+            console.log("Hello", event);
+            console.log("hai", this)
           }
         }
       ]

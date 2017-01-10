@@ -28,7 +28,7 @@ class MainForm extends React.Component {
                   {this.props.form_config["title"]}
                 </p>
               </header>
-              <form className="card-content" >
+              <form className="card-content" onSubmit={(e) => this.formSubmit(e)}>
                  {this.get_elements().map((object, key) => {
                    return(<FormComponentContainer config={object} key={key} />)
                   })}
