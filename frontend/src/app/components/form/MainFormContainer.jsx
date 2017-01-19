@@ -12,7 +12,11 @@ class MainFormContainer extends React.Component {
   constructor(props: any, context) {
     super(props, context);
     this.config = props.form_config;
-    this.config_key = props.form_config_key;
+    if (props.form_config_key) {
+      this.config_key = props.form_config_key;
+    } else {
+      this.config_key = props.form_config["id"]
+    }
     this.store = context.store
     if (this.config) {
       this.valid = false
@@ -25,12 +29,15 @@ class MainFormContainer extends React.Component {
   on_store_change() {
     if (this.store.getState().form_config && this.store.getState().form_config.get(this.config_key)) {
       this.valid = true
+      this.config = this.store.getState().form_config.get(this.config_key)
     }
   }
 
   render () {
+    console.log("Debug:", this.config_key, this.config, this.valid)
     if (this.config_key && this.config && this.valid) {
-      return(<MainForm form_config_key = {this.config_key}/>);
+      console.log("here")
+      return(<MainForm form_config = {this.config}/>);
     } else {
       return(null);
     }
