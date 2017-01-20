@@ -18,26 +18,29 @@ class MainFormContainer extends React.Component {
       this.config_key = props.form_config["id"]
     }
     this.store = context.store
-    if (this.config) {
-      this.valid = false
+    if (this.store.getState().form_config && this.store.getState().form_config.get(this.config_key)) {
+      this.config = this.store.getState().form_config.get(this.config_key)
+    } else if (this.config) {
       createFormConfigFromConfig(this.config, this.config_key)(context.store.dispatch)
     }
     context.store.subscribe(() => {this.on_store_change()})
-
   }
 
   on_store_change() {
-    if (this.store.getState().form_config && this.store.getState().form_config.get(this.config_key)) {
-      this.valid = true
-      this.config = this.store.getState().form_config.get(this.config_key)
-    }
+    this.render()
+  }
+
+  config_is_valid() {
+    return (this.store.getState().form_config && 
+            (typeof(this.store.getState().form_config.get) == "function") && 
+            this.store.getState().form_config.get(this.config_key)
+    )
   }
 
   render () {
-    console.log("Debug:", this.config_key, this.config, this.valid)
-    if (this.config_key && this.config && this.valid) {
-      console.log("here")
-      return(<MainForm form_config = {this.config}/>);
+    if (this.config_is_valid()) {
+      let config = this.store.getState().form_config.get(this.config_key);
+      return(<MainForm form_config = {config}/>);
     } else {
       return(null);
     }

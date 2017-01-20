@@ -17,7 +17,6 @@ class MainForm extends React.Component {
   get_elements() {
 
     let element_object = []
-    console.log(this.props.form_config)
     if (this.props.form_config.get("elements")) {
      element_object = this.props.form_config.get("elements")
     }

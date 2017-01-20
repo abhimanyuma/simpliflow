@@ -13,7 +13,6 @@ export const form_config = function(state: Object = Map({}), action: Object) {
       case "Set":
         let id: string = action.id;
         let data = {};
-
         while (id === null) {
           id = generateUnsafeUniqueId(10);
           if (state.get(id)) {
