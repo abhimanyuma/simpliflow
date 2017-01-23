@@ -1,14 +1,15 @@
-// @flow
+//@flow
 
 import React from 'react';
 import { Link } from 'react-router';
 import MainForm from './MainForm.jsx';
 import { setFormConfig } from '../../actions/FormConfigActions.js';
 import { connect } from 'react-redux';
-import { createFormConfigFromConfig } from '../../actions/FormConfigActions.js';
+import { createFormStateFromInitialState, createNewFormState } from '../../actions/FormStateActions.js';
+
 
 class MainFormContainer extends React.Component {
-  
+
   constructor(props: any, context) {
     super(props, context);
     this.config = props.form_config;
@@ -17,12 +18,30 @@ class MainFormContainer extends React.Component {
     } else {
       this.config_key = props.form_config["id"]
     }
+
+    if (props.form_state_key) {
+      this.form_state_key = props.form_state_key
+    } else if (this.config_key) {
+      this.form_state_key = this.config_key
+    }
+
     this.store = context.store
-    if (this.store.getState().form_config && this.store.getState().form_config.get(this.config_key)) {
+
+
+    if (this.config_is_valid()) {
       this.config = this.store.getState().form_config.get(this.config_key)
     } else if (this.config) {
-      createFormConfigFromConfig(this.config, this.config_key)(context.store.dispatch)
+      context.store.dispatch(setFormConfig(this.config, this.config_key))
     }
+
+    if (this.state_is_valid()) {
+      this.config = this.store.getState().form_state.get(this.config_key)
+    } else if (this.form_state) {
+      //createFormStateFromInitialState(this.form_state, this.form_state_key)(context.store.dispatch)
+    } else {
+      context.store.dispatch(createNewFormState(this.form_state_key))
+    }
+
     context.store.subscribe(() => {this.on_store_change()})
   }
 
@@ -31,14 +50,22 @@ class MainFormContainer extends React.Component {
   }
 
   config_is_valid() {
-    return (this.store.getState().form_config && 
-            (typeof(this.store.getState().form_config.get) == "function") && 
+    window.ad = this.store.getState()
+    return (this.store.getState().form_config &&
+            (typeof(this.store.getState().form_config.get) == "function") &&
             this.store.getState().form_config.get(this.config_key)
     )
   }
 
+  state_is_valid() {
+    return (this.store.getState().form_state &&
+            (typeof(this.store.getState().form_state.get) == "function") &&
+            this.store.getState().form_state.get(this.form_state_key)
+    )
+  }
+
   render () {
-    if (this.config_is_valid()) {
+    if (this.config_is_valid() && this.state_is_valid()) {
       let config = this.store.getState().form_config.get(this.config_key);
       return(<MainForm form_config = {config}/>);
     } else {

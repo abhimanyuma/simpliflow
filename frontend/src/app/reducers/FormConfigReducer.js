@@ -31,7 +31,7 @@ export const form_config = function(state: Object = Map({}), action: Object) {
         break;
       default:
         break;
-   }    
+   }
   }
 
   return state;

@@ -10,9 +10,3 @@ export function setFormConfig(config: any, id: string, reset: boolean = true) {
   };
   return response
 }
-
-export function createFormConfigFromConfig(config: any, id: string) {
-  return function(dispatch) {
-    dispatch(setFormConfig(config, id, null));
-  }
-}
