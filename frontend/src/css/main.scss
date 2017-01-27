@@ -6,13 +6,14 @@ $family-serif: "Georgia", serif; // Add a serif family
 // For example, by default, the $danger color is $red and the font is sans-serif
 // You can change these values:
 
-@import "~bulma/bulma";
+@import "~bootstrap/dist/css/bootstrap";
 
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome";
 
 @import 'base';
 @import 'mixins';
+@import 'custom';
 
 @import './components/user_button.scss';
 

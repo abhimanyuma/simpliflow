@@ -13,6 +13,7 @@
   "private": true,
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6",
     "bulma": "^0.2.3",
     "font-awesome": "^4.6.3",
     "immutable": "^3.8.1",

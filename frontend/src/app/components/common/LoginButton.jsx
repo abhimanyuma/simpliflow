@@ -12,13 +12,10 @@ class LoginButton extends React.Component {
 
   render() {
     return (
-      <Link to="/login" className="button"> 
-        <span className="icon">
-          <i className="fa fa-user"></i>
-        </span>
-        <span>Login</span>
-      </Link>
-    )
+      <button className="btn btn-outline-success my-2 my-sm-0" >
+        Login
+      </button>
+    );
   }
 }
 

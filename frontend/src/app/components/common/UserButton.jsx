@@ -16,12 +16,7 @@ class UserButton extends React.Component {
 
   render() {
     return (
-      <Link to="/" className="button user-button">
-        <span>{this.props.profile.get('user_name')}</span>
-        <div className="box dropdown" onClick={() => this.props.logout(this.props.profile)}>
-          Log Out
-        </div>
-      </Link>
+      <button className="btn btn-outline-success my-2 my-sm-0" >{this.props.profile.get('user_name')}</button>
     )
   }
 }

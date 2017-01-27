@@ -20,12 +20,12 @@ class LoginInfo extends React.Component {
   }
 
   computeNameFromProfile(profile: UserProfileType): ?string {
-    
+
     let name: any = null
     if(profile.get("sync") && profile.get("name")) {
       name =  profile.get("name")
     }
-    
+
     if (name) {
       return name.toString()
     } else {
@@ -36,20 +36,12 @@ class LoginInfo extends React.Component {
   render() {
     let name = this.computeNameFromProfile(this.props.profile);
     if(name) {
-      return( 
-        <div className="nav-right nav-menu">
-          <span className="nav-item">
-            <UserButtonContainer/>
-          </span>
-        </div>
+      return(
+        <UserButtonContainer/>
       );
     } else {
       return(
-        <div className="nav-right nav-menu">
-          <span className="nav-item">
-            <LoginButton/>
-          </span>
-        </div>
+        <LoginButton/>
       );
     }
   }
