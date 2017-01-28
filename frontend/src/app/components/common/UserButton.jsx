@@ -16,7 +16,9 @@ class UserButton extends React.Component {
 
   render() {
     return (
-      <button className="btn btn-outline-success my-2 my-sm-0" >{this.props.profile.get('user_name')}</button>
+      <button className="btn btn-outline-success my-2 my-sm-0" >
+        {this.props.profile.get('user_name')}
+      </button>
     )
   }
 }

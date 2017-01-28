@@ -2,7 +2,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 
 import Workspace from './components/Workspace.jsx';
@@ -16,32 +16,30 @@ import HomeHero from './components/static_components/HomeHero.jsx';
 import LoginPage from './components/login/LoginPage.jsx';
 import SignupPage from './components/signup/SignupPage.jsx';
 
-class App extends React.Component {
-
-  render () {
-    return(
-      <Router history={hashHistory}>
-        <Route path="/" component={Workspace}>
-          <Route path="/login" component={LoginPage} />
-          <Route path="/signup" component={SignupPage} />
-        </Route>
-      </Router>
-    );
-  }
-}
+import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
 
 const loggerMiddleware = createLogger();
+const middleware = routerMiddleware(browserHistory)
+
 
 let store = createStore(
-  reducer, 
+  reducer,
   applyMiddleware(
     thunkMiddleware,
-    loggerMiddleware
+    loggerMiddleware,
+    middleware
   )
 );
 
+const history = syncHistoryWithStore(browserHistory, store)
+
 render(
   <Provider store={store}>
-    <App/>
+    <Router history={history}>
+      <Route path="/" component={Workspace}>
+        <Route path="/login" component={LoginPage} />
+        <Route path="/signup" component={SignupPage} />
+      </Route>
+    </Router>
   </Provider>
   , document.getElementById('main'));

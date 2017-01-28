@@ -12,6 +12,7 @@ class Workspace extends React.Component {
     return (
       <div>
         <NavBar show_logo={true} show_login={true} />
+        {this.props.children || <HomeHero />}
       </div>
       // <div>
       //   <div className="columns is-gapless is-multiline">

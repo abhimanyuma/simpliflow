@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import LoginButton from "../common/LoginButton.jsx";
+import LoginButtonContainer from "../common/LoginButtonContainer.jsx";
 import UserButtonContainer from "../common/UserButtonContainer.jsx";
 
 type LoginInfoPropType = {
@@ -41,7 +41,7 @@ class LoginInfo extends React.Component {
       );
     } else {
       return(
-        <LoginButton/>
+        <LoginButtonContainer/>
       );
     }
   }
