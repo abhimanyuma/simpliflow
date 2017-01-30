@@ -27,11 +27,14 @@ class MainFormContainer extends React.Component {
 
     this.store = context.store
 
+    context.store.subscribe(() => {this.on_store_change()})
+  }
 
+  componentWillMount() {
     if (this.config_is_valid()) {
       this.config = this.store.getState().form_config.get(this.config_key)
     } else if (this.config) {
-      context.store.dispatch(setFormConfig(this.config, this.config_key))
+      this.store.dispatch(setFormConfig(this.config, this.config_key))
     }
 
     if (this.state_is_valid()) {
@@ -39,10 +42,8 @@ class MainFormContainer extends React.Component {
     } else if (this.form_state) {
       //createFormStateFromInitialState(this.form_state, this.form_state_key)(context.store.dispatch)
     } else {
-      context.store.dispatch(createNewFormState(this.form_state_key))
+      this.store.dispatch(createNewFormState(this.form_state_key))
     }
-
-    context.store.subscribe(() => {this.on_store_change()})
   }
 
   on_store_change() {

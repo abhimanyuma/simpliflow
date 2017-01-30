@@ -23,23 +23,38 @@ class MainForm extends React.Component {
     return (element_object);
   }
 
+  form_submit(e) {
+    e.preventDefault();
+    let cfg = this.props.form_config;
+    let submit_button = null;
+    if (cfg && (typeof(cfg.get) == "function") && cfg.get("elements")) {
+      for (let element of cfg.get("elements")) {
+        if (element["key"] == "submit") {
+          submit_button = element;
+        }
+      }
+    }
+    if (submit_button) {
+      console.log(submit_button["callback"](e))
+    }
+
+  }
+
   render() {
-    return(<div className="columns">
-          <div className="column is-half is-offset-one-quarter">
-            <div className="card is-fullwidth">
-              <header className="card-header has-text-centered">
-                <p className="card-header-title">
-                  {this.props.form_config["title"]}
-                </p>
-              </header>
-              <form className="card-content" onSubmit={(e) => this.formSubmit(e)}>
-                 {this.get_elements().map((object, key) => {
-                   return(<FormComponentContainer config={object} key={key} />)
-                  })}
-              </form>            
-            </div>
-          </div>
-        </div>)
+    return(
+      <div className="card">
+        <h3 className="card-header">
+          {this.props.form_config.get("title")}
+        </h3>
+        <div className="card-block">
+          <form onSubmit={(e) => this.form_submit(e)}>
+              {this.get_elements().map((object, key) => {
+                return(<FormComponentContainer config={object} key={key} />)
+              })}
+          </form>
+        </div>
+      </div>
+      )
   }
 
 }

@@ -10,14 +10,15 @@ export class TextComponentContainer extends React.Component {
     super(props);
   }
 
- 
+
   render() {
     return(
-      <div>
-        <label className="label">{this.props.config["label"]}</label>
-        <p className="control">
-          <input className="input" type="text" placeholder={this.props.config["placeholder"] || "Text"}/>
-        </p>
+      <div className="form-group row">
+        <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
+        <div className="col-sm-8">
+          <input type="email" className="form-control" placeholder={this.props.config["placeholder"] || "Text"} />
+          <small className="form-text text-muted">Example help text that remains unchanged.</small>
+        </div>
       </div>
     );
   }
@@ -30,14 +31,15 @@ export class PasswordComponentContainer extends React.Component {
     super(props);
   }
 
- 
+
   render() {
     return(
-      <div className="m2t">
-        <label className="label">{this.props.config["label"]}</label>
-        <p className="control">
-          <input className="input" type="password" placeholder={this.props.config["placeholder"] || "Text"}/>
-        </p>
+      <div className="form-group row">
+        <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
+        <div className="col-sm-8">
+          <input type="password" className="form-control" placeholder={this.props.config["placeholder"] || "Password"} />
+          <small className="form-text text-muted">Example help text that remains unchanged.</small>
+        </div>
       </div>
     );
   }
@@ -50,13 +52,11 @@ export class SubmitButtonComponentContainer extends React.Component {
     super(props);
   }
 
- 
+
   render() {
     return(
-      <div className="columns is-grouped m2t">
-        <p className="control column is-2 is-offset-10">
-          <button className="button is-primary is-fullwidth" type="submit" onClick={(e) => this.props.config["callback"](e) }>{this.props.config["lablel"]||"Submit"}</button>
-        </p>
+      <div className="container text-center">
+          <button type="submit" className="btn btn-primary">Submit</button>
       </div>
     );
   }
