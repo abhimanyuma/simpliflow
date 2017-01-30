@@ -1,9 +1,33 @@
 /* Show it is fixed to the top */
 body {
   min-height: 100%;
+  margin-bottom: 60px;
   //padding-top: 4.5rem;
+}
+
+html {
+  min-height: 100%;
+  //padding-top: 4.5rem;
+}
+
+.full-page-container {
+  min-height: 100%;
+}
+
+#main {
+  min-height: 100%;
+  display: flex;
 }
 
 .home-hero-margin {
   margin-top: 3rem;
+}
+
+.main-container{
+  margin-top: 50px;
+  padding-top: 20px;
+}
+
+.login-page-form {
+  min-width: 50%;
 }

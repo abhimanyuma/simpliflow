@@ -16,9 +16,10 @@ $fa-font-path: "~font-awesome/fonts";
 @import 'custom';
 
 @import './components/user_button.scss';
+@import './components/footer.scss';
 
 .main-container{
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
+  min-width: 100vw;
 }

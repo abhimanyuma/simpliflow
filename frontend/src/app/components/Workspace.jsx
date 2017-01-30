@@ -10,9 +10,10 @@ import HomeHero from '../components/static_components/HomeHero.jsx';
 class Workspace extends React.Component {
   render () {
     return (
-      <div>
+      <div className="full-page-container">
         <NavBar show_logo={true} show_login={true} />
         {this.props.children || <HomeHero />}
+        <Footer />
       </div>
       // <div>
       //   <div className="columns is-gapless is-multiline">
