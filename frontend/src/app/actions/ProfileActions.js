@@ -1,14 +1,14 @@
 // @flow
 // TODO: Add a dispatch function type
-import { fetch_object, create_object, delete_object } from '../common/utils.js'
-import { validate } from '../common/validator.js'
+import { fetch_object, create_object, delete_object } from '../common/common.js'
+import { validate } from '../common/common.js'
 
 const REQUEST_PROFILE = 'Profile::Response';
 
 export function requestProfile(refresh: boolean = false): {type: string, refresh: boolean} {
   return {
     type: REQUEST_PROFILE,
-    refresh: false    
+    refresh: false
   }
 }
 
@@ -69,7 +69,7 @@ export function fetchProfile(): Function {
     }
     fetch_object(url, success_cb, error_cb);
   }
-  
+
 }
 
 const LOGIN_PROFILE = "Profile::Login"

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import { debounce } from '../../common/common.js';
 
 
 export class TextComponentContainer extends React.Component {
@@ -10,13 +11,16 @@ export class TextComponentContainer extends React.Component {
     super(props);
   }
 
+  on_change() {
+
+  }
 
   render() {
     return(
       <div className="form-group row">
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="email" className="form-control" placeholder={this.props.config["placeholder"] || "Text"} />
+          <input type="email" className="form-control" placeholder={this.props.config["placeholder"] || "Text"} onChange={e=>{this.on_change()}}/>
           <small className="form-text text-muted">Example help text that remains unchanged.</small>
         </div>
       </div>

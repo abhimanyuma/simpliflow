@@ -1,7 +1,7 @@
 // @flow
 // TODO: Add a dispatch function type
-import { fetch_object, create_object, delete_object } from '../common/utils.js'
-import { validate } from '../common/validator.js'
+import { fetch_object, create_object, delete_object } from '../common/common.js'
+import { validate } from '../common/common.js'
 
 const SET_FORM_STATE = "FormState::Set"
 export function setFormState(id: ?string, data: any = {}) {
