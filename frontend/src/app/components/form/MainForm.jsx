@@ -49,7 +49,7 @@ class MainForm extends React.Component {
         <div className="card-block">
           <form onSubmit={(e) => this.form_submit(e)}>
               {this.get_elements().map((object, key) => {
-                return(<FormComponentContainer config={object} key={key} />)
+                return(<FormComponentContainer config={object} key={key} update_state={this.props.update_state}/>)
               })}
           </form>
         </div>

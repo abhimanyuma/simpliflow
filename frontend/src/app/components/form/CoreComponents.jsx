@@ -9,10 +9,20 @@ export class TextComponentContainer extends React.Component {
 
   constructor(props: any) {
     super(props);
+
+    this.debounced_call = debounce((e) => {this.update_state(e)}, 100)
   }
 
-  on_change() {
 
+  update_state(e) {
+    let update_value = {};
+    let update_key = this.props.config.variable[0];
+    update_value[update_key] = this.refs.text.value;
+    this.props.update_state(update_value);
+  }
+
+  on_change(e) {
+    this.debounced_call(e);
   }
 
   render() {
@@ -20,7 +30,7 @@ export class TextComponentContainer extends React.Component {
       <div className="form-group row">
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="email" className="form-control" placeholder={this.props.config["placeholder"] || "Text"} onChange={e=>{this.on_change()}}/>
+          <input type="text" className="form-control" ref="text" placeholder={this.props.config["placeholder"] || "Text"} onChange={e=>{this.on_change(e)}}/>
           <small className="form-text text-muted">Example help text that remains unchanged.</small>
         </div>
       </div>
@@ -33,15 +43,27 @@ export class PasswordComponentContainer extends React.Component {
 
   constructor(props: any) {
     super(props);
+    this.debounced_call = debounce((e) => {this.update_state(e)}, 100)
   }
 
+
+  update_state(e) {
+    let update_value = {};
+    let update_key = this.props.config.variable[0];
+    update_value[update_key] = this.refs.password.value;
+    this.props.update_state(update_value);
+  }
+
+  on_change(e) {
+    this.debounced_call(e);
+  }
 
   render() {
     return(
       <div className="form-group row">
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="password" className="form-control" placeholder={this.props.config["placeholder"] || "Password"} />
+          <input type="password" className="form-control" ref="password" placeholder={this.props.config["placeholder"] || "Password"}  onChange={e=>{this.on_change(e)}}/>
           <small className="form-text text-muted">Example help text that remains unchanged.</small>
         </div>
       </div>

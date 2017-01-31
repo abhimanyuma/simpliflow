@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import MainForm from './MainForm.jsx';
 import { setFormConfig } from '../../actions/FormConfigActions.js';
 import { connect } from 'react-redux';
-import { createFormStateFromInitialState, createNewFormState } from '../../actions/FormStateActions.js';
+import { createFormStateFromInitialState, createNewFormState, updateFormState } from '../../actions/FormStateActions.js';
 
 
 class MainFormContainer extends React.Component {
@@ -65,10 +65,14 @@ class MainFormContainer extends React.Component {
     )
   }
 
+  update_state(update_value) {
+    this.store.dispatch(updateFormState(this.form_state_key, update_value))
+  }
+
   render () {
     if (this.config_is_valid() && this.state_is_valid()) {
       let config = this.store.getState().form_config.get(this.config_key);
-      return(<MainForm form_config = {config}/>);
+      return(<MainForm form_config = {config} update_state={(e) => {this.update_state(e)}}/>);
     } else {
       return(null);
     }

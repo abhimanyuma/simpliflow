@@ -15,3 +15,12 @@ export function setFormState(id: ?string, data: any = {}) {
 export function createNewFormState(id: ?string) {
   return(setFormState(id, {}))
 }
+
+const UPDATE_FORM_STATE = "FormState::Update"
+export function updateFormState(id: string, additional_data: Object) {
+  return({
+    type: UPDATE_FORM_STATE,
+    id: id,
+    data: additional_data
+  });
+}

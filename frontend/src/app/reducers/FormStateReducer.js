@@ -29,6 +29,22 @@ export const form_state = function(state: Object = Map({}), action: Object) {
           state = state.set(id, ModelActions.from_data(data,"form_state"));
         }
         break;
+      case "Update":
+        id = action.id;
+        data = action.data;
+
+        let form_state = state.get(id)
+
+        if(!form_state) {
+          break;
+        }
+
+        form_state = ModelActions.set_data(form_state, data);
+
+        state = state.set(id, form_state);
+        window.st = state;
+        break;
+
       default:
         break;
     }
