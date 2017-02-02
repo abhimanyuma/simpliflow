@@ -7,6 +7,8 @@ import ErrorPanel from '../common/ErrorPanel.jsx'
 
 import MainFormContainer from '../form/MainFormContainer.jsx'
 
+import LoadingFormContainer from '../common/LoadingFormContainer.jsx';
+
 import { loginUser } from '../../actions/ProfileActions.js';
 
 type LoginFormProps = {
@@ -92,10 +94,23 @@ class LoginForm extends React.Component {
   }
 
   render () {
-    if(this.props.profile.get("user_name")) {
+    if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
+      return(<LoadingFormContainer />);
+    } else if(this.props.profile.get("user_name")) {
+      console.log(this.props.profile.toJS());
       return (
         <div className="has-text-centered">
-          <h3> Already logged in as {this.props.profile.get('user_name')} </h3>
+          <div className="card">
+            <h3 className="card-header">
+              You are already logged in
+            </h3>
+            <div className="card-block">
+              <p className="card-text">
+                You are alread logged in as&nbsp;
+                {this.props.profile.get("name") || this.props.profile.get("user_name")}.</p>
+              <a href="#" className="btn btn-primary">Go to profile</a>
+            </div>
+          </div>
         </div>
       )
     } else {
