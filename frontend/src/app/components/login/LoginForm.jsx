@@ -7,9 +7,11 @@ import ErrorPanel from '../common/ErrorPanel.jsx'
 
 import MainFormContainer from '../form/MainFormContainer.jsx'
 
+import { loginUser } from '../../actions/ProfileActions.js';
+
 type LoginFormProps = {
   createLoginFormConfig: (any, string) => any,
-  profile: UserProfileType 
+  profile: UserProfileType
 }
 
 class LoginForm extends React.Component {
@@ -36,7 +38,7 @@ class LoginForm extends React.Component {
             {
               type: "presence"
             },
-            { 
+            {
               type: "min_length",
               value: 3
             },
@@ -79,21 +81,21 @@ class LoginForm extends React.Component {
           "type" : "submit",
           "label": "Login",
           "align": "right",
-          "callback": (event) => {
-            event.preventDefault()
-            console.log("Hello", event);
-            console.log("hai", this)
+          "callback": (form_state, dispatch) => {
+            let username = form_state.get("username");
+            let password = form_state.get("password");
+            dispatch(loginUser(username, password))
           }
         }
       ]
     }
   }
- 
+
   render () {
     if(this.props.profile.get("user_name")) {
       return (
         <div className="has-text-centered">
-          <h3> Already logged in as {this.props.profile.get('user_name')} </h3>   
+          <h3> Already logged in as {this.props.profile.get('user_name')} </h3>
         </div>
       )
     } else {

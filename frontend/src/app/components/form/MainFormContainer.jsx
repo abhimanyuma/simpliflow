@@ -69,10 +69,27 @@ class MainFormContainer extends React.Component {
     this.store.dispatch(updateFormState(this.form_state_key, update_value))
   }
 
+  on_submit(e) {
+    e.preventDefault();
+    let cfg = this.store.getState().form_config.get(this.config_key);
+    let submit_button = null;
+    if (cfg && (typeof(cfg.get) == "function") && cfg.get("elements")) {
+      for (let element of cfg.get("elements")) {
+        if (element["key"] == "submit") {
+          submit_button = element;
+        }
+      }
+    }
+    let form_state = this.store.getState().form_state.get(this.form_state_key)
+    if (submit_button && form_state) {
+      submit_button["callback"](form_state, this.store.dispatch)
+    }
+  }
+
   render () {
     if (this.config_is_valid() && this.state_is_valid()) {
       let config = this.store.getState().form_config.get(this.config_key);
-      return(<MainForm form_config = {config} update_state={(e) => {this.update_state(e)}}/>);
+      return(<MainForm form_config = {config} update_state={(e) => {this.update_state(e)}} on_submit={(e) => {this.on_submit(e)}}/>);
     } else {
       return(null);
     }

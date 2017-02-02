@@ -23,23 +23,6 @@ class MainForm extends React.Component {
     return (element_object);
   }
 
-  form_submit(e) {
-    e.preventDefault();
-    let cfg = this.props.form_config;
-    let submit_button = null;
-    if (cfg && (typeof(cfg.get) == "function") && cfg.get("elements")) {
-      for (let element of cfg.get("elements")) {
-        if (element["key"] == "submit") {
-          submit_button = element;
-        }
-      }
-    }
-    if (submit_button) {
-      console.log(submit_button["callback"](e))
-    }
-
-  }
-
   render() {
     return(
       <div className="card">
@@ -47,9 +30,10 @@ class MainForm extends React.Component {
           {this.props.form_config.get("title")}
         </h3>
         <div className="card-block">
-          <form onSubmit={(e) => this.form_submit(e)}>
+          <form onSubmit={(e) => this.props.on_submit(e)}>
               {this.get_elements().map((object, key) => {
-                return(<FormComponentContainer config={object} key={key} update_state={this.props.update_state}/>)
+                return(<FormComponentContainer config={object} key={key} update_state={this.props.update_state}
+                on_submit = {this.props.on_submit}/>)
               })}
           </form>
         </div>

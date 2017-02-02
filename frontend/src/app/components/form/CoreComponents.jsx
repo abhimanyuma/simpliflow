@@ -30,7 +30,7 @@ export class TextComponentContainer extends React.Component {
       <div className="form-group row">
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="text" className="form-control" ref="text" placeholder={this.props.config["placeholder"] || "Text"} onChange={e=>{this.on_change(e)}}/>
+          <input type="text" className="form-control" ref="text" placeholder={this.props.config["placeholder"] || "Text"} onInput={e=>{this.on_change(e)}}/>
           <small className="form-text text-muted">Example help text that remains unchanged.</small>
         </div>
       </div>
@@ -63,7 +63,7 @@ export class PasswordComponentContainer extends React.Component {
       <div className="form-group row">
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="password" className="form-control" ref="password" placeholder={this.props.config["placeholder"] || "Password"}  onChange={e=>{this.on_change(e)}}/>
+          <input type="password" className="form-control" ref="password" placeholder={this.props.config["placeholder"] || "Password"}  onInput={e=>{this.on_change(e)}}/>
           <small className="form-text text-muted">Example help text that remains unchanged.</small>
         </div>
       </div>
@@ -78,13 +78,23 @@ export class SubmitButtonComponentContainer extends React.Component {
     super(props);
   }
 
+  on_submit(e) {
+    e.preventDefault();
+    this.props.on_submit(e);
+  }
 
   render() {
     return(
       <div className="container text-center">
-          <button type="submit" className="btn btn-primary">Submit</button>
+          <button type="submit" className="btn btn-primary" onClick={(e) => {this.on_submit(e)}}>Submit</button>
       </div>
     );
   }
 
+}
+
+export const FormComponents = {
+  "text": TextComponentContainer,
+  "password": PasswordComponentContainer,
+  "submit": SubmitButtonComponentContainer
 }

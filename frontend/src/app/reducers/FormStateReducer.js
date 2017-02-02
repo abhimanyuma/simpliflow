@@ -40,9 +40,8 @@ export const form_state = function(state: Object = Map({}), action: Object) {
         }
 
         form_state = ModelActions.set_data(form_state, data);
-
         state = state.set(id, form_state);
-        window.st = state;
+
         break;
 
       default:
