@@ -8,6 +8,7 @@ import ErrorPanel from '../common/ErrorPanel.jsx'
 import MainFormContainer from '../form/MainFormContainer.jsx'
 
 import LoadingFormContainer from '../common/LoadingFormContainer.jsx';
+import SignupButton from '../common/SignupButton.jsx';
 
 import { loginUser } from '../../actions/ProfileActions.js';
 
@@ -114,7 +115,12 @@ class LoginForm extends React.Component {
         </div>
       )
     } else {
-      return(<MainFormContainer form_config={this.get_config()}/>);
+      return(
+        <div>
+          <MainFormContainer form_config={this.get_config()}/>
+          <SignupButton />
+        </div>
+        );
     }
   }
 }
