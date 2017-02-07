@@ -5,6 +5,14 @@ module.exports = [
   {
     entry: './src/app/index.jsx',
     output: { path: __dirname, filename: 'dist/bundle.js' },
+    plugins: [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery",
+        Tether: "tether"
+      })
+    ],
     module: {
       loaders: [
         {

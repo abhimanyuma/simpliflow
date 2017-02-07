@@ -4,6 +4,7 @@ import {render} from 'react-dom';
 
 import { Router, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
+import Bootstrap from 'bootstrap/dist/js/bootstrap.js';
 
 import Workspace from './components/Workspace.jsx';
 
@@ -20,7 +21,6 @@ import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-rou
 
 const loggerMiddleware = createLogger();
 const middleware = routerMiddleware(browserHistory)
-
 
 let store = createStore(
   reducer,
