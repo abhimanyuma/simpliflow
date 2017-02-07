@@ -11,11 +11,10 @@ class SignupPage extends React.Component {
 
   render () {
     return (
-      <section className="section is-medium">
-        <div className="container ">
-          <div className="heading">
-            <h1 className="title has-text-centered">Signup</h1>
-              <SignupFormContainer/>
+      <section className="section main-container login-page-form">
+        <div className="d-flex justify-content-center ">
+          <div className="col-6">
+            <SignupFormContainer />
           </div>
         </div>
       </section>

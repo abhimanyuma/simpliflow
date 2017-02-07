@@ -30,8 +30,8 @@ export class TextComponentContainer extends React.Component {
       <div className="form-group row">
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="text" className="form-control" ref="text" placeholder={this.props.config["placeholder"] || "Text"} onInput={e=>{this.on_change(e)}}/>
-          <small className="form-text text-muted">Example help text that remains unchanged.</small>
+          <input type="text" className="form-control" ref="text" placeholder={this.props.config["placeholder"] || ""} onInput={e=>{this.on_change(e)}}/>
+          <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>
       </div>
     );
@@ -64,7 +64,7 @@ export class PasswordComponentContainer extends React.Component {
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
           <input type="password" className="form-control" ref="password" placeholder={this.props.config["placeholder"] || "Password"}  onInput={e=>{this.on_change(e)}}/>
-          <small className="form-text text-muted">Example help text that remains unchanged.</small>
+          <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>
       </div>
     );

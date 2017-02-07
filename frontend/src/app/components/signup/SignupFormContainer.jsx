@@ -16,13 +16,12 @@ let SignupFormContainer  = connect(
   },
   function mapDispatchToProps(dispatch: Dispatch) {
     return {
-      signupSubmit: (values) => {
-        let name = values.name.value;
-        let password = values.password.value;
-        let password_confirmation = values.password_confirmation.value;
-        let email = values.email.value;
-        dispatch(createUser(name, password, password_confirmation, email));
-      }
+      // signupSubmit: (values) => {
+      //   let name = values.name.value;
+      //   let password = values.password.value;
+      //   let password_confirmation = values.password_confirmation.value;
+      //   let email = values.email.value;
+      //   dispatch(createUser(name, password, password_confirmation, email));
     }
   }
 )(SignupForm);

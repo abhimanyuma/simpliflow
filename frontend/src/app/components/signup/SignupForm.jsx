@@ -3,64 +3,190 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-type SignupFormProps = {
-  profile: UserProfileType,
-  errors: Object,
-  signupSubmit: (Object) => any
-}
+import MainFormContainer from '../form/MainFormContainer.jsx'
+
+import LoadingFormContainer from '../common/LoadingFormContainer.jsx';
+import LoginCard from '../common/LoginCard.jsx';
+
+import { createUser } from '../../actions/ProfileActions.js';
 
 class SignupForm extends React.Component {
 
-  constructor(props: SignupFormProps): void {
+  constructor(props): void {
     super(props);
   }
 
+
+  get_config() {
+    return {
+      "id" : "signup-form",
+      "title" : "Signup",
+      "elements":[
+        {
+          "key": "username",
+          "order": 1,
+          "name": "username",
+          "label": "Username",
+          "type": "text",
+          "variable": ["username"],
+          "icon": "user",
+          "validates": [
+            {
+              type: "presence"
+            },
+            {
+              type: "min_length",
+              value: 3
+            },
+            {
+              type: "max_length",
+              value: 500
+            },
+            {
+              type: "like",
+              value: "username"
+            }
+          ]
+        },
+        {
+          "key": "Name",
+          "order": 2,
+          "name": "name",
+          "label": "Name",
+          "type": "text",
+          "variable": ["name"],
+          "icon": "user",
+          "validates": [
+            {
+              type: "presence"
+            },
+            {
+              type: "min_length",
+              value: 3
+            },
+            {
+              type: "max_length",
+              value: 500
+            }
+          ]
+        },
+        {
+          "key": "email",
+          "order":2,
+          "name": "email",
+          "label": "Email",
+          "type": "text",
+          "variable": ["email"],
+          "icon": "email",
+          "validates": [
+            {
+              type: "presence"
+            },
+            {
+              type: "min_length",
+              value: 3
+            },
+            {
+              type: "max_length",
+              value: 500
+            },
+            {
+              type: "like",
+              value: "email"
+            }
+          ]
+        },
+        {
+          "key": "password",
+          "order": 3,
+          "name": "password",
+          "label": "Password",
+          "type": "password",
+          "variable": ["password"],
+          "icon": "lock",
+          "validates": [
+            {
+              type: "presence"
+            },
+            {
+              type: "min_length",
+              value: 3
+            },
+            {
+              type: "max_length",
+              value: 500
+            }
+          ]
+        },
+        {
+          "key": "password",
+          "order": 4,
+          "name": "password_confirmation",
+          "label": "Cofirm Password",
+          "type": "password",
+          "variable": ["password_confirmation"],
+          "icon": "lock",
+          "validates": [
+            {
+              type: "presence"
+            },
+            {
+              type: "min_length",
+              value: 3
+            },
+            {
+              type: "max_length",
+              value: 500
+            }
+          ]
+        },
+        {
+          "key": "submit",
+          "order": 3,
+          "type" : "submit",
+          "label": "Login",
+          "align": "right",
+          "callback": (form_state, dispatch) => {
+            let data = {}
+            data['username'] = form_state.get("username");
+            data['name'] = form_state.get("name");
+            data['email'] = form_state.get("email");
+            data['password'] = form_state.get("password");
+            data['password_confirmation'] = form_state.get("password_confirmation")
+            dispatch(createUser(data))
+          }
+        }
+      ]
+    }
+  }
+
+
   render () {
-    if(this.props.profile.get("user_name")) {
+    if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
+      return(<LoadingFormContainer />);
+    } else if(this.props.profile.get("user_name")) {
       return (
         <div className="has-text-centered">
-          <h3> Already logged in as {this.props.profile.get('user_name')} </h3>   
+          <div className="card">
+            <h3 className="card-header">
+              You are already logged in
+            </h3>
+            <div className="card-block">
+              <p className="card-text">
+                You are alread logged in as&nbsp;
+                {this.props.profile.get("name") || this.props.profile.get("user_name")}.</p>
+              <a href="#" className="btn btn-primary">Go to profile</a>
+            </div>
+          </div>
         </div>
       )
     } else {
-      return (
-        <div className="columns">
-          <div className="column is-half is-offset-one-quarter">
-            <div className="card is-fullwidth">
-              <header className="card-header has-text-centered">
-                <p className="card-header-title">
-                  Signup
-                </p>
-              </header>
-              <form className="card-content" onSubmit={e => this.props.signupSubmit(this.refs)}>
-                <p className="control has-icon">
-                  <input className="input" type="text" ref="name" placeholder="Name"/>
-                  <i className="fa fa-user"></i>
-                </p>
-                <p className="control has-icon">
-                  <input className="input" type="email" ref="email" placeholder="Email"/>
-                  <i className="fa fa-at"></i>
-                </p>
-                <p className="control has-icon">
-                  <input className="input" type="password" ref="password" placeholder="Password"/>
-                  <i className="fa fa-lock"></i>
-                </p>
-                <p className="control has-icon">
-                  <input className="input" type="password" ref="password_confirmation" placeholder="Password Confirmation"/>
-                  <i className="fa fa-lock"></i>
-                </p>
-                <p>
-                  <button className="button is-outlined is-fullwidth" type="Submit">Signup</button>
-                </p>
-              </form>
-             
-            </div>
-            <Link to="/login" className="button is-outlined is-pulled-right m2t">
-              Login
-            </Link>
-          </div>
+      return(
+        <div>
+          <MainFormContainer form_config={this.get_config()}/>
+          <LoginCard/>
         </div>
-      );
+        );
     }
   }
 }

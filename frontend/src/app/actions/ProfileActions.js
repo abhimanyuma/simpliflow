@@ -100,7 +100,7 @@ export function loginUser(username: string, password: string): Function {
 }
 
 const CREATE_PROFILE = "Profile::Create"
-export function createUser(name: string, password: string, password_confirmation: string, email: string): Function {
+export function createUser(data: Object): Function {
   return function(dispatch) {
     let url = "/users";
     let success_cb = (data) => {
@@ -109,21 +109,11 @@ export function createUser(name: string, password: string, password_confirmation
     let error_cb = (errors) => {
       console.log(errors);
     }
-    let data = {
-      "user": {
-        "name": name,
-        "password": password,
-        "password_confirmation": password_confirmation,
-        "email": email
-      }
+    let submit_data = {
+      "user": data
     }
-    let errors = null // validate_user(username, password, password_confirmation, email)
+    create_object(url, submit_data, success_cb, error_cb);
 
-    if (errors) {
-      console.log(errors);
-    } else {
-      create_object(url, data, success_cb, error_cb);
-    }
   }
 }
 
