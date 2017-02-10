@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import MainForm from './MainForm.jsx';
 import { setFormConfig } from '../../actions/FormConfigActions.js';
 import { connect } from 'react-redux';
-import { createFormStateFromInitialState, createNewFormState, updateFormState } from '../../actions/FormStateActions.js';
+import { createFormStateFromInitialState, createNewFormState, updateFormState, checkFormStateErrors } from '../../actions/FormStateActions.js';
 
 
 class MainFormContainer extends React.Component {
@@ -69,10 +69,11 @@ class MainFormContainer extends React.Component {
     this.store.dispatch(updateFormState(this.form_state_key, update_value))
   }
 
-  on_submit(e) {
-    e.preventDefault();
+  on_submit_clean() {
+
     let cfg = this.store.getState().form_config.get(this.config_key);
     let submit_button = null;
+
     if (cfg && (typeof(cfg.get) == "function") && cfg.get("elements")) {
       for (let element of cfg.get("elements")) {
         if (element["key"] == "submit") {
@@ -86,10 +87,19 @@ class MainFormContainer extends React.Component {
     }
   }
 
+  on_submit(e) {
+    e.preventDefault();
+    let form_config = this.store.getState().form_config.get(this.config_key);
+    let form_state  = this.store.getState().form_state.get(this.form_state_key);
+    this.store.dispatch(checkFormStateErrors(form_state, form_config, this.form_state_key, this.on_submit_clean));
+  }
+
   render () {
+    console.log("Rendered again")
     if (this.config_is_valid() && this.state_is_valid()) {
       let config = this.store.getState().form_config.get(this.config_key);
-      return(<MainForm form_config = {config} update_state={(e) => {this.update_state(e)}} on_submit={(e) => {this.on_submit(e)}}/>);
+      let form_state = this.store.getState().form_state.get(this.form_state_key);
+      return(<MainForm form_config = {config} form_state = {form_state} update_state={(e) => {this.update_state(e)}} on_submit={(e) => {this.on_submit(e)}}/>);
     } else {
       return(null);
     }

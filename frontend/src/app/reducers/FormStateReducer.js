@@ -43,7 +43,20 @@ export const form_state = function(state: Object = Map({}), action: Object) {
         state = state.set(id, form_state);
 
         break;
+      case "SetErrors":
+        id = action.id;
+        let errors = action.errors;
 
+        form_state = state.get(id)
+
+        if (!form_state) {
+          break;
+        }
+
+        form_state = ModelActions.set_errors(form_state, errors);
+        state = state.set(id, form_state);
+
+        break;
       default:
         break;
     }

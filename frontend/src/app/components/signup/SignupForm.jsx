@@ -153,7 +153,7 @@ class SignupForm extends React.Component {
             data['email'] = form_state.get("email");
             data['password'] = form_state.get("password");
             data['password_confirmation'] = form_state.get("password_confirmation")
-            dispatch(createUser(data))
+            dispatch(submitForm(data))
           }
         }
       ]

@@ -10,26 +10,18 @@ class ErrorPanel extends React.Component {
     super(props);
   }
 
-  errors() {
-    let errors = this.props.errors;
-    if ((typeof(errors) == "string") || (errors instanceof String)) {
-      return (errors);
-    } else if (errors instanceof Array) {
-      return (errors.join(". "))
-    } else {
-      return null;
-    }
-  }
-
   render() {
-    let error_string = this.errors()
-    if (!error_string) {
+    if (!this.props.errors) {
       return null
     }
     return (
-      <div className="notification is-danger">
-        <button className="delete"></button>
-        {error_string}
+      <div className="alert alert-danger" role="alert">
+        <h4 className="alert-heading">{this.props.error_title || "You have errors :("}</h4>
+        <ul>
+          {this.props.errors.map((value, key) => {
+                return(<li>{value}</li>)
+              })}
+        </ul>
       </div>
     )
   }

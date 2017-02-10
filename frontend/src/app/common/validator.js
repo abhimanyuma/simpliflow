@@ -1,5 +1,6 @@
 // @flox
 
+import ModelActions from './ModelActions.js';
 
 let regex: {[id:string]: RegExp } = {
   "username": /^\w+$/,
@@ -39,7 +40,7 @@ function validate_likeness(value: string, regex_key: string): ?string {
   let operation = null
   let values: Array<string> = []
   let errors: Array<string> = []
-  let error: ?string = null 
+  let error: ?string = null
   if (regex_key.indexOf("_or_") > -1) {
     values = regex_key.split("_or_")
     operation = "or"
@@ -76,43 +77,70 @@ function validate_likeness(value: string, regex_key: string): ?string {
   } else {
     error = null
   }
-  
+
   return(error)
 }
 
-export function validate (
-  errors: ErrorListType,
+export function validate(form_state, rules) {
+  let errors: Object = {}
+  let single: boolean = false
+  let field_name = null;
+  let field_value = null;
+  for (let rule of rules) {
+    if (rule["variable"]) {
+      if (rule["variable"].length && rule["variable"].length === 1) {
+        field_name = rule["variable"][0];
+        single = true;
+        field_value = form_state.get(field_name)
+      } else if (rule["variable"].length > 1) {
+        field_name = rule["variable"]
+        field_value = ModelActions.multi_get(form_state, field_name)
+      } else if (form_state.get(rule["variable"])) {
+        console.log("Here at unknown variable")
+        field_name = rule["variable"]
+        field_value = form_state.get(field_name)
+      }
+      let cur_error = validate_individual(field_name, field_value, rule)
+      if (cur_error && single) {
+        if (!errors[field_name]) {
+          errors[field_name] = []
+        }
+        errors[field_name].push(`${field_name} ${cur_error}`)
+      } else if (cur_error) {
+        if (!errors["global"]) {
+          errors["global"] = []
+        }
+        errors["global"].push(cur_error)
+      }
+    }
+  }
+  return(errors);
+}
+
+
+function validate_individual (
   field_name: string,
   field_value: any,
-  rule: string,
-  rule_variable: any
-  ): ErrorListType {
+  rule: Object
+  )  {
 
   let error: ?string = null
-  switch (rule) {
-    case "presence": 
+  switch (rule["type"]) {
+    case "presence":
       error = validate_presence(field_value);
       break;
     case "min_length":
-      error = validate_min_length(field_value, rule_variable);
+      error = validate_min_length(field_value, rule["parameter"]);
       break;
     case "max_length":
-      error = validate_max_length(field_value, rule_variable);
+      error = validate_max_length(field_value, rule["parameter"]);
       break;
     case "like":
-      error = validate_likeness(field_value, rule_variable);
+      error = validate_likeness(field_value, rule["parameter"]);
       break;
     default:
-      errror = null
+      error = null
   }
 
-  if (error) {
-    if (!(field_name in errors)) {
-      errors[field_name] = []
-    }
-    let full_error: string = `${field_name} ${error}`
-    errors[field_name].push(full_error)
-  }
-
-  return errors
+  return error
 }

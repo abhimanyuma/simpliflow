@@ -37,21 +37,21 @@ class LoginForm extends React.Component {
           "type": "text",
           "variable": ["username"],
           "icon": "user",
-          "validates": [
+          "validation_rules": [
             {
               type: "presence"
             },
             {
               type: "min_length",
-              value: 3
+              parameter: 3
             },
             {
               type: "max_length",
-              value: 500
+              parameter: 128
             },
             {
               type: "like",
-              value: "username_or_email"
+              parameter: "username_or_email"
             }
           ]
         },
@@ -64,17 +64,17 @@ class LoginForm extends React.Component {
           "type": "password",
           "variable": ["password"],
           "icon": "lock",
-          "validates": [
+          "validation_rules": [
             {
               type: "presence"
             },
             {
               type: "min_length",
-              value: 3
+              parameter: 3
             },
             {
               type: "max_length",
-              value: 500
+              parameter: 128
             }
           ]
         },

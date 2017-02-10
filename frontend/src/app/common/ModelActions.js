@@ -37,6 +37,28 @@ let ModelActions = {
   unset_errors: (map: Object): Object => {
     map = map.delete("errors");
     return map;
+  },
+
+  multi_get_array: (map: Object, fields: Array): Array => {
+    let response: Array = []
+    for(let field of fields) {
+      response.push(map.get(field))
+    }
+    return(response);
+  },
+
+  multi_get: (map: Object, fields: Array, as_array: boolean = false): Object | Array  => {
+    if (as_array) {
+      return (self.mult_get_array(map, fields));
+    } else {
+      let response: Object = {}
+      for (let field of fields) {
+        if (map.get(field)) {
+          reponse[field] = map.get(field)
+        }
+      }
+      return(response);
+    }
   }
 }
 
