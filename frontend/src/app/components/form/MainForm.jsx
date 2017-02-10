@@ -15,6 +15,12 @@ class MainForm extends React.Component {
     super(props);
   }
 
+  componentWillMount() {
+    if ((!this.props.form_config) && this.props.config_key && this.props.config_native_object) {
+      this.props.setup_config(this.props.config_native_object, this.props.config_key)
+    }
+  }
+
   get_elements() {
 
     let element_object = []
@@ -36,23 +42,26 @@ class MainForm extends React.Component {
     return (!!this.props.form_state.get("errors"))
   }
   render() {
-    console.log("Rendered inside here again")
-    return(
-      <div className="card">
-        <h3 className="card-header">
-          {this.props.form_config.get("title")}
-        </h3>
-        <div className="card-block">
-          {this.has_errors() && <ErrorPanel errors={this.get_global_errors()} />}
-          <form onSubmit={(e) => this.props.on_submit(e)}>
-              {this.get_elements().map((object, key) => {
-                return(<FormComponentContainer config={object} key={key} update_state={this.props.update_state}
-                on_submit = {this.props.on_submit}/>)
-              })}
-          </form>
+    if (this.props.form_config && this.props.form_config.get(this.props.config_key)) {
+      return(
+        <div className="card">
+          <h3 className="card-header">
+            {this.props.form_config.get("title")}
+          </h3>
+          <div className="card-block">
+            {this.has_errors() && <ErrorPanel errors={this.get_global_errors()} />}
+            <form onSubmit={(e) => this.props.on_submit(e)}>
+                {this.get_elements().map((object, key) => {
+                  return(<FormComponentContainer config={object} key={key} update_state={this.props.update_state}
+                  on_submit = {this.props.on_submit}/>)
+                })}
+            </form>
+          </div>
         </div>
-      </div>
-      )
+        )
+    } else {
+      return (null)
+    }
   }
 
 }
