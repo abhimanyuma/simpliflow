@@ -98,7 +98,6 @@ class LoginForm extends React.Component {
     if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
       return(<LoadingFormContainer />);
     } else if(this.props.profile.get("user_name")) {
-      console.log(this.props.profile.toJS());
       return (
         <div className="has-text-centered">
           <div className="card">

@@ -96,7 +96,6 @@ export function validate(form_state, rules) {
         field_name = rule["variable"]
         field_value = ModelActions.multi_get(form_state, field_name)
       } else if (form_state.get(rule["variable"])) {
-        console.log("Here at unknown variable")
         field_name = rule["variable"]
         field_value = form_state.get(field_name)
       }

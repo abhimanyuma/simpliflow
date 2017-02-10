@@ -48,7 +48,7 @@ let MainFormContainer  = connect(
       dispatch(createNewFormState(form_state_key))
     }
 
-    dispatch_functions["update_states"] = (form_state_key, update_value) => {
+    dispatch_functions["update_state"] = (form_state_key, update_value) => {
       dispatch(updateFormState(form_state_key, update_value))
     }
 
