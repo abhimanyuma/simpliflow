@@ -90,12 +90,7 @@ export function loginUser(username: string, password: string): Function {
         "password": password
       }
     }
-  let errors: ErrorListType = validate_login(username, password)
-    if (errors) {
-      dispatch(setProfileErrors(errors));
-    } else {
-      create_object(url, data, success_cb, error_cb);
-    }
+    create_object(url, data, success_cb, error_cb);
   }
 }
 
@@ -117,20 +112,4 @@ export function createUser(data: Object): Function {
   }
 }
 
-export function validate_login(username: string, password: string): ErrorListType  {
-  let errors: ErrorListType = {}
-  errors = validate(errors, "username", username, "presence")
-  errors = validate(errors, "username", username, "min_length", 3)
-  errors = validate(errors, "username", username, "max_length", 500)
-  errors = validate(errors, "username", username, "like", "username_or_email")
-  errors = validate(errors, "password", password, "presence")
-  errors = validate(errors, "password", password, "min_length", 3)
-  errors = validate(errors, "password", password, "max_length", 500)
-
-  if (Object.keys(errors).length === 0) {
-    return(null);
-  } else {
-    return(errors);
-  }
-}
 

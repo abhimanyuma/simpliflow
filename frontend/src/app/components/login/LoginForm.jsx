@@ -42,10 +42,6 @@ class LoginForm extends React.Component {
               type: "presence"
             },
             {
-              type: "min_length",
-              parameter: 3
-            },
-            {
               type: "max_length",
               parameter: 128
             },
@@ -69,10 +65,6 @@ class LoginForm extends React.Component {
               type: "presence"
             },
             {
-              type: "min_length",
-              parameter: 3
-            },
-            {
               type: "max_length",
               parameter: 128
             }
@@ -91,6 +83,12 @@ class LoginForm extends React.Component {
           }
         }
       ]
+    }
+  }
+
+  get_login_errors() {
+    if (this.props.profile.get("errors")) {
+      return(this.props.profile.get("errors"))
     }
   }
 
@@ -116,7 +114,7 @@ class LoginForm extends React.Component {
     } else {
       return(
         <div>
-          <MainFormContainer form_config={this.get_config()}/>
+          <MainFormContainer form_config={this.get_config()} errors={this.get_login_errors()}/>
           <SignupButton />
         </div>
         );

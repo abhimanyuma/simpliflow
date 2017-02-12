@@ -34,7 +34,7 @@ export class TextComponentContainer extends React.Component {
   }
 
   list_errors() {
-    return(this.props.errors.join(","));``
+    return(this.props.errors.join(","));
   }
 
   render() {

@@ -17,6 +17,8 @@ class MainForm extends React.Component {
   }
 
   componentWillMount() {
+
+
     if ((!this.props.form_config) && this.props.config_key && this.props.config_native_object) {
       this.props.setup_config(this.props.config_native_object, this.props.config_key)
     }
@@ -24,6 +26,12 @@ class MainForm extends React.Component {
       this.props.setup_new_form_state(this.props.form_state_key)
     }
 
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.additional_errors) {
+      this.props.add_external_errors(this.props.form_state_key, nextProps.additional_errors)
+    }
   }
 
   get_elements() {
@@ -49,7 +57,12 @@ class MainForm extends React.Component {
   }
 
   has_errors() {
-    return (!!this.props.form_state.get("errors"))
+    let error_validity = false
+    let error_values = this.props.form_state.get("errors")
+    if (error_values && Object.keys(error_values).length > 0) {
+      error_validity = true
+    }
+    return(error_validity)
   }
 
   update_state(update_values) {
@@ -88,8 +101,11 @@ class MainForm extends React.Component {
     }
 
     let error_values = validate(this.props.form_state, total_validation_rules)
-    if (error_values) {
+    if (Object.keys(error_values).length !== 0) {
       this.props.set_errors(this.props.form_state_key, error_values)
+    } else {
+      this.props.set_errors(this.props.form_state_key, {})
+      this.props.on_submit(this.props.form_state, this.props.form_config)
     }
   }
 

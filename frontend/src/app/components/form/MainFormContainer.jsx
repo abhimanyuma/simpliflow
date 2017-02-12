@@ -31,6 +31,9 @@ let MainFormContainer  = connect(
       props["config_native_object"] = ownProps.form_config
     }
 
+
+    props["additional_errors"] = ownProps.errors
+
     return(props);
   },
   function mapDispatchToProps(dispatch: Dispatch, ownProps) {
@@ -52,8 +55,19 @@ let MainFormContainer  = connect(
       dispatch(updateFormState(form_state_key, update_value))
     }
 
-    dispatch_functions["on_submit"] = (form_state_key, form_config_key) => {
-      dispatch(checkFormStateErrors(form_state_key, form_config_key))
+    dispatch_functions["add_external_errors"] = (form_state_key, errors) => {
+      dispatch(setFormStateErrors(form_state_key, errors))
+    }
+
+    dispatch_functions["on_submit"] = (form_state, form_config) => {
+      if (form_config.get("elements") && form_config.get("elements")) {
+        for (let element of form_config.get("elements")) {
+          if (element["type"] === "submit" && element["callback"]) {
+            element["callback"](form_state, dispatch)
+            break;
+          }
+        }
+      }
     }
 
     dispatch_functions["set_errors"] = (form_state_key, errors) => {

@@ -16,7 +16,7 @@ class ErrorPanel extends React.Component {
         <h4 className="alert-heading">{this.props.error_title || "You have errors :("}</h4>
         {this.props.errors && <ul>
           {this.props.errors.map((value, key) => {
-                return(<li>{value}</li>)
+                return(<li key={key}>{value}</li>)
               })}
         </ul>}
       </div>

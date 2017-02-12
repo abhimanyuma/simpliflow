@@ -3,7 +3,7 @@
 import ModelActions from './ModelActions.js';
 
 let regex: {[id:string]: RegExp } = {
-  "username": /^\w+$/,
+  "username": /^\w*$/,
   "email": /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
 }
 
