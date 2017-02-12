@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import MainForm from './MainForm.jsx';
 import { setFormConfig } from '../../actions/FormConfigActions.js';
 import { connect } from 'react-redux';
-import { createFormStateFromInitialState, createNewFormState, updateFormState, checkFormStateErrors } from '../../actions/FormStateActions.js';
+import { createFormStateFromInitialState, createNewFormState, updateFormState, setFormStateErrors } from '../../actions/FormStateActions.js';
 
 
 let MainFormContainer  = connect(
@@ -54,6 +54,10 @@ let MainFormContainer  = connect(
 
     dispatch_functions["on_submit"] = (form_state_key, form_config_key) => {
       dispatch(checkFormStateErrors(form_state_key, form_config_key))
+    }
+
+    dispatch_functions["set_errors"] = (form_state_key, errors) => {
+      dispatch(setFormStateErrors(form_state_key, errors))
     }
 
     return dispatch_functions;
