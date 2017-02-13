@@ -99,13 +99,12 @@ class MainForm extends React.Component {
         total_validation_rules.push(Object.assign({}, global_rule))
       }
     }
-
     let error_values = validate(this.props.form_state, total_validation_rules)
     if (Object.keys(error_values).length !== 0) {
       this.props.set_errors(this.props.form_state_key, error_values)
     } else {
       this.props.set_errors(this.props.form_state_key, {})
-      this.props.on_submit(this.props.form_state, this.props.form_config)
+      this.props.on_submit(this.props.form_state, this.props.form_state_key, this.props.form_config)
     }
   }
 

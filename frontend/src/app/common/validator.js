@@ -21,7 +21,9 @@ function validate_presence(value: string|number): ?string {
 }
 
 function validate_min_length(value: string, min_length: number): ?string {
-  if (value.length < min_length) {
+  if (!value || !value.length) {
+    return 'must be present'
+  } else if (value.length < min_length) {
     return `has to be atleast ${min_length} characters long`
   } else {
     return null
@@ -29,7 +31,9 @@ function validate_min_length(value: string, min_length: number): ?string {
 }
 
 function validate_max_length(value: string, max_length: number): ?string {
-  if (value.length > max_length) {
+  if (!value || !value.length) {
+    return null
+  } else if ((!value.length) || (value.length > max_length)) {
     return `has to be shorter than ${min_length} characters`
   } else {
     return null
@@ -41,6 +45,9 @@ function validate_likeness(value: string, regex_key: string): ?string {
   let values: Array<string> = []
   let errors: Array<string> = []
   let error: ?string = null
+  if (!value) {
+    value = ""
+  }
   if (regex_key.indexOf("_or_") > -1) {
     values = regex_key.split("_or_")
     operation = "or"

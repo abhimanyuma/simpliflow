@@ -59,11 +59,11 @@ let MainFormContainer  = connect(
       dispatch(setFormStateErrors(form_state_key, errors))
     }
 
-    dispatch_functions["on_submit"] = (form_state, form_config) => {
+    dispatch_functions["on_submit"] = (form_state, form_state_key, form_config) => {
       if (form_config.get("elements") && form_config.get("elements")) {
         for (let element of form_config.get("elements")) {
           if (element["type"] === "submit" && element["callback"]) {
-            element["callback"](form_state, dispatch)
+            element["callback"](form_state, form_state_key, dispatch)
             break;
           }
         }

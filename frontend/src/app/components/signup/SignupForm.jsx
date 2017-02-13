@@ -30,21 +30,18 @@ class SignupForm extends React.Component {
           "type": "text",
           "variable": ["username"],
           "icon": "user",
-          "validates": [
-            {
-              type: "presence"
-            },
+          "validation_rules": [
             {
               type: "min_length",
-              value: 3
+              parameter: 3
             },
             {
               type: "max_length",
-              value: 500
+              parameter: 500
             },
             {
               type: "like",
-              value: "username"
+              parameter: "username"
             }
           ]
         },
@@ -56,17 +53,14 @@ class SignupForm extends React.Component {
           "type": "text",
           "variable": ["name"],
           "icon": "user",
-          "validates": [
-            {
-              type: "presence"
-            },
+          "validation_rules": [
             {
               type: "min_length",
-              value: 3
+              parameter: 3
             },
             {
               type: "max_length",
-              value: 500
+              parameter: 500
             }
           ]
         },
@@ -78,21 +72,18 @@ class SignupForm extends React.Component {
           "type": "text",
           "variable": ["email"],
           "icon": "email",
-          "validates": [
-            {
-              type: "presence"
-            },
+          "validation_rules": [
             {
               type: "min_length",
-              value: 3
+              parameter: 3
             },
             {
               type: "max_length",
-              value: 500
+              parameter: 500
             },
             {
               type: "like",
-              value: "email"
+              parameter: "email"
             }
           ]
         },
@@ -104,17 +95,14 @@ class SignupForm extends React.Component {
           "type": "password",
           "variable": ["password"],
           "icon": "lock",
-          "validates": [
-            {
-              type: "presence"
-            },
+          "validation_rules": [
             {
               type: "min_length",
-              value: 3
+              parameter: 3
             },
             {
               type: "max_length",
-              value: 500
+              parameter: 500
             }
           ]
         },
@@ -126,17 +114,10 @@ class SignupForm extends React.Component {
           "type": "password",
           "variable": ["password_confirmation"],
           "icon": "lock",
-          "validates": [
+          "validation_rules": [
             {
-              type: "presence"
-            },
-            {
-              type: "min_length",
-              value: 3
-            },
-            {
-              type: "max_length",
-              value: 500
+              type: "match",
+              parameter: "password"
             }
           ]
         },
@@ -146,20 +127,19 @@ class SignupForm extends React.Component {
           "type" : "submit",
           "label": "Login",
           "align": "right",
-          "callback": (form_state, dispatch) => {
+          "callback": (form_state, form_state_key, dispatch={}) => {
             let data = {}
             data['username'] = form_state.get("username");
             data['name'] = form_state.get("name");
             data['email'] = form_state.get("email");
             data['password'] = form_state.get("password");
             data['password_confirmation'] = form_state.get("password_confirmation")
-            dispatch(submitForm(data))
+            dispatch(createUser(data, form_state_key))
           }
         }
       ]
     }
   }
-
 
   render () {
     if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
@@ -183,7 +163,7 @@ class SignupForm extends React.Component {
     } else {
       return(
         <div>
-          <MainFormContainer form_config={this.get_config()}/>
+          <MainFormContainer form_config={this.get_config()} />
           <LoginCard/>
         </div>
         );

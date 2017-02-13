@@ -2,6 +2,7 @@
 // TODO: Add a dispatch function type
 import { fetch_object, create_object, delete_object } from '../common/common.js'
 import { validate } from '../common/common.js'
+import { setFormStateErrors } from './FormStateActions.js';
 
 const REQUEST_PROFILE = 'Profile::Response';
 
@@ -95,14 +96,14 @@ export function loginUser(username: string, password: string): Function {
 }
 
 const CREATE_PROFILE = "Profile::Create"
-export function createUser(data: Object): Function {
+export function createUser(data: Object, form_state_key: String): Function {
   return function(dispatch) {
     let url = "/users";
     let success_cb = (data) => {
       dispatch(setProfile(data));
     }
     let error_cb = (errors) => {
-      console.log(errors);
+      dispatch(setFormStateErrors(form_state_key, errors));
     }
     let submit_data = {
       "user": data

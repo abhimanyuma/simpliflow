@@ -25,7 +25,7 @@ class Api::V1::UsersController < ApplicationController
       if user.save
         render json: {status: true, data: user}, status: 201, location: [:api, user]
       else
-        render json: { status: false, error: user.errors }, status: 400
+        render json: { status: false, errors: user.errors }, status: 400
       end
     end
   end

@@ -76,7 +76,7 @@ class LoginForm extends React.Component {
           "type" : "submit",
           "label": "Login",
           "align": "right",
-          "callback": (form_state, dispatch) => {
+          "callback": (form_state, _form_state_key, dispatch) => {
             let username = form_state.get("username");
             let password = form_state.get("password");
             dispatch(loginUser(username, password))
