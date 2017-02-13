@@ -40,6 +40,13 @@ function validate_max_length(value: string, max_length: number): ?string {
   }
 }
 
+function validate_equality(value: string, comparison_variable: string, form_state ): ?string {
+  let comparable_value = form_state.get(comparison_variable)
+  if (value !== comparable_value){
+    return `has to be equal to ${comparison_variable}`
+  }
+}
+
 function validate_likeness(value: string, regex_key: string): ?string {
   let operation = null
   let values: Array<string> = []
@@ -106,7 +113,7 @@ export function validate(form_state, rules) {
         field_name = rule["variable"]
         field_value = form_state.get(field_name)
       }
-      let cur_error = validate_individual(field_name, field_value, rule)
+      let cur_error = validate_individual(field_name, field_value, rule, form_state)
       if (cur_error && single) {
         if (!errors[field_name]) {
           errors[field_name] = []
@@ -127,7 +134,8 @@ export function validate(form_state, rules) {
 function validate_individual (
   field_name: string,
   field_value: any,
-  rule: Object
+  rule: Object,
+  form_state: Object
   )  {
 
   let error: ?string = null
@@ -136,13 +144,16 @@ function validate_individual (
       error = validate_presence(field_value);
       break;
     case "min_length":
-      error = validate_min_length(field_value, rule["parameter"]);
+      error = validate_min_length(field_value, rule["parameter"], form_state);
       break;
     case "max_length":
-      error = validate_max_length(field_value, rule["parameter"]);
+      error = validate_max_length(field_value, rule["parameter"], form_state);
       break;
     case "like":
-      error = validate_likeness(field_value, rule["parameter"]);
+      error = validate_likeness(field_value, rule["parameter"], form_state);
+      break;
+    case "equality":
+      error = validate_equality(field_value, rule["parameter"], form_state);
       break;
     default:
       error = null

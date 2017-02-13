@@ -116,7 +116,7 @@ class SignupForm extends React.Component {
           "icon": "lock",
           "validation_rules": [
             {
-              type: "match",
+              type: "equality",
               parameter: "password"
             }
           ]
