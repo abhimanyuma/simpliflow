@@ -95,7 +95,7 @@ class LoginForm extends React.Component {
   render () {
     if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
       return(<LoadingFormContainer />);
-    } else if(this.props.profile.get("user_name")) {
+    } else if(this.props.profile.get("username")) {
       return (
         <div className="has-text-centered">
           <div className="card">
@@ -105,7 +105,7 @@ class LoginForm extends React.Component {
             <div className="card-block">
               <p className="card-text">
                 You are alread logged in as&nbsp;
-                {this.props.profile.get("name") || this.props.profile.get("user_name")}.</p>
+                {this.props.profile.get("name") || this.props.profile.get("username")}.</p>
               <a href="#" className="btn btn-primary">Go to profile</a>
             </div>
           </div>

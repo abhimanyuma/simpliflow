@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :auth_token, uniqueness: true
-  validates :user_name, uniqueness: true
+  validates :username, uniqueness: true
   before_validation :generate_authentication_token!, on: :create
   before_validation :generate_username, on: :create
 
@@ -17,20 +17,20 @@ class User < ApplicationRecord
   end
 
   def generate_username
-    if self.user_name.blank?
-      base_user_name = self.name.gsub(/\W+/, '').downcase
-      if base_user_name.blank?
-        base_user_name = 'user'
+    if self.username.blank?
+      base_username = self.name.gsub(/\W+/, '').downcase
+      if base_username.blank?
+        base_username = 'user'
       end
       count = 0
-      probable_user_name = base_user_name
+      probable_username = base_username
       while true
         #TODO: Make more efficient
-        probable_user_name = "#{base_user_name}_#{count}" unless count == 0
-        break if User.where(user_name: probable_user_name).blank?
+        probable_username = "#{base_username}_#{count}" unless count == 0
+        break if User.where(username: probable_username).blank?
         count += 1
       end
-      self.user_name = probable_user_name
+      self.username = probable_username
     end
   end
 end

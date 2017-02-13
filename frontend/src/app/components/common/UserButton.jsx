@@ -18,7 +18,7 @@ class UserButton extends React.Component {
     return (
       <div className="btn-group">
         <button type="button" className="btn btn-outline-success my-2 my-sm-0 dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          {this.props.profile.get('user_name')}
+          {this.props.profile.get('username')}
         </button>
         <div className="dropdown-menu dropdown-menu-right">
           <a className="dropdown-item" href="#">Profile</a>

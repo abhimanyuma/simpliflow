@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
     if user_id.present?
       user = User.find_by(email: user_id)
       unless user
-        user = User.find_by(user_name: user_id)
+        user = User.find_by(username: user_id)
       end
     end
 
@@ -33,7 +33,7 @@ class Api::V1::SessionsController < ApplicationController
     user.save!
     head 204
 
-  end  
+  end
 
 
   private
