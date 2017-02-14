@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import Bootstrap from 'bootstrap/dist/js/bootstrap.js';
 
 import Workspace from './components/Workspace.jsx';
+import Dashboard from './components/Dashboard.jsx';
 
 import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers/Reducer.js';
@@ -36,10 +37,14 @@ const history = syncHistoryWithStore(browserHistory, store)
 render(
   <Provider store={store}>
     <Router history={history}>
+      <Route path="/dashboard" component={Dashboard}>
+
+      </Route>
       <Route path="/" component={Workspace}>
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
       </Route>
+
     </Router>
   </Provider>
   , document.getElementById('main'));
