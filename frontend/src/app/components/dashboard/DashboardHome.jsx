@@ -2,7 +2,6 @@
 
 import React from 'react';
 
-
 class DashboardHome extends React.Component {
   render () {
     return (

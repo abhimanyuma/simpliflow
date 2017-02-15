@@ -14,30 +14,46 @@ import reducer from './reducers/Reducer.js';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 
+import { requireAuth } from './common/authentication.js';
+
+import { UserAuthWrapper } from 'redux-auth-wrapper'
+
 import HomeHero from './components/static_components/HomeHero.jsx';
 import LoginPage from './components/login/LoginPage.jsx';
 import SignupPage from './components/signup/SignupPage.jsx';
 
-import { syncHistoryWithStore, routerReducer, routerMiddleware } from 'react-router-redux'
+import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 
 const loggerMiddleware = createLogger();
-const middleware = routerMiddleware(browserHistory)
+const routingMiddleware = routerMiddleware(browserHistory)
 
 let store = createStore(
   reducer,
   applyMiddleware(
     thunkMiddleware,
     loggerMiddleware,
-    middleware
+    routingMiddleware
   )
 );
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+const UserIsAuthenticated = UserAuthWrapper({
+  authSelector: state => state.profile, // how to get the user state
+  redirectAction: routerActions.replace, // the redux action to dispatch for redirectAction
+  LoadingComponent: Workspace,
+  authenticatingSelector: state => {
+    return ((!state.profile.get) || (!state.profile.get("loading")))
+  },
+  wrapperDisplayName: 'UserIsAuthenticated', // a nice name for this auth check
+  predicate: profile => {return(profile.get && profile.get('auth_token'))}
+})
+
+
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/dashboard" component={Dashboard}>
+      <Route path="/dashboard" component={UserIsAuthenticated(Dashboard)}>
 
       </Route>
       <Route path="/" component={Workspace}>
