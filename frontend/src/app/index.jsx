@@ -2,7 +2,7 @@
 import React from 'react';
 import {render} from 'react-dom';
 
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, IndexRoute, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import Bootstrap from 'bootstrap/dist/js/bootstrap.js';
 
@@ -23,6 +23,11 @@ import { UserAuthWrapper } from 'redux-auth-wrapper'
 import HomeHero from './components/static_components/HomeHero.jsx';
 import LoginPage from './components/login/LoginPage.jsx';
 import SignupPage from './components/signup/SignupPage.jsx';
+
+
+import DashboardHome from './components/dashboard/DashboardHome.jsx';
+
+import ProfileContainer from './components/dashboard/profile/ProfileContainer.jsx';
 
 import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 
@@ -61,12 +66,15 @@ const UserIsAuthenticated = UserAuthWrapper({
 render(
   <Provider store={store}>
     <Router history={history}>
-      <Route path="/dashboard" component={UserIsAuthenticated(Dashboard)}>
 
-      </Route>
       <Route path="/" component={Workspace}>
+        <IndexRoute component={HomeHero} />
         <Route path="/login" component={LoginPage} />
         <Route path="/signup" component={SignupPage} />
+      </Route>
+      <Route path="/dashboard" component={UserIsAuthenticated(Dashboard)}>
+        <IndexRoute component={DashboardHome} />
+        <Route path="profile" component={ProfileContainer} />
       </Route>
 
     </Router>

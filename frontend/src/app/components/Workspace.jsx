@@ -14,7 +14,7 @@ class Workspace extends React.Component {
         <NavBar show_logo={true} show_login={true} show_links={true} />
         <div className="full-page-container container">
           <div className="workspace-container">
-            {this.props.children || <HomeHero />}
+            {this.props.children}
           </div>
         </div>
         <Footer />

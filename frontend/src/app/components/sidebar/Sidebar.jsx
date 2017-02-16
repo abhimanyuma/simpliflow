@@ -12,40 +12,28 @@ class SideBar extends React.Component {
             <a className="nav-link active" href="#">Overview <span className="sr-only">(current)</span></a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Reports</a>
+            <a className="nav-link" href="#">Forms</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Analytics</a>
+            <a className="nav-link" href="#">Dashboards</a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Export</a>
-          </li>
-        </ul>
-
-        <ul className="nav nav-pills flex-column">
-          <li className="nav-item">
-            <a className="nav-link" href="#">Nav item</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Nav item again</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">One more nav</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Another nav item</a>
+            <a className="nav-link" href="#">Data</a>
           </li>
         </ul>
 
         <ul className="nav nav-pills flex-column">
           <li className="nav-item">
-            <a className="nav-link" href="#">Nav item again</a>
+            <Link to="/dashboard/teams" className="nav-link">Team Management</Link>
+          </li>
+        </ul>
+
+        <ul className="nav nav-pills flex-column">
+          <li className="nav-item">
+            <Link to="/dashboard/profile" className="nav-link">Profile</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">One more nav</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">Another nav item</a>
+            <Link to="/dashboard" className="nav-link" >Settings</Link>
           </li>
         </ul>
       </nav>
