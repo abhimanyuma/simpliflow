@@ -9,7 +9,7 @@ class Api::V1::UsersController < ApplicationController
       if current_user
         render json: {status: true, data: current_user}, status: 200
       else
-        render json: {}, status: 200
+        render json: {status: false, errors: {}}, status: 401
       end
     else
       respond_with User.find(params[:id])

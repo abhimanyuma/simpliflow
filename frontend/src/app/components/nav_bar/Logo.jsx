@@ -7,9 +7,13 @@ import { Link } from 'react-router';
 class Logo extends React.Component {
 
   render () {
-    return (
-      <Link to="/" className="navbar-brand">MaxFlo</Link>
-    );
+    if (this.props.show_logo) {
+      return (
+        <Link to="/" className="navbar-brand">MaxFlo</Link>
+      );
+    } else {
+      return(<a></a>);
+    }
   }
 
 

@@ -12,7 +12,7 @@ class Dashboard extends React.Component {
   render () {
     return (
       <div className="full-width-container">
-        <NavBar show_logo={true} show_login={true} />
+        <NavBar show_logo={true} show_login={true} show_links={true}/>
         <div className="container-fluid">
           <div className="row">
             <SideBar />

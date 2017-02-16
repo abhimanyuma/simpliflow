@@ -35,14 +35,18 @@ class LoginInfo extends React.Component {
 
   render() {
     let name = this.computeNameFromProfile(this.props.profile);
-    if(name) {
-      return(
-        <UserButtonContainer/>
-      );
+    if (this.props.show_login) {
+      if(name) {
+        return(
+          <UserButtonContainer/>
+        );
+      } else {
+        return(
+          <LoginButtonContainer/>
+        );
+      }
     } else {
-      return(
-        <LoginButtonContainer/>
-      );
+      return(<span></span>);
     }
   }
 }

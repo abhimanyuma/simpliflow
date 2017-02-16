@@ -5,7 +5,6 @@ import { validate } from '../common/common.js'
 import { setFormStateErrors } from './FormStateActions.js';
 
 const REQUEST_PROFILE = 'Profile::Response';
-
 export function requestProfile(refresh: boolean = false): {type: string, refresh: boolean} {
   return {
     type: REQUEST_PROFILE,
@@ -26,6 +25,13 @@ export function setProfileErrors(errors: Object): {type: string, errors: Object}
   return {
     type: SET_PROFILE_ERROR,
     errors: errors
+  }
+}
+
+const SET_LOADED =  'Profile::SetLoaded';
+export function setLoaded(): {type: string} {
+  return {
+    type: SET_LOADED
   }
 }
 
@@ -66,6 +72,7 @@ export function fetchProfile(): Function {
       dispatch(setProfile(data));
     }
     let error_cb = (errors) => {
+      dispatch(setLoaded())
       dispatch(setProfileErrors(errors));
     }
     fetch_object(url, success_cb, error_cb);
@@ -83,6 +90,7 @@ export function loginUser(username: string, password: string): Function {
       dispatch(setProfile(data));
     }
     let error_cb = (errors) => {
+      dispatch(setLoaded())
       dispatch(setProfileErrors(errors));
     }
     let data = {

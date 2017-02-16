@@ -15,17 +15,10 @@ class NavBar extends React.Component {
         </button>
         <Logo show_logo={this.props.show_logo}/>
         <div className="collapse navbar-collapse" id="navbarCollapse">
-          <Links />
-          <LoginInfoContainer />
+          {this.props.show_links && <Links />}
+          <LoginInfoContainer show_login={this.props.show_login} />
         </div>
       </nav>
-
-      // <nav className="nav has-shadow">
-      //   <Logo show_logo={this.props.show_logo}/>
-      //   <Links />
-      //   <LoginInfoContainer show_login={this.props.show_login}/>
-      // </nav>
-
     );
   }
 }

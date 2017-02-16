@@ -9,6 +9,8 @@ import Bootstrap from 'bootstrap/dist/js/bootstrap.js';
 import Workspace from './components/Workspace.jsx';
 import Dashboard from './components/Dashboard.jsx';
 
+import LoadingComponent from './components/common/LoadingComponent.jsx';
+
 import { createStore, applyMiddleware } from 'redux';
 import reducer from './reducers/Reducer.js';
 import thunkMiddleware from 'redux-thunk';
@@ -41,9 +43,15 @@ const history = syncHistoryWithStore(browserHistory, store)
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.profile, // how to get the user state
   redirectAction: routerActions.replace, // the redux action to dispatch for redirectAction
-  LoadingComponent: Workspace,
+  LoadingComponent: LoadingComponent,
   authenticatingSelector: state => {
-    return ((!state.profile.get) || (!state.profile.get("loading")))
+    if (!state.profile.get) {
+      return true
+    } else if (state.profile.get("loading") == false) {
+      return false
+    } else {
+      return true
+    }
   },
   wrapperDisplayName: 'UserIsAuthenticated', // a nice name for this auth check
   predicate: profile => {return(profile.get && profile.get('auth_token'))}
