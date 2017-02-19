@@ -3,18 +3,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Profile from './Profile.jsx';
+import ChangeProfile from './ChangeProfile.jsx';
 
-let ProfileContainer  = connect(
+let ChangeProfileContainer  = connect(
   function mapStateToProps(state, ownProps) {
     return {
       profile: state.profile,
-      action: ownProps.location.hash
+      type: ownProps.type
     }
   },
   function mapDispatchToProps(dispatch) {
     return ({});
   }
-)(Profile);
-export default ProfileContainer;
+)(ChangeProfile);
+export default ChangeProfileContainer;
 
