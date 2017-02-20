@@ -90,3 +90,12 @@ export function delete_object(url: string, data: ?Object, success_cb: Function, 
   };
   ajax_request("DELETE", url, options);
 }
+
+export function update_object(url: string, data: Object, success_cb: Function, error_cb: Function) {
+  let options = {
+    success_cb: success_cb,
+    error_cb: error_cb,
+    data: data
+  };
+  ajax_request("PUT", url, options);
+}

@@ -32,6 +32,9 @@ export const profile = function(state: Object = Map({}), action: Object) {
       case "SetLoaded":
         state = ModelActions.set_loaded(state);
         break;
+      case "SetLoading":
+        state = ModelActions.set_loading(state);
+        break;
       case "UnsetErrors":
         state = ModelActions.unset_errors(state)
         break;

@@ -120,7 +120,7 @@ export class SubmitButtonComponentContainer extends React.Component {
   render() {
     return(
       <div className="container text-center">
-          <button type="submit" className="btn btn-primary" onClick={(e) => {this.on_submit(e)}}>Submit</button>
+          <button type="submit" className="btn btn-primary" onClick={(e) => {this.on_submit(e)}}>{this.props.config["label"] || "Submit"}</button>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 // @flow
 // TODO: Add a dispatch function type
-import { fetch_object, create_object, delete_object } from '../common/common.js'
+import { fetch_object, create_object, delete_object, update_object } from '../common/common.js'
 import { validate } from '../common/common.js'
 import { setFormStateErrors } from './FormStateActions.js';
 
@@ -32,6 +32,13 @@ const SET_LOADED =  'Profile::SetLoaded';
 export function setLoaded(): {type: string} {
   return {
     type: SET_LOADED
+  }
+}
+
+const SET_LOADING =  'Profile::SetLoading';
+export function setLoading(): {type: string} {
+  return {
+    type: SET_LOADING
   }
 }
 
@@ -118,6 +125,24 @@ export function createUser(data: Object, form_state_key: String): Function {
     }
     create_object(url, submit_data, success_cb, error_cb);
 
+  }
+}
+
+export function updateUser(data: Object): Function {
+  return function(dispatch) {
+    dispatch(setLoading())
+    let url = "/users/me";
+    let success_cb = (data) => {
+      dispatch(setProfile(data));
+    }
+    let error_cb = (errors) => {
+      dispatch(setLoaded())
+      dispatch(setProfileErrors(errors));
+    }
+
+    let new_data = {"user": data}
+
+    update_object(url, new_data, success_cb, error_cb);
   }
 }
 
