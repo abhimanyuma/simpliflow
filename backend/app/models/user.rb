@@ -16,6 +16,11 @@ class User < ApplicationRecord
     end while self.class.exists?(auth_token: auth_token)
   end
 
+  def refresh_authentication_token(save_obj = true)
+    self.auth_token = Devise.friendly_token
+    self.save! if save_obj
+  end
+
   def generate_username
     if self.username.blank?
       base_username = self.name.gsub(/\W+/, '').downcase

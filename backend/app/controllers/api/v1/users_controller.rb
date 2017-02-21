@@ -33,11 +33,31 @@ class Api::V1::UsersController < ApplicationController
   def update
     user = current_user
 
-    if user.update(user_params)
-      render json: user, status: 200, location: [:api, user]
+    current_password = params[:password]
+
+    if user.valid_password?(current_password)
+
+      if params[:refresh_auth_token]
+        user.refresh_authentication_token(false)
+      elsif params[:new_password] and params[:new_password_confirmation]
+        new_attributes = {password: params[:new_password], password_confirmation: params[:new_password_confirmation]}
+        user.assign_attributes(new_attributes)
+      elsif params[:username]
+        user.assign_attributes({username: params[:username]})
+      elsif params[:email]
+        user.assign_attributes({email: params[:email]})
+      end
+
+      if user.save
+        render json: {status: true, data: user}, status: 200
+      else
+        render json: { status: false, errors: user.errors }, status: 400
+      end
+
     else
-      render json: { errors: user.errors }, status: 422
+      render json: { status: false, errors: {"password": ["The password is invalid"]} }, status: 403
     end
+
   end
 
   def destroy
@@ -48,6 +68,10 @@ class Api::V1::UsersController < ApplicationController
   private
 
     def user_params
-      params.require(:user).permit(:email, :name, :username, :password, :password_confirmation)
+      params.require(:user).permit(
+        :email, :name, :username, :password,
+        :refresh_auth_token, :new_password,
+        :new_password_confirmation
+      )
     end
 end
