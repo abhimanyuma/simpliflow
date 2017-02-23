@@ -33,19 +33,19 @@ class Api::V1::UsersController < ApplicationController
   def update
     user = current_user
 
-    current_password = params[:password]
+    current_password = user_params[:password]
 
     if user.valid_password?(current_password)
 
-      if params[:refresh_auth_token]
+      if user_params[:refresh_auth_token]
         user.refresh_authentication_token(false)
-      elsif params[:new_password] and params[:new_password_confirmation]
-        new_attributes = {password: params[:new_password], password_confirmation: params[:new_password_confirmation]}
+      elsif user_params[:new_password] and user_params[:new_password_confirmation]
+        new_attributes = {password: user_params[:new_password], password_confirmation: user_params[:new_password_confirmation]}
         user.assign_attributes(new_attributes)
-      elsif params[:username]
-        user.assign_attributes({username: params[:username]})
-      elsif params[:email]
-        user.assign_attributes({email: params[:email]})
+      elsif user_params[:username]
+        user.assign_attributes({username: user_params[:username]})
+      elsif user_params[:email]
+        user.assign_attributes({email: user_params[:email]})
       end
 
       if user.save

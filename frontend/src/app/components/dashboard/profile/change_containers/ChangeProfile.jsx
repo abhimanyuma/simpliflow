@@ -13,7 +13,6 @@ class ChangeProfile extends React.Component {
   }
 
   get_form_config(type) {
-    console.log(type)
     let initial_config = {
       "id" : "change-profile-from",
       "title" : "Change Profile",
@@ -52,7 +51,6 @@ class ChangeProfile extends React.Component {
       submit_element["order"] = order
       submit_element["callback"] = (form_state, _form_state_key, dispatch) => {
         let data = {}
-        console.log("We are here")
         data["refresh_auth_token"] = true
         data["password"] = form_state.get("password")
         dispatch(updateUser(data))

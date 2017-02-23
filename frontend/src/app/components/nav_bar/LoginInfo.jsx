@@ -14,7 +14,7 @@ class LoginInfo extends React.Component {
 
   constructor(props: LoginInfoPropType): void {
     super(props);
-    if(!props.profile || !props.profile.get("loaded")) {
+    if(!props.profile || (!props.profile.get("name") && !props.profile.get("loading"))) {
       props.loadProfile();
     }
   }
