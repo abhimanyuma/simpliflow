@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import LoginForm from './LoginForm.jsx';
 
 import { setFormConfig } from '../../actions/FormConfigActions.js';
-import { createNewFormState } from '../../actions/FormStateActions.js';
+import { createNewFormState, setFormStateErrors } from '../../actions/FormStateActions.js';
 
 let LoginFormContainer  = connect(
   function mapStateToProps(state: {profile: UserProfileType}) {
@@ -22,6 +22,9 @@ let LoginFormContainer  = connect(
       },
       create_new_form_state: (state_key) => {
         dispatch(createNewFormState(state_key))
+      },
+      set_form_state_errors: (state_key, errors) => {
+        dispatch(setFormStateErrors(state_key, errors))
       }
     }
   }

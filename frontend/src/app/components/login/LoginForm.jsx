@@ -86,19 +86,22 @@ class LoginForm extends React.Component {
     }
   }
 
-  get_login_errors() {
-    if (this.props.profile.get("errors")) {
-      return(this.props.profile.get("errors"))
-    }
-  }
-
   componentWillMount() {
-    let config = this.get_config()
-    let config_key = config["id"]
-    this.props.set_form_config(config, config_key)
-    this.props.create_new_form_state(config_key)
+    this.config = this.get_config()
+    this.config_key = this.config["id"]
+    this.form_state_key = this.config_key
+    this.props.set_form_config(this.config, this.config_key)
+    this.props.create_new_form_state(this.form_state_key)
   }
 
+  componentWillUpdate(nextProps, nextState) {
+    let errors = null
+    if (nextProps.profile.get("errors")) {
+      errors = nextProps.profile.get("errors")
+    }
+
+    this.props.set_form_state_errors(this.form_state_key, errors)
+  }
 
   render () {
     if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
