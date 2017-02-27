@@ -141,6 +141,14 @@ class SignupForm extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.config = this.get_config()
+    this.config_key = this.config["id"]
+    this.form_state_key = this.config_key
+    this.props.set_form_config(this.config, this.config_key)
+    this.props.create_new_form_state(this.form_state_key)
+  }
+
   render () {
     if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
       return(<LoadingFormContainer />);
@@ -163,7 +171,7 @@ class SignupForm extends React.Component {
     } else {
       return(
         <div>
-          <MainFormContainer form_config={this.get_config()} />
+          <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>
           <LoginCard/>
         </div>
         );
