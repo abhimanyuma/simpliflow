@@ -16,24 +16,6 @@ class MainForm extends React.Component {
     super(props);
   }
 
-  componentWillMount() {
-
-
-    if ((!this.props.form_config) && this.props.config_key && this.props.config_native_object) {
-      this.props.setup_config(this.props.config_native_object, this.props.config_key)
-    }
-    if ((!this.props.form_state) && this.props.form_state_key) {
-      this.props.setup_new_form_state(this.props.form_state_key)
-    }
-
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.additional_errors) {
-      this.props.add_external_errors(this.props.form_state_key, nextProps.additional_errors)
-    }
-  }
-
   get_elements() {
 
     let element_object = []

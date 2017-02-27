@@ -92,6 +92,14 @@ class LoginForm extends React.Component {
     }
   }
 
+  componentWillMount() {
+    let config = this.get_config()
+    let config_key = config["id"]
+    this.props.set_form_config(config, config_key)
+    this.props.create_new_form_state(config_key)
+  }
+
+
   render () {
     if (!this.props.profile.get("sync") || this.props.profile.get("loading")) {
       return(<LoadingFormContainer />);
@@ -114,7 +122,7 @@ class LoginForm extends React.Component {
     } else {
       return(
         <div>
-          <MainFormContainer form_config={this.get_config()} errors={this.get_login_errors()}/>
+          <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>
           <SignupButton />
         </div>
         );
