@@ -4,16 +4,17 @@ import { fetch_object, create_object, delete_object } from '../common/common.js'
 import { validate } from '../common/common.js'
 
 const SET_FORM_STATE = "FormState::Set"
-export function setFormState(id: ?string, data: any = {}) {
+export function setFormState(id: ?string, data: any = {}, reset = false) {
   return ({
     type: SET_FORM_STATE,
     id: id,
-    data: data
+    data: data,
+    reset: reset
   });
 }
 
 export function createNewFormState(id: ?string) {
-  return(setFormState(id, {}))
+  return(setFormState(id, {}, true))
 }
 
 const UPDATE_FORM_STATE = "FormState::Update"
