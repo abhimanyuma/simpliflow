@@ -24,7 +24,8 @@ class SideBar extends React.Component {
 
         <ul className="nav nav-pills flex-column">
           <li className="nav-item">
-            <Link to="/dashboard/teams" className="nav-link">Team Management</Link>
+            <Link to="/dashboard/organisations" className="nav-link">Organisations</Link>
+            <Link to="/dashboard/teams" className="nav-link">Teams</Link>
           </li>
         </ul>
 
