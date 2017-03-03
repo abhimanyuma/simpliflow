@@ -3,7 +3,7 @@ require 'api_constraints'
 
 Rails.application.routes.draw do
 
-  
+
   namespace :api,
     defaults: {format: :json},
     constraints: {subdomain: 'api' },
@@ -11,9 +11,11 @@ Rails.application.routes.draw do
 
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
 
-      resources :users
+      resources :users do
+        resources :organisations, only: [:index]
+      end
 
-      resources :sessions, :only => [:create, :destroy]
+      resources :sessions, only: [:create, :destroy]
 
     end
 
