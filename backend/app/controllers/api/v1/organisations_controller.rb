@@ -6,7 +6,7 @@ class Api::V1::OrganisationsController < ApplicationController
 
     if current_user
       organisations = current_user.get_organisations
-      render json: {status: true, data: organisations, params: params}, status: 200
+      render json: {status: true, data: organisations}, status: 200
     else
       render json: {status: false, errors: {}, current_user: current_user}, status: 401
     end
