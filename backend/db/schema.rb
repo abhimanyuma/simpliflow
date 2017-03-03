@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301014047) do
+ActiveRecord::Schema.define(version: 20170302233752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,17 @@ ActiveRecord::Schema.define(version: 20170301014047) do
     t.string   "tagline"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "actor_id"
+    t.string   "actor_type"
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.index ["actor_type", "actor_id"], name: "index_permissions_on_actor_type_and_actor_id", using: :btree
+    t.index ["resource_type", "resource_id"], name: "index_permissions_on_resource_type_and_resource_id", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
@@ -40,6 +51,7 @@ ActiveRecord::Schema.define(version: 20170301014047) do
     t.string   "auth_token",             default: ""
     t.string   "name"
     t.string   "username"
+    t.integer  "role",                   default: 0
     t.index ["auth_token"], name: "index_users_on_auth_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
