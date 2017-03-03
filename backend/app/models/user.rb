@@ -9,6 +9,7 @@ class User < ApplicationRecord
   before_validation :generate_authentication_token!, on: :create
   before_validation :generate_username, on: :create
 
+  enum role: [ :user, :manager, :admin, :super_admin ]
 
   def generate_authentication_token!
     begin
@@ -37,5 +38,9 @@ class User < ApplicationRecord
       end
       self.username = probable_username
     end
+  end
+
+  def self.policy_class
+    ProfilePolicy
   end
 end
