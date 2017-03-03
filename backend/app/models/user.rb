@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   enum role: [ :user, :manager, :admin, :super_admin ]
 
+  has_many :permissions, as: :actor
+
   def generate_authentication_token!
     begin
       self.auth_token = Devise.friendly_token
