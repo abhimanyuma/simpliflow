@@ -8,7 +8,7 @@ const REQUEST_PROFILE = 'Profile::Response';
 export function requestProfile(refresh: boolean = false): {type: string, refresh: boolean} {
   return {
     type: REQUEST_PROFILE,
-    refresh: false
+    refresh: refresh
   }
 }
 

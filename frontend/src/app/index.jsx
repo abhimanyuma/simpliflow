@@ -28,6 +28,7 @@ import SignupPage from './components/signup/SignupPage.jsx';
 import DashboardHome from './components/dashboard/DashboardHome.jsx';
 
 import ProfileContainer from './components/dashboard/profile/ProfileContainer.jsx';
+import OrganisationsContainer from './components/dashboard/organisations/OrganisationsContainer.jsx';
 
 import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 
@@ -75,6 +76,7 @@ render(
       <Route path="/dashboard" component={UserIsAuthenticated(Dashboard)}>
         <IndexRoute component={DashboardHome} />
         <Route path="profile" component={ProfileContainer} />
+        <Route path="organisations" component={OrganisationsContainer} />
       </Route>
 
     </Router>
