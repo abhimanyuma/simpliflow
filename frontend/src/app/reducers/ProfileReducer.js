@@ -1,42 +1,41 @@
 // @flow
 
-import ModelActions from '../common/ModelActions.js';
-import { Map } from 'immutable';
+//import ModelActions from '../common/ModelActions.js';
+import ProfileModel from '../models/ProfileModel.js';
 import { set_auth_from_user } from '../common/authentication.js';
 
-export const profile = function(state: Object = Map({}), action: Object) {
+export const profile = function(state: Object = new ProfileModel({}), action: Object) {
   let object: string = action.type.split("::")[0]
   let method: string = action.type.split("::")[1]
   if(object && object == "Profile" && method) {
     switch (method) {
       case "Request":
         //Set state to emptry profile
-        if (state.isEmpty()) {
-          state = ModelActions.from_data({},"profile");
-        }
-        state = ModelActions.set_loading(state);
+
+        state = new ProfileModel({})
+        state = state.set_loading();
 
         break;
       case "Set":
-        state = ModelActions.set_data(state, action.data);
-        state = ModelActions.set_loaded(state);
+        state = new ProfileModel(action.data);
+        state = state.set_loaded();
         set_auth_from_user(state);
         break;
       case "Unset":
-        state = ModelActions.from_data({},"profile");
-        state = ModelActions.set_loaded(state);
+        state = new ProfileModel({});
+        state = state.set_loaded();
         break;
       case "SetErrors":
-        state = ModelActions.set_errors(state, action.errors)
+        state = state.set_errors(action.errors)
         break;
       case "SetLoaded":
-        state = ModelActions.set_loaded(state);
+        state = state.set_loaded();
         break;
       case "SetLoading":
-        state = ModelActions.set_loading(state);
+        state = state.set_loading();
         break;
       case "UnsetErrors":
-        state = ModelActions.unset_errors(state)
+        state = state.unset_errors()
         break;
       default:
        break;

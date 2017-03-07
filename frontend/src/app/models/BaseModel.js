@@ -1,61 +1,57 @@
 // @flow
-import {Map} from 'immutable';
+import {Map, Record} from 'immutable';
 
-class BaseModel {
+const BaseModel = defaultValues => class extends Record({
+  sync: false,
+  loading: false,
+  id: undefined,
+  created_at: undefined,
+  updated_at: undefined,
+  errors: new Map({}),
+  ...defaultValues,
+}) {
 
-  constructor(data = {}) {
-    this.sync = false
-    this.loading = false
-    this.data = Map(data)
-    this.name = "Model"
-  }
 
   set_loading() {
-    this.sync = false
-    this.loading = true
+    return this.set("sync", false).set("loading", true)
   }
 
   set_loaded() {
-    this.loading = false
-    this.sync = true
-  }
-
-  set_data(data) {
-    this.data = this.data.merge(data)
+    return this.set("sync", true).set("loading", false)
   }
 
   set_errors(errors) {
-    this.errors = Map(errors)
+    return this.set("errors", new Map(errors))
   }
 
   unset_errors() {
-    this.errors = null
-  }
-
-  get(key) {
-   return data.get(key)
+   return this.set("errors", new Map({}))
   }
 
   multi_get_array(fields: Array) {
     let response: Array = []
     for(let field of fields) {
-      response.push(self.get(field))
+      response.push(this.get(field))
     }
     return(response);
   }
 
   multi_get(fields: Array, as_array: boolean = false) {
     if (as_array) {
-      return (self.multi_get_array(fields));
+      return (this.multi_get_array(fields));
     } else {
       let response: Object = {}
       for (let field of fields) {
-        if (self.get(field)) {
-          reponse[field] = self.get(field)
+        if (this.get(field)) {
+          reponse[field] = this.get(field)
         }
       }
       return(response);
     }
+  }
+
+  has_errors() {
+    return (!(this.get("errors").isEmpty()))
   }
 }
 

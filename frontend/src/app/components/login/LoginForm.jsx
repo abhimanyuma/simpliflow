@@ -96,7 +96,7 @@ class LoginForm extends React.Component {
 
   componentWillUpdate(nextProps, nextState) {
     let errors = null
-    if (nextProps.profile.get("errors")) {
+    if (nextProps.profile.has_errors()) {
       errors = nextProps.profile.get("errors")
     }
 
