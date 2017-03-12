@@ -26,7 +26,7 @@ export const form_state = function(state: Object = Map({}), action: Object) {
         let reset: boolean = action.reset || false
 
         if (reset || !state.has(id)) {
-          state = state.set(id, new FormStateModel({data: action.data}));
+          state = state.set(id, new FormStateModel({data: new Map(action.data)}));
         }
         break;
       case "Update":

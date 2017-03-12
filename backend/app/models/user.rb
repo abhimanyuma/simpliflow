@@ -49,12 +49,12 @@ class User < ApplicationRecord
       permissions.resource_id = organisations.id
     ").select("
       permissions.level,
-      organisations.id as org_id,
+      organisations.id as id,
       organisations.name org_name,
       organisations.slug as org_slug
     ")
 
-    response = org_permissions.as_json(only: [:level], methods: [:org_name, :org_slug])
+    response = org_permissions.as_json(only: [:level], methods: [:id, :org_name, :org_slug])
 
     return response
   end

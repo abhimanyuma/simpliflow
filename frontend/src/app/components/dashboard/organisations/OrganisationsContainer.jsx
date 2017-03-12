@@ -11,7 +11,7 @@ let OrganisationsContainer  = connect(
   function mapStateToProps(state) {
     return {
       profile: state.profile,
-      organisations: state.user_organisations,
+      organisations: state.user_organisations.get("models"),
     }
   },
   function mapDispatchToProps(dispatch) {

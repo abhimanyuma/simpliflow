@@ -129,11 +129,11 @@ class SignupForm extends React.Component {
           "align": "right",
           "callback": (form_state, form_state_key, dispatch={}) => {
             let data = {}
-            data['username'] = form_state.get("username");
-            data['name'] = form_state.get("name");
-            data['email'] = form_state.get("email");
-            data['password'] = form_state.get("password");
-            data['password_confirmation'] = form_state.get("password_confirmation")
+            data['username'] = form_state.get_data("username");
+            data['name'] = form_state.get_data("name");
+            data['email'] = form_state.get_data("email");
+            data['password'] = form_state.get_data("password");
+            data['password_confirmation'] = form_state.get_data("password_confirmation")
             dispatch(createUser(data, form_state_key))
           }
         }

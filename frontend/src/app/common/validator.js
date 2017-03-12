@@ -41,7 +41,7 @@ function validate_max_length(value: string, max_length: number): ?string {
 }
 
 function validate_equality(value: string, comparison_variable: string, form_state ): ?string {
-  let comparable_value = form_state.get(comparison_variable)
+  let comparable_value = form_state.get_data(comparison_variable)
   if (value !== comparable_value){
     return `has to be equal to ${comparison_variable}`
   }
@@ -105,13 +105,13 @@ export function validate(form_state, rules) {
       if (rule["variable"].length && rule["variable"].length === 1) {
         field_name = rule["variable"][0];
         single = true;
-        field_value = form_state.get(field_name)
+        field_value = form_state.get_data(field_name)
       } else if (rule["variable"].length > 1) {
         field_name = rule["variable"]
-        field_value = ModelActions.multi_get(form_state, field_name)
+        field_value = form_state.multi_get_data(field_name)
       } else if (form_state.get(rule["variable"])) {
         field_name = rule["variable"]
-        field_value = form_state.get(field_name)
+        field_value = form_state.get_data(field_name)
       }
       let cur_error = validate_individual(field_name, field_value, rule, form_state)
       if (cur_error && single) {

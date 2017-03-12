@@ -82,8 +82,6 @@ class MainForm extends React.Component {
   }
 
   render() {
-    window.fst = this.props.form_state
-    window.fcg = this.props.form_config
     if (this.props.form_config && this.props.form_state) {
       return(
         <div className="card">

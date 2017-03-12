@@ -146,7 +146,6 @@ class ChangeProfile extends React.Component {
       "label": "Change Profile",
       "align": "right",
       "callback": (form_state, _form_state_key, dispatch) => {
-        console.log ("We are here", form_state)
         }
     }
 
@@ -156,7 +155,7 @@ class ChangeProfile extends React.Component {
       submit_element["callback"] = (form_state, _form_state_key, dispatch) => {
         let data = {}
         data["refresh_auth_token"] = true
-        data["password"] = form_state.get("password")
+        data["password"] = form_state.get_data("password")
         dispatch(updateUser(data))
       }
 
@@ -169,8 +168,8 @@ class ChangeProfile extends React.Component {
         let values_to_get = ["password", "new_password", "new_password_confirmation", "email", "username"]
 
         for (let value of values_to_get) {
-          if (form_state.get(value)) {
-            data[value] = form_state.get(value)
+          if (form_state.get_data(value)) {
+            data[value] = form_state.get_data(value)
           }
         }
         dispatch(updateUser(data))

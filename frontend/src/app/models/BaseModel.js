@@ -50,15 +50,32 @@ const BaseModel = defaultValues => class extends Record({
     }
   }
 
+   multi_get_data(fields: Array, as_array: boolean = false) {
+    let response: Object = {}
+    for (let field of fields) {
+      if (this.get(field)) {
+        reponse[field] = this.get_data(field)
+      }
+    }
+    return(response);
+  }
+
   has_errors() {
     return (!(this.get("errors").isEmpty()))
   }
 
   update_data(new_data) {
     let data = this.get("data") || new Map({})
-    window.xg = data
     data = data.merge(new_data)
     return this.set("data", data)
+  }
+
+  get_data(field) {
+    if (this.get("data") && (this.get("data").get(field) !== undefined)) {
+      return this.get("data").get(field)
+    } else {
+      return null
+    }
   }
 }
 
