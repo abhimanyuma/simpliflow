@@ -1,6 +1,6 @@
 // @flow
 
-import ModelActions from '../common/ModelActions.js';
+import FormStateModel from '../models/FormStateModel.js';
 import { Map, List } from 'immutable';
 
 
@@ -26,7 +26,7 @@ export const form_state = function(state: Object = Map({}), action: Object) {
         let reset: boolean = action.reset || false
 
         if (reset || !state.has(id)) {
-          state = state.set(id, ModelActions.from_data(data,"form_state"));
+          state = state.set(id, new FormStateModel({data: action.data}));
         }
         break;
       case "Update":
@@ -39,7 +39,7 @@ export const form_state = function(state: Object = Map({}), action: Object) {
           break;
         }
 
-        form_state = ModelActions.set_data(form_state, data);
+        form_state = form_state.update_data(action.data)
         state = state.set(id, form_state);
 
         break;
@@ -53,7 +53,7 @@ export const form_state = function(state: Object = Map({}), action: Object) {
           break;
         }
 
-        form_state = ModelActions.set_errors(form_state, errors);
+        form_state = form_state.set_errors(errors);
         state = state.set(id, form_state);
 
         break;

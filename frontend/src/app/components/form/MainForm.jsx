@@ -38,15 +38,6 @@ class MainForm extends React.Component {
     return (errors);
   }
 
-  has_errors() {
-    let error_validity = false
-    let error_values = this.props.form_state.get("errors")
-    if (error_values && Object.keys(error_values).length > 0) {
-      error_validity = true
-    }
-    return(error_validity)
-  }
-
   update_state(update_values) {
     this.props.update_state(this.props.form_state_key, update_values)
   }
@@ -91,6 +82,8 @@ class MainForm extends React.Component {
   }
 
   render() {
+    window.fst = this.props.form_state
+    window.fcg = this.props.form_config
     if (this.props.form_config && this.props.form_state) {
       return(
         <div className="card">
@@ -98,7 +91,7 @@ class MainForm extends React.Component {
             {this.props.form_config.get("title")}
           </h3>
           <div className="card-block">
-            {this.has_errors() && <ErrorPanel errors={this.get_errors(["global"])} />}
+            {this.props.form_state.has_errors() && <ErrorPanel errors={this.get_errors(["global"])} />}
             <form onSubmit={(e) => this.props.on_submit(e)}>
                 {this.get_elements().map((object, key) => {
                   return(<FormComponentContainer config={object} key={key} errors={this.get_errors(object["variable"])} update_state={(value) => this.update_state(value)}

@@ -53,6 +53,13 @@ const BaseModel = defaultValues => class extends Record({
   has_errors() {
     return (!(this.get("errors").isEmpty()))
   }
+
+  update_data(new_data) {
+    let data = this.get("data") || new Map({})
+    window.xg = data
+    data = data.merge(new_data)
+    return this.set("data", data)
+  }
 }
 
 export default BaseModel;

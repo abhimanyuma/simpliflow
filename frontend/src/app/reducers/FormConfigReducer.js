@@ -1,6 +1,6 @@
 // @flow
 
-import ModelActions from '../common/ModelActions.js';
+import FormConfigModel from '../models/FormConfigModel.js';
 import { Map } from 'immutable';
 
 import { generateUnsafeUniqueId } from '../common/utils.js'
@@ -25,7 +25,7 @@ export const form_config = function(state: Object = Map({}), action: Object) {
         }
         let reset: boolean = action.reset || false
         if (reset || !state.has(id)) {
-          state = state.set(id, ModelActions.from_data(data,"form_config"));
+          state = state.set(id, new FormConfigModel(data));
         }
         break;
       default:
