@@ -34,9 +34,15 @@ class Organisations extends React.Component {
         <div>
           <h1>Organisations</h1>
           <div className="card ">
-
             <div className="card-block">
-              <h4 className="card-title">Your Organisations</h4>
+              <div className="row m2b">
+                <div className="col">
+                  <h4>Your Organisations</h4>
+                </div>
+                <div className="col text-right">
+                  <Link to="/dashboard/organisations/new" className="btn btn-secondary"> + New Organisation</Link>
+                </div>
+              </div>
               <ul className="list-group">
                 {listItems}
               </ul>
