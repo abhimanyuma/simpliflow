@@ -19,7 +19,7 @@ class Organisations extends React.Component {
   render() {
 
     if (this.props.organisations) {
-      const listItems = this.props.organisations.map((value, index) => {
+      const listItems = this.props.organisations.valueSeq().map((value, index) => {
           return(
           <li className="list-group-item justify-content-between" key={value.get("org_slug")}>
             { value.get("org_name") }

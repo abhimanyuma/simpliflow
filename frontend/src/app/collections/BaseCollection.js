@@ -62,7 +62,6 @@ const BaseCollection = defaultValues => class extends Record({
   }
 
   set_multi(data) {
-    console.log(this)
     return this.withMutations( (collection) => {
       for (let data_point of data) {
         let id = data_point["id"]
