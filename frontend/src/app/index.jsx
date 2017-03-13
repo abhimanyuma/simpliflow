@@ -53,7 +53,7 @@ const UserIsAuthenticated = UserAuthWrapper({
   authenticatingSelector: state => {
     if (!state.profile.get) {
       return true
-    } else if (state.profile.get("loading") == false) {
+    } else if ((state.profile.get("loading") === false) && (state.profile.get("sync") === true)) {
       return false
     } else {
       return true
