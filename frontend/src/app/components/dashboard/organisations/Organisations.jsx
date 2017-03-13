@@ -31,22 +31,19 @@ class Organisations extends React.Component {
       })
 
       return (
-        <div>
-          <h1>Organisations</h1>
-          <div className="card ">
-            <div className="card-block">
-              <div className="row m2b">
-                <div className="col">
-                  <h4>Your Organisations</h4>
-                </div>
-                <div className="col text-right">
-                  <Link to="/dashboard/organisations/new" className="btn btn-secondary"> + New Organisation</Link>
-                </div>
+        <div className="card ">
+          <div className="card-block">
+            <div className="row m2b">
+              <div className="col">
+                <h4>Your Organisations</h4>
               </div>
-              <ul className="list-group">
-                {listItems}
-              </ul>
+              <div className="col text-right">
+                <Link to="/dashboard/organisations/new" className="btn btn-secondary"> + New Organisation</Link>
+              </div>
             </div>
+            <ul className="list-group">
+              {listItems}
+            </ul>
           </div>
         </div>
       );
