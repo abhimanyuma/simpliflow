@@ -5,7 +5,8 @@ import {List} from 'immutable';
 
 class FormConfigModel extends BaseModel({
   title: "",
-  elements: new List([])
+  elements: new List([]),
+  hide_title: false
 }){
 
 

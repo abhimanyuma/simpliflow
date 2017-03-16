@@ -85,9 +85,11 @@ class MainForm extends React.Component {
     if (this.props.form_config && this.props.form_state) {
       return(
         <div className="card">
-          <h3 className="card-header">
-            {this.props.form_config.get("title")}
-          </h3>
+          {!this.props.form_config.get("hide_title") &&
+            <h3 className="card-header">
+              {this.props.form_config.get("title")}
+            </h3>
+          }
           <div className="card-block">
             {this.props.form_state.has_errors() && <ErrorPanel errors={this.get_errors(["global"])} />}
             <form onSubmit={(e) => this.props.on_submit(e)}>
