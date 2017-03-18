@@ -4,6 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  include ::Slug
+
   validates :auth_token, uniqueness: true
   validates :username, uniqueness: true
   before_validation :generate_authentication_token!, on: :create
@@ -25,42 +27,19 @@ class User < ApplicationRecord
   end
 
   def generate_username
-    if self.username.blank?
-      base_username = self.name.gsub(/\W+/, '').downcase
-      if base_username.blank?
-        base_username = 'user'
-      end
-      count = 0
-      probable_username = base_username
-      while true
-        #TODO: Make more efficient
-        probable_username = "#{base_username}_#{count}" unless count == 0
-        break if User.where(username: probable_username).blank?
-        count += 1
-      end
-      self.username = probable_username
-    end
+    self.generate_slug(self.name)
   end
 
   def get_organisations
-    org_permissions =  Permission.joins("
-      LEFT JOIN organisations ON
-      permissions.resource_type='Organisation' AND
-      permissions.resource_id = organisations.id
-    ").select("
-      permissions.level,
-      organisations.id as id,
-      organisations.name org_name,
-      organisations.slug as org_slug
-    ")
-
-    response = org_permissions.as_json(only: [:level], methods: [:id, :org_name, :org_slug])
-
-    return response
+    Organisation.get_user_organisations(self.id)
   end
 
   def self.policy_class
     ProfilePolicy
+  end
+
+  def self.slug_field
+    "username"
   end
 
 end

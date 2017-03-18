@@ -58,7 +58,9 @@ export function createOrganisation(org_name): Function {
       console.log(errors)
     }
     let data = {
-      org_name: org_name
+      "organisation": {
+        "name": org_name
+      }
     }
     create_object(url, data, success_cb, error_cb)
   }
