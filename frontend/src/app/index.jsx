@@ -31,6 +31,9 @@ import ProfileContainer from './components/dashboard/profile/ProfileContainer.js
 import OrganisationMain from './components/dashboard/organisations/OrganisationMain.jsx';
 import OrganisationsContainer from './components/dashboard/organisations/OrganisationsContainer.jsx';
 import NewOrganisationContainer from './components/dashboard/organisations/NewOrganisationContainer.jsx';
+import SingleOrganisationContainer from './components/dashboard/organisations/SingleOrganisationContainer.jsx';
+
+
 
 import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 
@@ -81,6 +84,7 @@ render(
         <Route path="organisations" component={OrganisationMain}>
           <IndexRoute component={OrganisationsContainer} />
           <Route path="new" component={NewOrganisationContainer} />
+          <Route path="*" component={SingleOrganisationContainer} />
         </Route>
       </Route>
 
