@@ -3,13 +3,17 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-import LoadingFormContainer from '../../common/LoadingFormContainer.jsx';
-
-class Organisations extends React.Component {
+class SingleOrganisation extends React.Component {
 
   constructor(props) {
     super(props);
 
+  }
+
+  componentWillMount() {
+    if (!this.props.organisation) {
+      this.props.get_org()
+    }
   }
 
   render() {
@@ -27,8 +31,8 @@ class Organisations extends React.Component {
           <hr/>
           <span><strong>Members</strong></span>
           <ul className="list-group">
-            <li class="list-group-item justify-content-between">Member 1</li>
-            <li class="list-group-item justify-content-between">Member 2</li>
+            <li className="list-group-item justify-content-between">Member 1</li>
+            <li className="list-group-item justify-content-between">Member 2</li>
           </ul>
         </div>
       </div>
@@ -36,4 +40,4 @@ class Organisations extends React.Component {
   }
 }
 
-export default Organisations;
+export default SingleOrganisation;

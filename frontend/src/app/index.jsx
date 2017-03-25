@@ -84,7 +84,7 @@ render(
         <Route path="organisations" component={OrganisationMain}>
           <IndexRoute component={OrganisationsContainer} />
           <Route path="new" component={NewOrganisationContainer} />
-          <Route path="*" component={SingleOrganisationContainer} />
+          <Route path=":org_slug" component={SingleOrganisationContainer} />
         </Route>
       </Route>
 
