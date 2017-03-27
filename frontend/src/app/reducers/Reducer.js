@@ -6,12 +6,14 @@ import { form_state } from './FormStateReducer.js';
 import { form_config } from './FormConfigReducer.js';
 import { routerReducer } from 'react-router-redux';
 import { user_organisations } from './UserOrganisationReducer.js';
+import { organisations } from './OrganisationReducer.js';
 
 let reducer = combineReducers({
   profile: profile,
   form_state: form_state,
   form_config: form_config,
   user_organisations: user_organisations,
+  organisations: organisations,
   routing: routerReducer
 });
 

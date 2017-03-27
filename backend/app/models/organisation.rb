@@ -1,6 +1,7 @@
 class Organisation < ApplicationRecord
 
   include Slug
+  include AccessControl
 
   has_many :permissions, as: :resource
 

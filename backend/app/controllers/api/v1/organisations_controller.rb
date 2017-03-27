@@ -37,6 +37,22 @@ class Api::V1::OrganisationsController < ApplicationController
     end
   end
 
+  def show
+    organisation = Organisation.find_by_slug(params[:id])
+
+    if !organisation
+      render json: {status: false, errors:{"global": "No such organisation"}}, status: 404
+    elsif !current_user
+      render json: {status: false, errors: {"global": "User must be signed in"}}, status: 401
+    else
+      if organisation.accessible?(current_user)
+        render json: {status: true, data: organisation}, status: 200
+      else
+        render json: {status: false, errors: {"global": "User not part of organsation"}}, status: 401
+      end
+    end
+  end
+
   private
 
     def org_params

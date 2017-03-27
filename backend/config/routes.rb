@@ -15,6 +15,8 @@ Rails.application.routes.draw do
         resources :organisations, only: [:index, :create]
       end
 
+      resources :organisations, only: [:show]
+
       resources :sessions, only: [:create, :destroy]
 
     end

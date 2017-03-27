@@ -18,16 +18,17 @@ let SingleOrganisationContainer  = connect(
       response["org_slug"] = org_slug
     }
 
-    if (org_slug && state.organiations && state.organisations.get(ownProps.org_slug)) {
-      response["organisation"] = state.organisations.get(ownProps.org_slug)
+    if (org_slug && state.organisations && state.organisations.get_model(org_slug)) {
+      response["organisation"] = state.organisations.get_model(org_slug)
     }
+
+    response["organisations"] = state.organisations
 
     return response
   },
   function mapDispatchToProps(dispatch, ownProps) {
     return ({
       get_org: () => {
-        console.log("This is called")
         let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
         dispatch(getOrganisation(org_slug))
       }

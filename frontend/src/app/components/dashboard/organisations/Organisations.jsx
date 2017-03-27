@@ -22,7 +22,7 @@ class Organisations extends React.Component {
       const listItems = this.props.organisations.valueSeq().map((value, index) => {
           return(
           <li className="list-group-item justify-content-between" key={value.get("org_slug")}>
-            { value.get("org_name") }
+            <Link to={"/dashboard/organisations/" + value.get("org_slug")}>{ value.get("org_name") }</Link>
             <span className="badge badge-default badge-pill">
               { value.get("level") }
             </span>

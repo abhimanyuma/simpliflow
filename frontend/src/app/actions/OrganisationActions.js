@@ -37,8 +37,7 @@ export function setOrganisationErrors(org_slug: string, errors: Object): {type: 
 
 export function getOrganisation(org_slug: string): Function {
   return function(dispatch) {
-    console.log("I am here")
-    dispatch(requestOrganisation());
+    dispatch(requestOrganisation(org_slug));
     let url = `/organisations/${org_slug}`;
     let success_cb = (data) => {
       dispatch(setOrganisation(data));

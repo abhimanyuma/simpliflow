@@ -32,7 +32,7 @@ const BaseCollection = defaultValues => class extends Record({
   }
 
   add_model(id, data, reset = false) {
-    let can_update = (!this.get(id)) || reset
+    let can_update = (!this.models.get(id)) || reset
     if (can_update) {
       return this.set("models", this.get("models").set(id, new this.model(data)))
     } else {
@@ -42,7 +42,7 @@ const BaseCollection = defaultValues => class extends Record({
   }
 
   remove_model(id) {
-    let can_remove = !!(this.get(id))
+    let can_remove = !!(this.models.get(id))
     if (can_remove) {
       return  this.set("models", this.get("models").remove(id))
     } else {
@@ -52,13 +52,23 @@ const BaseCollection = defaultValues => class extends Record({
   }
 
   update_model(id, data) {
-    let can_update =  !!(this.get(id))
+    let can_update =  !!(this.models.get(id))
     if (can_update) {
       return this.set("models", this.get("models").set(id, new this.model(data)))
     } else {
       return this
     }
 
+  }
+
+  get_model(id) {
+    let has_model = !!(this.models.get(id))
+
+    if (has_model) {
+      return this.models.get(id)
+    } else {
+      return null
+    }
   }
 
   set_multi(data) {
