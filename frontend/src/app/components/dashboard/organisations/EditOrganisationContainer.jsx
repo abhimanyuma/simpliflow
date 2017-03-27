@@ -3,17 +3,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import SingleOrganisation from './SingleOrganisation.jsx';
+import EditOrganisation from './EditOrganisation.jsx';
 
 import {getOrganisation} from '../../../actions/OrganisationActions.js';
 
 
 
-let SingleOrganisationContainer  = connect(
+let EditOrganisationContainer  = connect(
   function mapStateToProps(state, ownProps) {
     let response = {"profile": state.profile}
     let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
-    window.op = ownProps
+
     if (org_slug) {
       response["org_slug"] = org_slug
     }
@@ -35,6 +35,6 @@ let SingleOrganisationContainer  = connect(
     })
 
   }
-)(SingleOrganisation);
-export default SingleOrganisationContainer;
+)(EditOrganisation);
+export default EditOrganisationContainer;
 
