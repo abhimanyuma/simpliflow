@@ -39,11 +39,11 @@ export const organisations = function(state: Object = new OrganisationCollection
         model = state.models.get(org_slug)
         state = state.set("models", state.models.set(org_slug, model.set_errors(action.errors)))
         break;
-      case "SetLoaded":
+      case "SetLoadedModel":
         model = state.models.get(org_slug)
         state = state.set("models", state.models.set(org_slug, model.set_loaded()))
         break;
-      case "SetLoading":
+      case "SetLoadingModel":
         model = state.models.get(org_slug)
         state = state.set("models", state.models.set(org_slug, model.set_loading()))
         break;

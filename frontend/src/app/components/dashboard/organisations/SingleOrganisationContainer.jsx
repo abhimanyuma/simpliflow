@@ -13,7 +13,7 @@ let SingleOrganisationContainer  = connect(
   function mapStateToProps(state, ownProps) {
     let response = {"profile": state.profile}
     let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
-    window.op = ownProps
+
     if (org_slug) {
       response["org_slug"] = org_slug
     }
