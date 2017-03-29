@@ -18,6 +18,19 @@ export function createNewFormState(id: ?string) {
   return(setFormState(id, {}, true))
 }
 
+export function setFormStateFromModel(id: ?string, form_config, model, reset) {
+  let els = form_config["elements"]
+  let variables = []
+  for (let el of els) {
+    if (el["variable"]) {
+      variables = variables.concat(el["variable"])
+    }
+  }
+  let data = model.multi_get(variables)
+  console.log(data)
+  return(setFormState(id, data, reset))
+}
+
 const UPDATE_FORM_STATE = "FormState::Update"
 export function updateFormState(id: string, additional_data: Object) {
   return({

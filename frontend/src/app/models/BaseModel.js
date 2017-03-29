@@ -43,7 +43,7 @@ const BaseModel = defaultValues => class extends Record({
       let response: Object = {}
       for (let field of fields) {
         if (this.get(field)) {
-          reponse[field] = this.get(field)
+          response[field] = this.get(field)
         }
       }
       return(response);

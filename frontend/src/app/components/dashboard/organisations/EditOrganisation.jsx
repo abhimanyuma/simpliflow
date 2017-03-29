@@ -20,11 +20,19 @@ class EditOrganisation extends React.Component {
     if (!this.props.organisation) {
       this.props.get_org()
     }
+
     this.config = this.get_config()
     this.config_key = this.config["id"]
     this.form_state_key = this.config_key
-    this.props.set_form_config(this.config, this.config_key)
-    this.props.create_new_form_state(this.form_state_key)
+    this.props.set_form_config(this.config, this.config_key, false)
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.organisation) {
+      this.props.set_form_state_from_model(this.form_state_key, this.config, nextProps.organisation, false)
+    } else {
+      this.props.create_new_form_state(this.form_state_key)
+    }
   }
 
   get_config() {

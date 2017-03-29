@@ -8,12 +8,11 @@ import EditOrganisation from './EditOrganisation.jsx';
 import {getOrganisation} from '../../../actions/OrganisationActions.js';
 
 import { setFormConfig } from '../../../actions/FormConfigActions.js';
-import { createNewFormState, setFormStateErrors } from '../../../actions/FormStateActions.js';
+import { createNewFormState, setFormStateErrors, setFormStateFromModel } from '../../../actions/FormStateActions.js';
 
 let EditOrganisationContainer  = connect(
   function mapStateToProps(state, ownProps) {
     let response = {"profile": state.profile}
-    console.log(ownProps)
     let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
 
     if (org_slug) {
@@ -34,14 +33,17 @@ let EditOrganisationContainer  = connect(
         let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
         dispatch(getOrganisation(org_slug))
       },
-      set_form_config: (config_base, config_key) => {
-        dispatch(setFormConfig(config_base, config_key))
+      set_form_config: (config_base, config_key, reset) => {
+        dispatch(setFormConfig(config_base, config_key, reset))
       },
       create_new_form_state: (state_key) => {
         dispatch(createNewFormState(state_key))
       },
       set_form_state_errors: (state_key, errors) => {
         dispatch(setFormStateErrors(state_key, errors))
+      },
+      set_form_state_from_model: (state_key, config, model, reset) => {
+        dispatch(setFormStateFromModel(state_key, config, model, reset ))
       }
     });
   }
