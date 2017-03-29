@@ -27,7 +27,6 @@ export function setFormStateFromModel(id: ?string, form_config, model, reset) {
     }
   }
   let data = model.multi_get(variables)
-  console.log(data)
   return(setFormState(id, data, reset))
 }
 

@@ -50,11 +50,11 @@ const BaseModel = defaultValues => class extends Record({
     }
   }
 
-   multi_get_data(fields: Array, as_array: boolean = false) {
+   multi_get_data(fields: Array) {
     let response: Object = {}
     for (let field of fields) {
-      if (this.get(field)) {
-        reponse[field] = this.get_data(field)
+      if (this.get_data(field)) {
+        response[field] = this.get_data(field)
       }
     }
     return(response);

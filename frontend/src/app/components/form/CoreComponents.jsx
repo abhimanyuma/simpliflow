@@ -37,6 +37,17 @@ export class TextComponentContainer extends React.Component {
     return(this.props.errors.join(","));
   }
 
+  get_value() {
+    if (this.props.config["variable"] && this.props.config["variable"][0]) {
+      let key = this.props.config["variable"][0]
+      if (this.props.substate && this.props.substate[key]) {
+        return(this.props.substate[key])
+      }
+    }
+    return("");
+
+  }
+
   render() {
     let error_class = null
     if (this.has_errors()) {
@@ -46,7 +57,7 @@ export class TextComponentContainer extends React.Component {
       <div className={"form-group row " + error_class}>
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="text" className="form-control" ref="text" placeholder={this.props.config["placeholder"] || ""} onInput={e=>{this.on_change(e)}}/>
+          <input type="text" defaultValue={this.get_value()} className="form-control" ref="text" placeholder={this.props.config["placeholder"] || ""} onInput={e=>{this.on_change(e)}}/>
           {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
           <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>

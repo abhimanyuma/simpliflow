@@ -20,7 +20,7 @@ class FormComponentContainer extends React.Component {
     let FormComponent = FormComponents[this.props.config["type"]];
 
     if (FormComponent) {
-      return (<FormComponent config={this.props.config} update_state={this.props.update_state} on_submit={this.props.on_submit} errors={this.props.errors} />);
+      return (<FormComponent config={this.props.config} substate={this.props.substate} update_state={this.props.update_state} on_submit={this.props.on_submit} errors={this.props.errors} />);
     } else {
       return(null);
     }
