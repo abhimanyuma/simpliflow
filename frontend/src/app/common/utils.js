@@ -53,6 +53,16 @@ export function generateUnsafeUniqueId(length: number):string {
   return result;
 }
 
+export function add_nonce(url:string): string {
+  let nonce = generateUnsafeUniqueId(12)
+  if(url.indexOf("?")!== -1){
+    url = url.concat(`&req=${nonce}`)
+  } else {
+    url = url.concat(`?req=${nonce}`)
+  }
+  return url
+}
+
 export function debounce(callback, wait, context = this) {
   let timeout = null
   let callbackArgs = null

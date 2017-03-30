@@ -1,5 +1,5 @@
 // TODO: Change from object type
-import { get_full_url } from './utils.js';
+import { get_full_url, add_nonce } from './utils.js';
 import { get_auth_token } from './authentication.js';
 
 export function process_response(request: Object): [number, boolean, Array<number>] {
@@ -37,6 +37,7 @@ function http_code_kind(code: number | string):string  {
 
 function ajax_request(method: string, url: string, options: Object): void {
   let full_url: string = get_full_url(url);
+  full_url = add_nonce(full_url)
   let req = new XMLHttpRequest();
   req.addEventListener("load", (event) => {
     let [http_status, status, response] = process_response(req);
