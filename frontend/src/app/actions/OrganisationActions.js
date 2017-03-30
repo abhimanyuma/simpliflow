@@ -51,7 +51,7 @@ export function getOrganisation(org_slug: string): Function {
       dispatch(setOrganisation(data));
     }
     let error_cb = (errors) => {
-      dispatch(setLoaded(org_slug))
+      dispatch(setLoadedModel(org_slug))
       dispatch(setOrganisationErrors(org_slug, errors));
     }
     fetch_object(url, success_cb, error_cb);
@@ -61,13 +61,13 @@ export function getOrganisation(org_slug: string): Function {
 
 export function updateOrganisation(org_slug: string, data: Object): Function {
   return function(dispatch) {
-    dispatch(setLoading(org_slug));
+    dispatch(setLoadingModel(org_slug));
     let url = `/organisations/${org_slug}`;
     let success_cb = (data) => {
       dispatch(setOrganisation(data));
     }
     let error_cb = (errors) => {
-      dispatch(setLoaded(org_slug))
+      dispatch(setLoadedModel(org_slug))
       dispatch(setOrganisationErrors(org_slug, errors));
     }
     update_object(url, data, success_cb, error_cb);

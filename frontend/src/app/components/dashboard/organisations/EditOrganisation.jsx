@@ -25,11 +25,16 @@ class EditOrganisation extends React.Component {
     this.config_key = this.config["id"]
     this.form_state_key = this.config_key
     this.props.set_form_config(this.config, this.config_key, false)
+    if (this.props.organisation) {
+      this.props.set_form_state_from_model(this.form_state_key, this.config, this.props.organisation, true)
+    } else {
+      this.props.create_new_form_state(this.form_state_key)
+    }
   }
 
   componentWillUpdate(nextProps) {
     if (nextProps.organisation) {
-      this.props.set_form_state_from_model(this.form_state_key, this.config, nextProps.organisation, false)
+      this.props.set_form_state_from_model(this.form_state_key, this.config, nextProps.organisation, true)
     } else {
       this.props.create_new_form_state(this.form_state_key)
     }
@@ -101,7 +106,7 @@ class EditOrganisation extends React.Component {
             data['name'] = form_state.get_data("name");
             data['slug'] = form_state.get_data("slug");
             data['tagline'] = form_state.get_data("tagline");
-            dispatch(updateOrganisation(data, form_state_key))
+            dispatch(updateOrganisation(form_state.get_data("slug"),data))
           }
         }
       ]

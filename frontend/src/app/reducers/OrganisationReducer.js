@@ -25,7 +25,7 @@ export const organisations = function(state: Object = new OrganisationCollection
         }
         break;
       case "Set":
-        let org_slug = action.data["slug"]
+        org_slug = action.data["slug"]
         state = state.set("models", state.models.set(org_slug, new OrganisationModel(action.data)))
         model = state.models.get(org_slug)
         state = state.set("models", state.models.set(org_slug, model.set_loaded()))

@@ -26,6 +26,7 @@ export function setFormStateFromModel(id: ?string, form_config, model, reset) {
       variables = variables.concat(el["variable"])
     }
   }
+
   let data = model.multi_get(variables)
   return(setFormState(id, data, reset))
 }
