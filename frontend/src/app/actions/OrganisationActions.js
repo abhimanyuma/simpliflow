@@ -70,6 +70,11 @@ export function updateOrganisation(org_slug: string, data: Object): Function {
       dispatch(setLoadedModel(org_slug))
       dispatch(setOrganisationErrors(org_slug, errors));
     }
+
+    data = {
+      "organisation": data
+    }
+
     update_object(url, data, success_cb, error_cb);
   }
 
