@@ -79,7 +79,7 @@ class Api::V1::OrganisationsController < ApplicationController
 
     def org_params
       params.require(:organisation).permit(
-        :name, :slug, :tagline
+        :name, :slug, :tagline, :bio
       )
     end
 

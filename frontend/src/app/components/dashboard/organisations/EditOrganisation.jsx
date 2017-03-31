@@ -97,8 +97,22 @@ class EditOrganisation extends React.Component {
           ]
         },
         {
+          "key": "bio",
+          "order": 4,
+          "name": "bio",
+          "label": "Bio",
+          "type": "textarea",
+          "variable": ["bio"],
+          "validation_rules": [
+            {
+              type: "max_length",
+              parameter: 500
+            }
+          ]
+        },
+        {
           "key": "submit",
-          "order": 3,
+          "order": 5,
           "type" : "submit",
           "label": "Update Organisation",
           "callback": (form_state, form_state_key, dispatch={}) => {
@@ -107,6 +121,7 @@ class EditOrganisation extends React.Component {
             data['name'] = form_state.get_data("name");
             data['slug'] = form_state.get_data("slug");
             data['tagline'] = form_state.get_data("tagline");
+            data['bio'] = form_state.get_data("bio")
             dispatch(updateOrganisation(org,data))
           }
         }
