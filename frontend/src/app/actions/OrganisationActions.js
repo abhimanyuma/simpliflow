@@ -59,23 +59,9 @@ export function getOrganisation(org_slug: string): Function {
 
 }
 
-export function updateOrganisation(org_slug: string, data: Object): Function {
+export function updateOrganisation(org, data): Function {
   return function(dispatch) {
-    dispatch(setLoadingModel(org_slug));
-    let url = `/organisations/${org_slug}`;
-    let success_cb = (data) => {
-      dispatch(setOrganisation(data));
-    }
-    let error_cb = (errors) => {
-      dispatch(setLoadedModel(org_slug))
-      dispatch(setOrganisationErrors(org_slug, errors));
-    }
-
-    data = {
-      "organisation": data
-    }
-
-    update_object(url, data, success_cb, error_cb);
+    org.update(data, dispatch)
   }
 
 }

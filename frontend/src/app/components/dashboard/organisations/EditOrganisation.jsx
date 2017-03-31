@@ -103,10 +103,11 @@ class EditOrganisation extends React.Component {
           "label": "Update Organisation",
           "callback": (form_state, form_state_key, dispatch={}) => {
             let data = {}
+            let org = this.props.organisation
             data['name'] = form_state.get_data("name");
             data['slug'] = form_state.get_data("slug");
             data['tagline'] = form_state.get_data("tagline");
-            dispatch(updateOrganisation(form_state.get_data("slug"),data))
+            dispatch(updateOrganisation(org,data))
           }
         }
       ]
