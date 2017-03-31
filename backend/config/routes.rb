@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: true) do
 
       resources :users do
+        get :search, on: :collection
         resources :organisations, only: [:index, :create]
       end
 

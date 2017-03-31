@@ -39,7 +39,7 @@ class User < ApplicationRecord
   end
 
   def self.slug_field
-    "username"
+    :username
   end
 
 end

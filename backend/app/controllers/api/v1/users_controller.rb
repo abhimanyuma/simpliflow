@@ -67,6 +67,14 @@ class Api::V1::UsersController < ApplicationController
     head 204
   end
 
+  def search
+    term = params[:term]
+    limit = params[:count] || 10
+    start = params[:start] || 0
+    users = User.search(term, limit, start)
+    render json: {status: true, data: users}, status: 200
+  end
+
   private
 
     def user_params
