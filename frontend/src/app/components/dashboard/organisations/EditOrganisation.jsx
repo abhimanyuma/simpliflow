@@ -111,8 +111,27 @@ class EditOrganisation extends React.Component {
           ]
         },
         {
-          "key": "submit",
+          "key": "members",
           "order": 5,
+          "name": "members",
+          "label": "Members",
+          "type": "selectlist",
+          "variable": ["members"],
+          "items": [
+            {
+              value:"alpha", display_text:"Alpha D'iego"
+            },
+            {
+              value:"abhi", display_text: "Abhimanyu M A"
+            },
+            {
+              value:"manyu", display_text: "Maximus D"
+            }
+          ]
+        },
+        {
+          "key": "submit",
+          "order": 6,
           "type" : "submit",
           "label": "Update Organisation",
           "callback": (form_state, form_state_key, dispatch={}) => {
