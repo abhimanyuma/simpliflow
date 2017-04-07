@@ -25,22 +25,33 @@ module Slug
     end
   end
 
+  def display_text
+    if self.class.search_additional_field
+      return  self[self.class.search_additional_field.to_sym]
+    else
+      return nil
+    end
+  end
+
   class_methods do
 
-    def search_additional_fields
-      if self.respond_to?(:search_fields)
-        return self.search_fields
+    def search_additional_field
+      if self.respond_to?(:search_field)
+        return self.search_field
       elsif self.respond_to?(:name)
-        return [:name]
+        return :name
       else
-        return []
+        return nil
       end
     end
 
     def search(term, limit = 10, start = 0)
 
       field = self.slug_field || :slug
-      select_fields = [:id,"#{field}".to_sym] + self.search_additional_fields
+
+      select_fields = [:id,"#{field}".to_sym]
+      select_fields.push(self.search_additional_field) if self.search_additional_field
+
       exact_match = self.where("#{field} LIKE :term", term: "#{term}").select(select_fields).limit(1) #Always 1
 
 
@@ -54,9 +65,18 @@ module Slug
       prefix_match = self.where(
         "#{field} LIKE :term AND #{field} NOT LIKE :exact",
         term: "#{term}%", exact: "#{term}"
-      ).select(:username).limit(limit).offset(start).select(select_fields)
+      ).limit(limit).offset(start).select(select_fields)
 
-      return exact_match + prefix_match
+      matches = exact_match + prefix_match
+      response = matches.map do |match|
+        response = {value: match[field.to_sym]}
+        if self.search_additional_field
+          response[:display_text] = match.display_text
+        end
+        response
+
+      end
+
     end
 
   end

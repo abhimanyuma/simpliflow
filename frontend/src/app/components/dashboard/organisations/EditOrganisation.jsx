@@ -117,17 +117,9 @@ class EditOrganisation extends React.Component {
           "label": "Members",
           "type": "selectlist",
           "variable": ["members"],
-          "items": [
-            {
-              value:"alpha", display_text:"Alpha D'iego"
-            },
-            {
-              value:"abhi", display_text: "Abhimanyu M A"
-            },
-            {
-              value:"manyu", display_text: "Maximus D"
-            }
-          ]
+          "id": "search_members_edit_organisation",
+          "search_path": "/users/search",
+          "search_variable": "term"
         },
         {
           "key": "submit",
