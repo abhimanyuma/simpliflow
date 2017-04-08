@@ -12,7 +12,7 @@ class SelectListComponent extends React.Component {
     this.debounced_call = debounce((e) => {this.props.do_search(this.props.search_model, this.refs.search_text)}, 300)
   }
 
-  on_change(e) {
+  on_key_press(e) {
     this.debounced_call(e);
   }
 
@@ -60,8 +60,12 @@ class SelectListComponent extends React.Component {
       <div className={"form-group row " + error_class}>
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input list={this.props.config["id"]} className="form-control" ref="search_text" onInput={e=>{this.on_change(e)}} />
-          {data_list}
+          <div className="flex-row">
+            <input list={this.props.config["id"]} className="form-control" ref="search_text" onKeyUp={e=>{this.on_key_press(e)}} />
+            <button className="btn btn-primary m2l">Add</button>
+            {data_list}
+          </div>
+
           {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
           <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>
