@@ -1,5 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+
 
 module.exports = [
   {
@@ -41,5 +43,15 @@ module.exports = [
         }
       ]
     }
+  },
+  {
+    output: { path: __dirname, filename: 'dist' },
+    plugins: [
+        new CopyWebpackPlugin([
+            { from: 'src/index.html', to: 'dist/index.html' }
+        ])
+    ]
+
+
   }
-];
+]
