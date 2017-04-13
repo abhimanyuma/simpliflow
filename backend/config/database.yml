@@ -1,15 +1,19 @@
-development:
+default: &default
   adapter: postgresql
   encoding: unicode
+  host: db
+  port: 5432
+  username: postgres
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+
+development:
+  <<: *default
   database: flox_development
-  pool: 5
-  username: flox_development
-  password: helloworld
 
 test:
-  adapter: postgresql
-  encoding: unicode
+  <<: *default
   database: flox_test
-  pool: 5
-  username: flox_test
-  password: test
+
+production:
+  <<: *default
+  database: flox_production
