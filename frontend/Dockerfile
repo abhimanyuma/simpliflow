@@ -1,4 +1,4 @@
-FROM nginx:alpine
+FROM nginx
 
 RUN rm -f /etc/nginx/conf.d/default.conf
 RUN rm -f /etc/nginx/conf.d/examplessl.conf
@@ -10,4 +10,5 @@ VOLUME /var/log/nginx/log
 
 RUN mkdir /dist_html
 COPY dist /dist_html
+COPY assets /dist_html/dist
 VOLUME /dist_html

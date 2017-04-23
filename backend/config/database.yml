@@ -1,19 +1,23 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db
   port: 5432
-  username: postgres
+  username: simpliflow
   password: <%= ENV['POSTGRES_PASSWORD'] %>
 
 development:
   <<: *default
-  database: flox_development
+  host: dockerhost
+  password: bgduigibvgleekdibintdltcvkfluinh
+  database: simpliflow_development
 
 test:
   <<: *default
-  database: flox_test
+  database: simpliflow_test
+  host: localhost
 
 production:
   <<: *default
-  database: flox_production
+  host: simpliflow-production.crejvcdpylco.us-east-1.rds.amazonaws.com
+  username: simpliflow
+  database: simpliflow

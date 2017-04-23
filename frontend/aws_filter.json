@@ -1,0 +1,11 @@
+[
+  {
+    "Name": "image-id",
+    "Values": ["ami-7f0a9769"]
+  },
+  {
+    "Name": "instance-state-code",
+    "Values": ["16"]
+  }
+
+]

@@ -8,11 +8,13 @@ RUN mkdir -p $RAILS_ROOT/config/shared/sockets
 
 WORKDIR $RAILS_ROOT
 
+RUN cd $RAILS_ROOT
+
 COPY Gemfile Gemfile
 COPY Gemfile.lock Gemfile.lock
 
 RUN gem install bundler
-RUN bundle install
+RUN bundle install --path vendor/cache
 
 COPY . .
 

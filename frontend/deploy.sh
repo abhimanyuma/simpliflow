@@ -1,0 +1,1 @@
+aws ec2 describe-instances --filters file://aws_filter.json | grep PublicIpAddress |  cut -d : -f 2 | cut -d \" -f 2

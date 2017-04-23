@@ -1,13 +1,27 @@
 var path = require('path');
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var PROD = JSON.parse(process.env.PROD_ENV || '0');
 
 
 module.exports = [
   {
     entry: './src/app/index.jsx',
-    output: { path: __dirname, filename: 'dist/bundle.js' },
-    plugins: [
+    output: {
+      path: __dirname,
+      filename: PROD? 'dist/bundle.min.js' : 'dist/bundle.js'
+    },
+    plugins: PROD ? [
+      new webpack.ProvidePlugin({
+        $: "jquery",
+        jQuery: "jquery",
+        "window.jQuery": "jquery",
+        Tether: "tether"
+      }),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: { warnings: false }
+      })
+      ]: [
       new webpack.ProvidePlugin({
         $: "jquery",
         jQuery: "jquery",
@@ -30,7 +44,10 @@ module.exports = [
   },
   {
     entry: './src/css/main.scss',
-    output: { path: __dirname, filename: 'dist/bundle.css' },
+    output: {
+      path: __dirname,
+      filename: 'dist/bundle.css'
+    },
     module: {
       loaders: [
         {
