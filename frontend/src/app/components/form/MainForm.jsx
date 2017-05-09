@@ -31,8 +31,9 @@ class MainForm extends React.Component {
       return []
     }
     for (let variable of variable_list) {
-      if (this.props.form_state.get("errors") && this.props.form_state.get("errors")[variable]) {
-        errors.push(this.props.form_state.get("errors")[variable])
+
+      if (this.props.form_state.get("errors") && this.props.form_state.get("errors").get(variable)) {
+        errors.push(this.props.form_state.get("errors").get(variable))
       }
     }
     return (errors);

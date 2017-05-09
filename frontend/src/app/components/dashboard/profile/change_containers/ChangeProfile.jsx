@@ -194,6 +194,8 @@ class ChangeProfile extends React.Component {
       this.config = this.get_form_config(nextProps.type)
       this.props.set_form_config(this.config, this.config_key)
       this.props.create_new_form_state(this.form_state_key)
+    } else if (nextProps.profile.get("errors") && nextProps.profile.get("errors").size ) {
+      this.props.set_form_state_errors(this.form_state_key, nextProps.profile.get("errors") )
     }
   }
 
