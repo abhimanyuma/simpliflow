@@ -9,7 +9,7 @@ class Logo extends React.Component {
   render () {
     if (this.props.show_logo) {
       return (
-        <Link to="/" className="navbar-brand">MaxFlo</Link>
+        <Link to="/" className="navbar-brand">Simpliflow</Link>
       );
     } else {
       return(<a></a>);

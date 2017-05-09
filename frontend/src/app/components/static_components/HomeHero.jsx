@@ -7,11 +7,11 @@ class HomeHero extends React.Component {
     return (
       <div className="container">
         <div className="jumbotron home-hero-margin">
-          <h1>Max Flo</h1>
+          <h1>Simpliflow</h1>
           <p className="lead">
-            Max Flo is a platform to create simple
-            worflows and smart forms.
-            Use them to collect information
+            Simpliflow is a platform to create simple
+            easy to use workflows to automate repetitive
+            beauraucratic tasks like Approvals, and Data Collection.
           </p>
         </div>
       </div>
