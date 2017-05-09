@@ -41,7 +41,12 @@ Rails.application.configure do
 
   config.middleware.insert_before 0, "Rack::Cors" do
     allow do
-      origins 'flox.dev'
+      origins 'simpliflow.dev'
+      resource '*', :headers => :any, :methods => :any
+    end
+
+    allow do
+      origins 'simpliflow.local'
       resource '*', :headers => :any, :methods => :any
     end
   end
