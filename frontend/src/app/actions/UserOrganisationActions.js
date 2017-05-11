@@ -1,4 +1,6 @@
 import { fetch_object, create_object, delete_object, update_object } from '../common/common.js'
+import { push } from 'react-router-redux'
+
 
 const SET_LOADED =  'UserOrganisation::SetLoaded';
 export function setLoaded(): {type: string} {
@@ -48,11 +50,14 @@ export function getUserOrganisations(): Function {
 
 }
 
-export function createOrganisation(org_name): Function {
+export function createOrganisation(org_name, redirect): Function {
   return function(dispatch) {
     let url = "/users/me/organisations";
     let success_cb = (data) => {
       dispatch(getUserOrganisations())
+      if (redirect !== null) {
+        dispatch(push(redirect))
+      }
     }
     let error_cb = (errors) => {
       console.log(errors)
