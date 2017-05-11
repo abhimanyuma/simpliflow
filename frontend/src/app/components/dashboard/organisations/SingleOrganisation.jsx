@@ -5,6 +5,9 @@ import { Link } from 'react-router';
 
 import LoadingFormContainer from '../../common/LoadingFormContainer.jsx';
 
+import * as URL from '../../../common/url.js';
+
+
 class SingleOrganisation extends React.Component {
 
   constructor(props) {
@@ -29,7 +32,7 @@ class SingleOrganisation extends React.Component {
                 <small className="text-muted">{this.props.organisation.tagline}</small>
               </div>
               <div className="col text-right">
-                <Link to={"/dashboard/organisations/" + this.props.organisation.slug + "/edit"} className="btn btn-secondary">Edit Organisation</Link>
+                <Link to={URL.Organisation.edit(this.props.organisation.slug)} className="btn btn-secondary">Edit Organisation</Link>
               </div>
             </div>
             <hr/>

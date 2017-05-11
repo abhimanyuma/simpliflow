@@ -2,7 +2,6 @@
 
 // TODO: Import more specific flow type for Map
 import {Map} from 'immutable';
-import URLDictionary from './urls.js';
 import { fetch_object } from './utils.js';
 
 let ModelActions = {

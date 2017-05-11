@@ -6,6 +6,8 @@ import { Link } from 'react-router';
 import MainFormContainer from '../../../form/MainFormContainer.jsx';
 import { updateUser } from '../../../../actions/ProfileActions.js';
 
+import * as URL from '../../../../common/url.js'
+
 class ChangeProfile extends React.Component {
 
   constructor(props) {

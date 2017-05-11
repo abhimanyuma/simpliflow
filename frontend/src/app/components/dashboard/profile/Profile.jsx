@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 
 import ChangeProfileContainer from './change_containers/ChangeProfileContainer.jsx';
 
+import * as URL from '../../../common/url.js';
+
 class Profile extends React.Component {
 
   constructor(props) {
@@ -35,21 +37,21 @@ class Profile extends React.Component {
                   <tr>
                     <th scope="row">Email</th>
                     <td>{this.props.profile.get("email")}</td>
-                    <td><a href="#change_email" className="btn btn-secondary btn-block btn-outline">Change</a></td>
+                    <td><Link to={URL.Profile.edit_email()} className="btn btn-secondary btn-block btn-outline">Change</Link></td>
                   </tr>
                    <tr>
                     <th scope="row">Username</th>
                     <td>{this.props.profile.get("username")}</td>
-                    <td><a href="#change_username" className="btn btn-secondary btn-block btn-outline">Change</a></td>
+                    <td><Link to={URL.Profile.edit_username()}  className="btn btn-secondary btn-block btn-outline">Change</Link></td>
                   </tr>
                   <tr>
                     <th scope="row">Auth Token</th>
                     <td>(hidden)</td>
-                    <td><a href="#refresh_auth_token" className="btn btn-secondary btn-block btn-outline">Refresh</a></td>
+                    <td><Link to={URL.Profile.edit_auth_token()}  className="btn btn-secondary btn-block btn-outline">Refresh</Link></td>
                   </tr>
                   <tr>
                     <th scope="row">Password</th>
-                    <td colSpan="2"><a href="#change_password" className="btn btn-secondary btn-block btn-outline">Change</a></td>
+                    <td colSpan="2"><Link to={URL.Profile.edit_password()} className="btn btn-secondary btn-block btn-outline">Change</Link></td>
                   </tr>
                 </tbody>
               </table>

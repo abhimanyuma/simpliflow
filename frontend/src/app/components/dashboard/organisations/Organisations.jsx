@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 
 import LoadingFormContainer from '../../common/LoadingFormContainer.jsx';
 
+import * as URL from '../../../common/url.js';
+
 class Organisations extends React.Component {
 
   constructor(props) {
@@ -22,7 +24,7 @@ class Organisations extends React.Component {
       const listItems = this.props.organisations.valueSeq().map((value, index) => {
           return(
           <li className="list-group-item justify-content-between" key={value.get("org_slug")}>
-            <Link to={"/dashboard/organisations/" + value.get("org_slug")}>{ value.get("org_name") }</Link>
+            <Link to={URL.Organisation.show(value.get("org_slug"))}>{ value.get("org_name") }</Link>
             <span className="badge badge-default badge-pill">
               { value.get("level") }
             </span>
@@ -38,7 +40,7 @@ class Organisations extends React.Component {
                 <h4>Your Organisations</h4>
               </div>
               <div className="col text-right">
-                <Link to="/dashboard/organisations/new" className="btn btn-secondary"> + New Organisation</Link>
+                <Link to={URL.Organisation.new_org()} className="btn btn-secondary"> + New Organisation</Link>
               </div>
             </div>
             <ul className="list-group">

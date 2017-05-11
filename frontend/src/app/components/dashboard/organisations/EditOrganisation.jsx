@@ -9,6 +9,9 @@ import MainFormContainer from '../../form/MainFormContainer.jsx'
 
 import { updateOrganisation } from '../../../actions/OrganisationActions.js';
 
+import * as URL from '../../../common/url.js';
+
+
 class EditOrganisation extends React.Component {
 
   constructor(props) {
@@ -150,7 +153,7 @@ class EditOrganisation extends React.Component {
                 <h4>Editing {this.props.organisation.name}</h4>
               </div>
               <div className="col text-right">
-                <Link to={"/dashboard/organisations/" + this.props.organisation.slug } className="btn btn-secondary">Back to Organisation</Link>
+                <Link to={URL.Organisation.show(this.props.organisation.slug) } className="btn btn-secondary">Back to Organisation</Link>
               </div>
             </div>
              <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>

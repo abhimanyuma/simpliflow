@@ -9,6 +9,8 @@ import MainFormContainer from '../../form/MainFormContainer.jsx'
 
 import { createOrganisation } from '../../../actions/UserOrganisationActions.js';
 
+import * as URL from '../../../common/url.js';
+
 class NewOrganisation extends React.Component {
 
   constructor(props) {
@@ -47,7 +49,7 @@ class NewOrganisation extends React.Component {
           "align": "right",
           "callback": (form_state, _form_state_key, dispatch) => {
             let org_name = form_state.get_data("org_name");
-            dispatch(createOrganisation(org_name, "/dashboard/organisations"))
+            dispatch(createOrganisation(org_name, URL.Organisation.default_root()))
           }
         }
       ]
@@ -71,7 +73,7 @@ class NewOrganisation extends React.Component {
               <h4>New Organisations</h4>
             </div>
             <div className="col text-right">
-              <Link to="/dashboard/organisations" className="btn btn-secondary"> + View Organisations</Link>
+              <Link to={URL.Organisation.default_root()} className="btn btn-secondary"> + View Organisations</Link>
             </div>
           </div>
           <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>
