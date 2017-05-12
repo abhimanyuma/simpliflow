@@ -56,7 +56,7 @@ export function createOrganisation(org_name, redirect): Function {
     let success_cb = (data) => {
       dispatch(getUserOrganisations())
       if (redirect !== null) {
-        dispatch(push(redirect))
+        dispatch(push(redirect(data["slug"])))
       }
     }
     let error_cb = (errors) => {

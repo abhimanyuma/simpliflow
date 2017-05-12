@@ -49,7 +49,7 @@ class NewOrganisation extends React.Component {
           "align": "right",
           "callback": (form_state, _form_state_key, dispatch) => {
             let org_name = form_state.get_data("org_name");
-            dispatch(createOrganisation(org_name, URL.Organisation.default_root()))
+            dispatch(createOrganisation(org_name, URL.Organisation.edit))
           }
         }
       ]
