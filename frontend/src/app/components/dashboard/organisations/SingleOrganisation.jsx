@@ -7,7 +7,6 @@ import LoadingFormContainer from '../../common/LoadingFormContainer.jsx';
 
 import * as URL from '../../../common/url.js';
 
-
 class SingleOrganisation extends React.Component {
 
   constructor(props) {

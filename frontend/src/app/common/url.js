@@ -7,23 +7,23 @@ export class Profile {
   }
 
   static change(field) {
-    return (this.default_root() + `#change_${field}`)
+    return (Profile.default_root() + `#change_${field}`)
   }
 
   static edit_username() {
-    return this.change("username")
+    return Profile.change("username")
   }
 
   static edit_email() {
-    return this.change("email")
+    return Profile.change("email")
   }
 
   static edit_password() {
-    return this.change("password")
+    return Profile.change("password")
   }
 
   static edit_auth_token() {
-    return (this.default_root() + "#refresh_auth_token")
+    return (Profile.default_root() + "#refresh_auth_token")
   }
 }
 
@@ -34,15 +34,15 @@ export class Organisation {
   }
 
   static new_org() {
-    return (this.default_root() + "/new")
+    return (Organisation.default_root() + "/new")
   }
 
   static show(org_slug) {
-    return (this.default_root() + `/${org_slug}`)
+    return (Organisation.default_root() + `/${org_slug}`)
   }
 
   static edit(org_slug) {
-    return (this.default_root() + `/${org_slug}/edit`)
+    return (Organisation.default_root() + `/${org_slug}/edit`)
   }
 
 }
