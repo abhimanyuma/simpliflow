@@ -8,7 +8,7 @@ class Footer extends React.Component {
       <footer className="footer">
         <div className="container">
           <div className="content has-text-centered">
-              <strong>Flox</strong> is a workflow and smart form creator by
+              <strong>Simpliflow</strong> is a workflow and smart form creator by
               <strong> CodeN</strong> and <strong> susmingt</strong>.
           </div>
         </div>
