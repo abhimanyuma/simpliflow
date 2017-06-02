@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
@@ -28,6 +29,11 @@ class SelectListComponent extends React.Component {
     return(this.props.errors.join(","));
   }
 
+  on_add_button_click(e) {
+    e.preventDefault()
+    this.props.add_value(this.refs.search_text.value)
+  }
+
   componentWillMount() {
     this.props.setup_autocomplete()
   }
@@ -56,19 +62,33 @@ class SelectListComponent extends React.Component {
       </datalist>
     }
 
+    let member_list = null
+
+    if (this.props["members"]) {
+      member_list = this.props["members"].map((member) =>
+        <li className="list-group-item">{member}</li>
+        );
+    }
+
     return(
       <div className={"form-group row " + error_class}>
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
           <div className="flex-row">
             <input list={this.props.config["id"]} className="form-control" ref="search_text" onKeyUp={e=>{this.on_key_press(e)}} />
-            <button className="btn btn-primary m2l">Add</button>
+            <button className="btn btn-primary m2l" onClick={(e)=>{this.on_add_button_click(e)}}>Add</button>
             {data_list}
           </div>
 
           {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
           <small className="form-text text-muted">{this.props.config["help_text"]}</small>
+          <div className="flex-row">
+            <ul className="list-group full-width m2t">
+              {member_list}
+            </ul>
+          </div>
         </div>
+
       </div>
     );
   }

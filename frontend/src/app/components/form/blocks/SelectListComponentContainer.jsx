@@ -11,8 +11,14 @@ let SelectListComponentContainer  = connect(
 
     props["config"] = ownProps.config || {};
     props["errors"] = ownProps.errors || {};
+    props["members"] = [];
     if (ownProps.config["id"] &&  state.search_terms.models.get(ownProps.config["id"])) {
       props["search_model"] = state.search_terms.models.get(ownProps.config["id"])
+    }
+    let update_key = ownProps.config.variable[0];
+    let members = ownProps.substate[update_key]
+    if (members && members.length) {
+      props["members"] = members
     }
 
     return(props);
@@ -24,6 +30,23 @@ let SelectListComponentContainer  = connect(
     dispatch_functions["do_search"] = (search_model, search_text_element) => {
       if (search_model) {
         dispatch(do_search(search_model, search_text_element.value))
+      }
+    }
+
+    dispatch_functions["add_value"] = (username) => {
+      if (username) {
+
+        let update_value = {}
+        let update_key = ownProps.config.variable[0];
+        let members = ownProps.substate[update_key]
+        if (members && members.length) {
+          members.push(username)
+        } else {
+          members = [username]
+        }
+
+        update_value[update_key] = members
+        ownProps.update_state(update_value);
       }
     }
 

@@ -41,7 +41,7 @@ let MainFormContainer  = connect(
     }
 
     dispatch_functions["on_submit"] = (form_state, form_state_key, form_config) => {
-      if (form_config.get("elements") && form_config.get("elements")) {
+      if (form_config && form_config.get && form_config.get("elements")) {
         for (let element of form_config.get("elements")) {
           if (element["type"] === "submit" && element["callback"]) {
             element["callback"](form_state, form_state_key, dispatch)
