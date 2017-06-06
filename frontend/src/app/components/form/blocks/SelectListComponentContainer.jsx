@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import SelectListComponent from './SelectListComponent.jsx';
 import { createSearchTerm, do_search} from '../../../actions/SearchTermActions.js';
 
+import { List } from 'immutable';
+
 let SelectListComponentContainer  = connect(
   function mapStateToProps(state, ownProps) {
 
@@ -17,7 +19,7 @@ let SelectListComponentContainer  = connect(
     }
     let update_key = ownProps.config.variable[0];
     let members = ownProps.substate[update_key]
-    if (members && members.length) {
+    if (members && members.size) {
       props["members"] = members
     }
 
@@ -39,10 +41,10 @@ let SelectListComponentContainer  = connect(
         let update_value = {}
         let update_key = ownProps.config.variable[0];
         let members = ownProps.substate[update_key]
-        if (members && members.length) {
-          members.push(username)
+        if (members && members.size) {
+          members = members.push(username)
         } else {
-          members = [username]
+          members = List([username])
         }
 
         update_value[update_key] = members

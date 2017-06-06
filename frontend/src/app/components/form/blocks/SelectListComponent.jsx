@@ -32,6 +32,7 @@ class SelectListComponent extends React.Component {
   on_add_button_click(e) {
     e.preventDefault()
     this.props.add_value(this.refs.search_text.value)
+    this.refs.search_text.value = ""
   }
 
   componentWillMount() {
