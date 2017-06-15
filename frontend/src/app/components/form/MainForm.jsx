@@ -92,6 +92,16 @@ class MainForm extends React.Component {
     }
   }
 
+  set_errors(key, error) {
+    let error_data = {}
+    error_data[key] = error
+    if(error) {
+      this.props.set_errors(this.props.form_state_key, error_data)
+    } else {
+      this.props.set_errors(this.props.form_state_key, {})
+    }
+  }
+
   render() {
     if (this.props.form_config && this.props.form_state) {
       return(
@@ -106,7 +116,7 @@ class MainForm extends React.Component {
             <form onSubmit={(e) => this.props.on_submit(e)}>
                 {this.get_elements().map((object, key) => {
                   return(<FormComponentContainer config={object} substate={this.get_substate(object)} key={key} errors={this.get_errors(object["variable"])} update_state={(value) => this.update_state(value)}
-                  on_submit ={() => {this.check_errors()}}/>)
+                  on_submit ={() => {this.check_errors()}} set_errors={(key, errors) => {this.set_errors(key, errors)}}/>)
                 })}
             </form>
           </div>

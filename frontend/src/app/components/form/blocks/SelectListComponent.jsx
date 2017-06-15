@@ -32,6 +32,7 @@ class SelectListComponent extends React.Component {
   on_add_button_click(e) {
     e.preventDefault()
     this.props.add_value(this.props.search_model, this.refs.search_text)
+    this.props.set_errors(null)
     this.refs.search_text.value = ""
   }
 

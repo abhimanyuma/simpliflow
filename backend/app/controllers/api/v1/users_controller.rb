@@ -75,6 +75,16 @@ class Api::V1::UsersController < ApplicationController
     render json: {status: true, data: users}, status: 200
   end
 
+  def validate
+    term = params[:term]
+    user = User.find_by(username: term)
+    if user
+      render json: {status: true, valid: true}, status: 200
+    else
+      render json: {status: false, valid: false}, status: 404
+    end
+  end
+
   private
 
     def user_params

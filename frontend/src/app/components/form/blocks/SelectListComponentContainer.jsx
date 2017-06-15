@@ -54,11 +54,15 @@ let SelectListComponentContainer  = connect(
           ownProps.update_state(update_value);
         }
         let error_cb = () => {
-          console.log("We have errored out");
+          dispatch_functions.set_errors("Unable to find user")
         }
         async_validate(update_key, username, ownProps.config.access_path, ownProps.config.access_variable, success_cb, error_cb)
 
       }
+    }
+
+    dispatch_functions["set_errors"] = (error) => {
+      ownProps.set_errors(ownProps.config.key, error)
     }
 
 

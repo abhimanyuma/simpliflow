@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
       resources :users do
         get :search, on: :collection
+        get :validate, on: :collection
         resources :organisations, only: [:index, :create]
       end
 
