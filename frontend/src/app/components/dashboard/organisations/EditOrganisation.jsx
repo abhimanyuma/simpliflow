@@ -121,8 +121,9 @@ class EditOrganisation extends React.Component {
           "type": "selectlist",
           "variable": ["members"],
           "id": "search_members_edit_organisation",
-          "search_path": "/users/search",
-          "search_variable": "term"
+          "access_type": "api",
+          "access_path": "/users",
+          "access_variable": "term"
         },
         {
           "key": "submit",

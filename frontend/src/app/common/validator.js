@@ -1,6 +1,7 @@
 // @flox
 
 import ModelActions from './ModelActions.js';
+import { fetch_object } from './requests.js';
 
 let regex: {[id:string]: RegExp } = {
   "username": /^\w*$/,
@@ -130,6 +131,18 @@ export function validate(form_state, rules) {
   return(errors);
 }
 
+export function async_validate(
+  field_name: string,
+  field_value: any,
+  url: string,
+  variable: string,
+  success_cb: Function,
+  error_cb: Function
+) {
+  let full_request = `${url}/validate?${variable}=${field_value}`
+  fetch_object(full_request, success_cb, error_cb)
+
+}
 
 function validate_individual (
   field_name: string,

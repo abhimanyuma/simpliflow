@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import SelectListComponent from './SelectListComponent.jsx';
-import { createSearchTerm, do_search} from '../../../actions/SearchTermActions.js';
+import { createSearchTerm, do_search, do_validation} from '../../../actions/SearchTermActions.js';
+import { async_validate } from '../../../common/common.js';
 
 import { List } from 'immutable';
 
@@ -35,7 +36,8 @@ let SelectListComponentContainer  = connect(
       }
     }
 
-    dispatch_functions["add_value"] = (username) => {
+    dispatch_functions["add_value"] = (search_model, search_text_element) => {
+      let username = search_text_element.value
       if (username) {
 
         let update_value = {}
@@ -48,13 +50,20 @@ let SelectListComponentContainer  = connect(
         }
 
         update_value[update_key] = members
-        ownProps.update_state(update_value);
+        let success_cb = () => {
+          ownProps.update_state(update_value);
+        }
+        let error_cb = () => {
+          console.log("We have errored out");
+        }
+        async_validate(update_key, username, ownProps.config.access_path, ownProps.config.access_variable, success_cb, error_cb)
+
       }
     }
 
 
     dispatch_functions["setup_autocomplete"] = () => {
-      dispatch(createSearchTerm(ownProps.config["id"], ownProps.config["search_path"], ownProps.config["search_variable"] ))
+      dispatch(createSearchTerm(ownProps.config["id"], ownProps.config["access_path"], ownProps.config["access_variable"] ))
     }
     return dispatch_functions;
   }) (SelectListComponent)

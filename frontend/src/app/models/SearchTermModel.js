@@ -7,13 +7,13 @@ import { setLoadingModel, setLoadedModel, updateSearchTerm, setSearchTermErrors 
 
 class SearchTermModel extends BaseModel({
   term: "",
-  search_path: "",
-  search_variable: "",
+  access_path: "",
+  access_variable: "",
   suggestions: new List([])
 }){
 
-  url(term) {
-    return `/${this.search_path}?${this.search_variable}=${term}`
+  url(term, action = "search") {
+    return `/${this.access_path}/${action}?${this.access_variable}=${term}`
   }
 
   dispatch_new_data(new_term, items, dispatch) {
@@ -24,17 +24,33 @@ class SearchTermModel extends BaseModel({
     dispatch(updateSearchTerm(this.id, new_data))
   }
 
+
+
   search(new_term, dispatch) {
+    this.search_or_validate(new_term, dispatch, "search")
+  }
+
+  validate(term, dispatch, callback) {
+    this.search_or_validate(term, dispatch, "validate", callback)
+  }
+
+  search_or_validate(term, dispatch, action, callback) {
     let cur_term = this.term
-    if(cur_term == new_term) {
+    if(cur_term == term) {
       return null
     }
     let id = this.id
+
     dispatch(setLoadingModel(id))
 
-    let url = this.url(new_term)
+    let url = this.url(term, action)
     let success_cb = (items) => {
-      this.dispatch_new_data(new_term, items, dispatch)
+      if (action == "search") {
+        this.dispatch_new_data(term, items, dispatch)
+      } else if (action == "validate") {
+        dispatch(setLoadedModel(id))
+        callback(term)
+      }
     }
 
     let error_cb = (errors) => {
