@@ -122,8 +122,10 @@ class EditOrganisation extends React.Component {
           "variable": ["members"],
           "id": "search_members_edit_organisation",
           "access_type": "api",
-          "access_path": "/users",
-          "access_variable": "term"
+          "search_path": "/users/search",
+          "api_variable": "term",
+          "modify_path" : "/organisations/1/permissions",
+          "modify_variable" : "member_username"
         },
         {
           "key": "submit",

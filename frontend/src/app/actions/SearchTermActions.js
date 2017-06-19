@@ -26,10 +26,10 @@ export function updateSearchTerm(id, data) {
   }
 }
 
-export function createSearchTerm(id: string, access_path, access_variable): {type: string, refresh: boolean} {
+export function createSearchTerm(id: string, search_path, search_variable): {type: string, refresh: boolean} {
   return setSearchTerm(id,{
-    access_path: access_path,
-    access_variable: access_variable
+    search_path: search_path,
+    search_variable: search_variable
   })
 }
 
@@ -58,9 +58,3 @@ export function do_search(search_model, term): Function {
 
 }
 
-export function do_validation(search_model, term, callback): Function {
-  return function(dispatch) {
-    search_model.validate(term, dispatch, callback)
-  }
-
-}

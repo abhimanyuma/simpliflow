@@ -17,7 +17,9 @@ Rails.application.routes.draw do
         resources :organisations, only: [:index, :create]
       end
 
-      resources :organisations, only: [:show, :update]
+      resources :organisations, only: [:show, :update] do
+        resources :permissions, only: [:create]
+      end
 
       resources :sessions, only: [:create, :destroy]
 
