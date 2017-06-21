@@ -28,6 +28,15 @@ class Organisation < ApplicationRecord
     return response
   end
 
+  def as_json(current_options)
+    if current_options[:methods]
+      current_options[:methods].push(:member_usernames)
+      super(current_options)
+    else
+      super(methods: [:member_usernames])
+    end
+  end
+
   def add_user(username)
     user = User.find_by(username: username)
     unless user.present?
@@ -49,6 +58,9 @@ class Organisation < ApplicationRecord
 
   end
 
+  def member_usernames
+    return self.users.pluck(:username)
+  end
 
   def generate_org_slug
     self.generate_slug(self.name)

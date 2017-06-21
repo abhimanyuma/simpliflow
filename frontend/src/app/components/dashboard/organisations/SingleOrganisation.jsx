@@ -22,6 +22,15 @@ class SingleOrganisation extends React.Component {
 
   render() {
     if (this.props.organisation && this.props.organisation) {
+
+      let member_list = null
+      console.log(this.props.organisation.member_usernames)
+      if (this.props.organisation.member_usernames) {
+        member_list = this.props.organisation.member_usernames.map((member) =>
+          <li className="list-group-item">{member}</li>
+          );
+      }
+
       return (
         <div className="card ">
           <div className="card-block">
@@ -37,8 +46,7 @@ class SingleOrganisation extends React.Component {
             <hr/>
             <span><strong>Members</strong></span>
             <ul className="list-group">
-              <li className="list-group-item justify-content-between">Member 1</li>
-              <li className="list-group-item justify-content-between">Member 2</li>
+              {member_list}
             </ul>
           </div>
         </div>
