@@ -42,16 +42,19 @@ let SelectListComponentContainer  = connect(
 
         let update_key = ownProps.config.variable[0];
         let success_cb = (members) => {
+          console.log(members)
           console.log("If it works, it would be updated")
           //ownProps.update_state(update_value);
         }
-        let error_cb = () => {
-          dispatch_functions.set_errors("Unable to find user")
+        let error_cb = (errors) => {
+          console.log(errors)
+
+          dispatch_functions.set_errors(errors["global"])
         }
 
         let url = `${ownProps.config.modify_path}`
         let data = {}
-        data[ownProps.config.member_username] = new_member
+        data[ownProps.config.modify_variable] = new_member
         create_object(url, data, success_cb, error_cb)
 
       }
