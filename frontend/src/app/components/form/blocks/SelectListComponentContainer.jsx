@@ -20,7 +20,7 @@ let SelectListComponentContainer  = connect(
     }
     let update_key = ownProps.config.variable[0];
     let members = ownProps.substate[update_key]
-    if (members && members.size) {
+    if (members && members.length) {
       props["members"] = members
     }
 
@@ -40,15 +40,13 @@ let SelectListComponentContainer  = connect(
       let new_member = search_text_element.value
       if (new_member) {
 
-        let update_key = ownProps.config.variable[0];
         let success_cb = (members) => {
-          console.log(members)
-          console.log("If it works, it would be updated")
-          //ownProps.update_state(update_value);
+          let update_key = ownProps.config.variable[0];
+          let update_value = {}
+          update_value[update_key] = members
+          ownProps.update_state(update_value);
         }
         let error_cb = (errors) => {
-          console.log(errors)
-
           dispatch_functions.set_errors(errors["global"])
         }
 

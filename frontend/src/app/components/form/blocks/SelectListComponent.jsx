@@ -68,7 +68,7 @@ class SelectListComponent extends React.Component {
 
     if (this.props["members"]) {
       member_list = this.props["members"].map((member) =>
-        <li className="list-group-item">{member}</li>
+        <li className="list-group-item" key={member}>{member}</li>
         );
     }
 
