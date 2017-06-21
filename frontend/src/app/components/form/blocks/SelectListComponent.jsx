@@ -36,6 +36,11 @@ class SelectListComponent extends React.Component {
     this.refs.search_text.value = ""
   }
 
+  on_delete_button_click(e) {
+    let member_id = e.target.value
+    this.props.delete_value(this.props.search_model, member_id)
+  }
+
   componentWillMount() {
     this.props.setup_autocomplete()
   }
@@ -68,7 +73,9 @@ class SelectListComponent extends React.Component {
 
     if (this.props["members"]) {
       member_list = this.props["members"].map((member) =>
-        <li className="list-group-item" key={member}>{member}</li>
+        <li className="list-group-item justify-content-between" key={member}>{member}
+        <span><button type="button" className="btn btn-outline-danger btn-sm" value={member} onClick={(e)=>{this.on_delete_button_click(e)}}>Delete</button></span>
+        </li>
         );
     }
 

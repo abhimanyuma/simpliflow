@@ -32,13 +32,39 @@ class Api::V1::PermissionsController < ApplicationController
     render json: {status: false, errors: {"global": "Unexpected error. Please contact support"}}, status: 400
   end
 
+  def destroy
+    if create_params[:id] and create_params[:organisation_id]
+      #This is from new member adding functionality
+
+      #Check if the current_user has permissions for the same
+
+      org = Organisation.find_by(id: create_params[:organisation_id])
+      unless org
+        render json: {status: false, errors: {"global": "No such organisation"}}, status: 400
+        return
+      end
+
+      response = org.remove_user(create_params[:id])
+      if response
+        members = org.users.pluck(:username)
+        render json: {status: true, data: members}
+      else
+        render json: {status: false, errors: {global: org.errors.full_messages}}, status: 400
+      end
+
+      return
+    end
+
+    render json: {status: false, errors: {"global": "Unexpected error. Please contact support"}}, status: 400
+  end
+
 
 
   private
 
   def create_params
     params.permit(
-      :member_username, :organisation_id
+      :member_username, :organisation_id, :id
     )
   end
 

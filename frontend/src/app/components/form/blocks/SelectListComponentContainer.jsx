@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import SelectListComponent from './SelectListComponent.jsx';
 import { createSearchTerm, do_search, do_validation} from '../../../actions/SearchTermActions.js';
-import { create_object } from '../../../common/common.js';
+import { create_object, delete_object } from '../../../common/common.js';
 
 import { List } from 'immutable';
 
@@ -55,6 +55,24 @@ let SelectListComponentContainer  = connect(
         data[ownProps.config.modify_variable] = new_member
         create_object(url, data, success_cb, error_cb)
 
+      }
+    }
+
+    dispatch_functions["delete_value"] = (search_model, member_id) => {
+      if (member_id) {
+        let success_cb = (members) => {
+          let update_key = ownProps.config.variable[0];
+          let update_value = {}
+          update_value[update_key] = members
+          ownProps.update_state(update_value);
+        }
+        let error_cb = (errors) => {
+          console.log("An Error Occured")
+        }
+
+        let url = `${ownProps.config.modify_path}/${member_id}`
+        let data = {}
+        delete_object(url, data, success_cb, error_cb)
       }
     }
 

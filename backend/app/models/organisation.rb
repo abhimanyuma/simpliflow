@@ -58,6 +58,28 @@ class Organisation < ApplicationRecord
 
   end
 
+
+  def remove_user(username)
+    user = User.find_by(username: username)
+    unless user.present?
+      self.errors.add(:base, "User does not exist")
+      return false
+    end
+
+    unless self.permissions.where(actor_id: user.id, actor_type: user.class.to_s).present?
+      self.errors.add(:base, "User is not present")
+      return false
+    end
+
+    permission = self.permissions.where(actor_id: user.id, actor_type: user.class.to_s).first
+    if permission.destroy
+      return true
+    else
+      return false
+    end
+
+  end
+
   def member_usernames
     return self.users.pluck(:username)
   end
