@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import SelectListComponent from './SelectListComponent.jsx';
 import { createSearchTerm, do_search, do_validation} from '../../../actions/SearchTermActions.js';
 import { create_object, delete_object } from '../../../common/common.js';
+import { hydrate_string } from '../../../common/common.js';
 
 import { List } from 'immutable';
 
@@ -70,9 +71,10 @@ let SelectListComponentContainer  = connect(
           console.log("An Error Occured")
         }
 
-        let url = `${ownProps.config.modify_path}/${member_id}`
+        let url = `${ownProps.config.modify_path}/:id`
         let data = {}
-        delete_object(url, data, success_cb, error_cb)
+        console.log(hydrate_string(url,{organisation_id: 1, id: member_id}))
+        //delete_object(url, data, success_cb, error_cb)
       }
     }
 

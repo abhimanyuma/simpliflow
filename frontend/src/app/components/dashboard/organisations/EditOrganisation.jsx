@@ -124,7 +124,7 @@ class EditOrganisation extends React.Component {
           "access_type": "api",
           "search_path": "/users/search",
           "api_variable": "term",
-          "modify_path" : "/organisations/1/permissions",
+          "modify_path" : "/organisations/:organisation_id/permissions",
           "modify_variable" : "member_username"
         },
         {
