@@ -44,6 +44,8 @@ const BaseModel = defaultValues => class extends Record({
       for (let field of fields) {
         if (this.get(field)) {
           response[field] = this.get(field)
+        } else if (typeof(this[field]) === "function") {
+          response[field] = this[field]()
         }
       }
       return(response);
@@ -55,6 +57,8 @@ const BaseModel = defaultValues => class extends Record({
     for (let field of fields) {
       if (this.get_data(field)) {
         response[field] = this.get_data(field)
+      } else if (typeof(this[field]) === "function") {
+        response[field] = this[field]()
       }
     }
     return(response);

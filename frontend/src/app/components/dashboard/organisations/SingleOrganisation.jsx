@@ -24,10 +24,9 @@ class SingleOrganisation extends React.Component {
     if (this.props.organisation && this.props.organisation) {
 
       let member_list = null
-      console.log(this.props.organisation.member_usernames)
       if (this.props.organisation.member_usernames) {
         member_list = this.props.organisation.member_usernames.map((member) =>
-          <li className="list-group-item">{member}</li>
+          <li className="list-group-item" key={member}>{member}</li>
           );
       }
 

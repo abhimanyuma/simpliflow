@@ -53,6 +53,7 @@ let SelectListComponentContainer  = connect(
 
         let url = `${ownProps.config.modify_path}`
         let data = {}
+        url = hydrate_string(url, ownProps.substate)
         data[ownProps.config.modify_variable] = new_member
         create_object(url, data, success_cb, error_cb)
 
@@ -70,11 +71,12 @@ let SelectListComponentContainer  = connect(
         let error_cb = (errors) => {
           console.log("An Error Occured")
         }
-
         let url = `${ownProps.config.modify_path}/:id`
         let data = {}
-        console.log(hydrate_string(url,{organisation_id: 1, id: member_id}))
-        //delete_object(url, data, success_cb, error_cb)
+        let variable_state = ownProps.substate
+        variable_state["id"] = member_id
+        url = hydrate_string(url, variable_state)
+        delete_object(url, data, success_cb, error_cb)
       }
     }
 

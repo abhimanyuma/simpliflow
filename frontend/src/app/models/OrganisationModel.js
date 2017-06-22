@@ -12,6 +12,10 @@ class OrganisationModel extends BaseModel({
   member_usernames: []
 }){
 
+  organisation_id() {
+    return this.id
+  }
+
   url() {
     return `/organisations/${this.slug}`;
   }
