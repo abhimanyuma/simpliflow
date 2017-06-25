@@ -48,7 +48,9 @@ let SelectListComponentContainer  = connect(
           ownProps.update_state(update_value);
         }
         let error_cb = (errors) => {
-          dispatch_functions.set_errors(errors["global"])
+          if (errors && errors["global"]) {
+            dispatch_functions.set_errors(errors["global"])
+          }
         }
 
         let url = `${ownProps.config.modify_path}`
@@ -69,7 +71,9 @@ let SelectListComponentContainer  = connect(
           ownProps.update_state(update_value);
         }
         let error_cb = (errors) => {
-          console.log("An Error Occured")
+          if (errors && errors["global"]) {
+            dispatch_functions.set_errors(errors["global"])
+          }
         }
         let url = `${ownProps.config.modify_path}/:id`
         let data = {}

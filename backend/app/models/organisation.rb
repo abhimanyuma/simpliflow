@@ -3,6 +3,8 @@ class Organisation < ApplicationRecord
   include Slug
   include AccessControl
 
+  include Membership
+
   has_many :permissions, as: :resource
 
   has_many :users, :through => :permissions, :source => :actor,
@@ -33,56 +35,10 @@ class Organisation < ApplicationRecord
       current_options[:methods].push(:member_usernames)
       super(current_options)
     else
-      super(methods: [:member_usernames])
+      super(methods: [:members])
     end
   end
 
-  def add_user(username)
-    user = User.find_by(username: username)
-    unless user.present?
-      self.errors.add(:base, "User does not exist")
-      return false
-    end
-
-    if self.permissions.where(actor_id: user.id, actor_type: user.class.to_s).present?
-      self.errors.add(:base, "User is already present")
-      return false
-    end
-
-    permission = self.permissions.create(actor_id: user.id, actor_type: user.class.to_s)
-    if permission
-      return true
-    else
-      return false
-    end
-
-  end
-
-
-  def remove_user(username)
-    user = User.find_by(username: username)
-    unless user.present?
-      self.errors.add(:base, "User does not exist")
-      return false
-    end
-
-    unless self.permissions.where(actor_id: user.id, actor_type: user.class.to_s).present?
-      self.errors.add(:base, "User is not present")
-      return false
-    end
-
-    permission = self.permissions.where(actor_id: user.id, actor_type: user.class.to_s).first
-    if permission.destroy
-      return true
-    else
-      return false
-    end
-
-  end
-
-  def member_usernames
-    return self.users.pluck(:username)
-  end
 
   def generate_org_slug
     self.generate_slug(self.name)

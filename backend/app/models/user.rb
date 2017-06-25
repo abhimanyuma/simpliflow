@@ -38,6 +38,13 @@ class User < ApplicationRecord
     ProfilePolicy
   end
 
+  def member_attributes
+    {
+      name: self.name,
+      username: self.username
+    }
+  end
+
   def self.slug_field
     :username
   end

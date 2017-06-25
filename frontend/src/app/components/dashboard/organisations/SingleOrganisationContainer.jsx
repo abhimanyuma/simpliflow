@@ -20,6 +20,7 @@ let SingleOrganisationContainer  = connect(
 
     if (org_slug && state.organisations && state.organisations.get_model(org_slug)) {
       response["organisation"] = state.organisations.get_model(org_slug)
+      window.org = response["organisation"]
     }
 
     response["organisations"] = state.organisations

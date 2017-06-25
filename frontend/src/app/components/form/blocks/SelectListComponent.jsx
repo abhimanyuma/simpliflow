@@ -73,8 +73,8 @@ class SelectListComponent extends React.Component {
 
     if (this.props["members"]) {
       member_list = this.props["members"].map((member) =>
-        <li className="list-group-item justify-content-between" key={member}>{member}
-        <span><button type="button" className="btn btn-outline-danger btn-sm" value={member} onClick={(e)=>{this.on_delete_button_click(e)}}>Delete</button></span>
+        <li className="list-group-item justify-content-between" key={member.id}>{member.username} ({member.name})
+        <span><button type="button" className="btn btn-outline-danger btn-sm" value={member.id} onClick={(e)=>{this.on_delete_button_click(e)}}>Delete</button></span>
         </li>
         );
     }
