@@ -39,6 +39,18 @@ module Membership
     end
   end
 
+  def modifiable?(actor)
+    perm = self.permissions.where(actor_id: actor.id, actor_type: actor.class.to_s).first
+
+    if perm.present? and (perm.owner? or perm.admin?)
+      return true
+    else
+      return false
+    end
+
+  end
+
+
   #Giving helper for most common method
   def add_user(username)
     user = User.find_by(username: username)

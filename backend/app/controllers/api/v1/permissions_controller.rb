@@ -12,8 +12,12 @@ class Api::V1::PermissionsController < ApplicationController
       org = Organisation.find_by(id: perm_params[:organisation_id])
 
       unless org
-        render json: {status: false, errors: {"global": "No such organisation"}}, status: 400
+        render json: {status: false, errors: {"global": ["No such organisation"]}}, status: 400
+        return
+      end
 
+      unless org.modifiable?(current_user)
+        render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
         return
       end
 
@@ -29,7 +33,7 @@ class Api::V1::PermissionsController < ApplicationController
       return
     end
 
-    render json: {status: false, errors: {"global": "Unexpected error. Please contact support"}}, status: 400
+    render json: {status: false, errors: {"global": ["Unexpected error. Please contact support"]}}, status: 400
   end
 
   def destroy
@@ -40,7 +44,12 @@ class Api::V1::PermissionsController < ApplicationController
 
       org = Organisation.find_by(id: perm_params[:organisation_id])
       unless org
-        render json: {status: false, errors: {"global": "No such organisation"}}, status: 400
+        render json: {status: false, errors: {"global": ["No such organisation"]}}, status: 400
+        return
+      end
+
+      unless org.modifiable?(current_user)
+        render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
         return
       end
 
@@ -55,7 +64,7 @@ class Api::V1::PermissionsController < ApplicationController
       return
     end
 
-    render json: {status: false, errors: {"global": "Unexpected error. Please contact support"}}, status: 400
+    render json: {status: false, errors: {"global": ["Unexpected error. Please contact support"]}}, status: 400
   end
 
 
