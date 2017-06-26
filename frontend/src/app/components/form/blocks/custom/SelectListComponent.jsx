@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { debounce } from '../../../common/common.js';
+import { debounce } from '../../../../common/common.js';
 
 class SelectListComponent extends React.Component {
 

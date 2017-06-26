@@ -2,9 +2,9 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import SelectListComponent from './SelectListComponent.jsx';
-import { createSearchTerm, do_search, do_validation} from '../../../actions/SearchTermActions.js';
-import { create_object, delete_object } from '../../../common/common.js';
-import { hydrate_string } from '../../../common/common.js';
+import { createSearchTerm, do_search, do_validation} from '../../../../actions/SearchTermActions.js';
+import { create_object, delete_object } from '../../../../common/common.js';
+import { hydrate_string } from '../../../../common/common.js';
 
 import { List } from 'immutable';
 
