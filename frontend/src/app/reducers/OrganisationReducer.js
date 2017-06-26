@@ -35,6 +35,9 @@ export const organisations = function(state: Object = new OrganisationCollection
         model = state.models.get(org_slug)
         state = state.set("models", state.models.set(org_slug, model.set_loaded()))
         break;
+      case "Remove":
+        state = state.set("models", state.models.remove(org_slug))
+        break;
       case "SetErrors":
         model = state.models.get(org_slug)
         state = state.set("models", state.models.set(org_slug, model.set_errors(action.errors)))

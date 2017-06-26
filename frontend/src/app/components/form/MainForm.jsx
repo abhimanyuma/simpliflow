@@ -104,6 +104,8 @@ class MainForm extends React.Component {
 
   render() {
     if (this.props.form_config && this.props.form_state) {
+      let disabled = this.props.form_state.disabled || ""
+
       return(
         <div className="card">
           {!this.props.form_config.get("hide_title") &&
@@ -114,10 +116,12 @@ class MainForm extends React.Component {
           <div className="card-block">
             {this.props.form_state.has_errors() && <ErrorPanel errors={this.get_errors(["global"])} />}
             <form onSubmit={(e) => this.props.on_submit(e)}>
+              <fieldset disabled={disabled} >
                 {this.get_elements().map((object, key) => {
                   return(<FormComponentContainer config={object} substate={this.get_substate(object)} key={key} errors={this.get_errors(object["variable"])} update_state={(value) => this.update_state(value)}
                   on_submit ={() => {this.check_errors()}} set_errors={(key, errors) => {this.set_errors(key, errors)}}/>)
                 })}
+              </fieldset>
             </form>
           </div>
         </div>

@@ -5,7 +5,7 @@ class Organisation < ApplicationRecord
 
   include Membership
 
-  has_many :permissions, as: :resource
+  has_many :permissions, as: :resource, dependent: :destroy
 
   has_many :users, :through => :permissions, :source => :actor,
            :source_type => 'User'

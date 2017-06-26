@@ -152,14 +152,26 @@ class EditOrganisation extends React.Component {
         <div className="card ">
           <div className="card-block">
             <div className="row m2b">
+
               <div className="col">
-                <h4>Editing {this.props.organisation.name}</h4>
-              </div>
-              <div className="col text-right">
-                <Link to={URL.Organisation.show(this.props.organisation.slug) } className="btn btn-secondary">Back to Organisation</Link>
+                <Link to={URL.Organisation.show(this.props.organisation.slug)} className="btn btn-secondary">
+                  <i className="fa fa-arrow-circle-left" /> Back to Organisation
+                </Link>
               </div>
             </div>
-             <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>
+            <hr />
+            <div className="row m2b">
+             <div className="col">
+                <h4>Editing {this.props.organisation.name}</h4>
+              </div>
+
+              <div className="col text-right">
+                <Link to={URL.Organisation.delete(this.props.organisation.slug)} className="btn btn-outline-danger">
+                  <i className="fa fa-trash-o" /> Delete Organisation
+                </Link>
+              </div>
+            </div>
+            <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>
           </div>
         </div>
       );

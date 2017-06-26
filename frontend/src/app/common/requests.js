@@ -83,11 +83,10 @@ export function create_object(url: string, data: Object, success_cb: Function, e
   ajax_request("POST", url, options);
 }
 
-export function delete_object(url: string, data: ?Object, success_cb: Function, error_cb: Function)  {
+export function delete_object(url: string, success_cb: Function, error_cb: Function)  {
   let options = {
     success_cb: success_cb,
     error_cb: error_cb,
-    data: data
   };
   ajax_request("DELETE", url, options);
 }

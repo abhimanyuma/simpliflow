@@ -44,6 +44,9 @@ let EditOrganisationContainer  = connect(
       },
       set_form_state_from_model: (state_key, config, model, reset) => {
         dispatch(setFormStateFromModel(state_key, config, model, reset ))
+      },
+      delete_org: () => {
+        console.log("The org now needs to confirm deletion")
       }
     });
   }

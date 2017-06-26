@@ -33,6 +33,8 @@ import OrganisationsContainer from './components/dashboard/organisations/Organis
 import NewOrganisationContainer from './components/dashboard/organisations/NewOrganisationContainer.jsx';
 import SingleOrganisationContainer from './components/dashboard/organisations/SingleOrganisationContainer.jsx';
 import EditOrganisationContainer from './components/dashboard/organisations/EditOrganisationContainer.jsx';
+import DeleteOrganisationContainer from './components/dashboard/organisations/DeleteOrganisationContainer.jsx';
+
 
 
 import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
@@ -86,6 +88,7 @@ render(
           <Route path="new" component={NewOrganisationContainer} />
           <Route path=":org_slug" component={SingleOrganisationContainer} />
           <Route path=":org_slug/edit" component={EditOrganisationContainer} />
+          <Route path=":org_slug/delete" component={DeleteOrganisationContainer} />
         </Route>
       </Route>
 

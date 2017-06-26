@@ -45,4 +45,8 @@ export class Organisation {
     return (Organisation.default_root() + `/${org_slug}/edit`)
   }
 
+  static delete(org_slug) {
+    return (Organisation.default_root() + `/${org_slug}/delete`)
+  }
+
 }
