@@ -45,7 +45,7 @@ class Api::V1::OrganisationsController < ApplicationController
     elsif !current_user
       render json: {status: false, errors: {"global": "User must be signed in"}}, status: 401
     else
-      if organisation.accessible?(current_user)
+      if organisation.viewable?(current_user)
         render json: {status: true, data: organisation}, status: 200
       else
         render json: {status: false, errors: {"global": "User not part of organsation"}}, status: 401
@@ -61,7 +61,7 @@ class Api::V1::OrganisationsController < ApplicationController
     elsif !current_user
       render json: {status: false, errors: {"global": "User must be signed in"}}, status: 401
     else
-      if organisation.accessible?(current_user)
+      if organisation.modifiable?(current_user)
         organisation.assign_attributes(org_params)
 
         if organisation.save
@@ -83,7 +83,7 @@ class Api::V1::OrganisationsController < ApplicationController
     elsif !current_user
       render json: {status: false, errors: {"global": "User must be signed in"}}, status: 401
     else
-      if organisation.accessible?(current_user)
+      if organisation.modifiable?(current_user)
 
         if organisation.destroy
           render json: {status: true, data: organisation}, status: 200

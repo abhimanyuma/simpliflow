@@ -50,6 +50,17 @@ module Membership
 
   end
 
+  def viewable?(actor)
+    perm = self.permissions.where(actor_id: actor.id, actor_type: actor.class.to_s).first
+
+    if perm.present?
+      return true
+    else
+      return false
+    end
+
+  end
+
 
   #Giving helper for most common method
   def add_user(username)

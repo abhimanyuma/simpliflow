@@ -1,7 +1,6 @@
 class Organisation < ApplicationRecord
 
   include Slug
-  include AccessControl
 
   include Membership
 
