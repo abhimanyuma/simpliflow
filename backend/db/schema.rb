@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302233752) do
+ActiveRecord::Schema.define(version: 20170627164713) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,8 +31,9 @@ ActiveRecord::Schema.define(version: 20170302233752) do
     t.integer  "resource_id"
     t.string   "resource_type"
     t.integer  "level",         default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "full_member",   default: true
     t.index ["actor_type", "actor_id"], name: "index_permissions_on_actor_type_and_actor_id", using: :btree
     t.index ["resource_type", "resource_id", "level"], name: "index_permissions_on_resource_type_and_resource_id_and_level", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_permissions_on_resource_type_and_resource_id", using: :btree

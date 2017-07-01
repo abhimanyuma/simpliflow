@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import { debounce } from '../../../../common/common.js';
 
+import ListItemComponent from './ListItemComponent.jsx';
+
 class SelectListComponent extends React.Component {
 
   constructor(props: any) {
@@ -73,9 +75,7 @@ class SelectListComponent extends React.Component {
 
     if (this.props["members"]) {
       member_list = this.props["members"].map((member) =>
-        <li className="list-group-item justify-content-between" key={member.id}>{member.username} ({member.name})
-        <span><button type="button" className="btn btn-outline-danger btn-sm" value={member.id} onClick={(e)=>{this.on_delete_button_click(e)}}>Delete</button></span>
-        </li>
+          <ListItemComponent member={member} key={member.id}/>
         );
     }
 
@@ -85,7 +85,7 @@ class SelectListComponent extends React.Component {
         <div className="col-sm-8">
           <div className="flex-row">
             <input list={this.props.config["id"]} className="form-control" ref="search_text" onKeyUp={e=>{this.on_key_press(e)}} />
-            <button className="btn btn-primary m2l" onClick={(e)=>{this.on_add_button_click(e)}}>Add</button>
+            <button className="btn btn-primary m2l" onClick={(e)=>{this.on_add_button_click(e)}}>Add Member</button>
             {data_list}
           </div>
 
