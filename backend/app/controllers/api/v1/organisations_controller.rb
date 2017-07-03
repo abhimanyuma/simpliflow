@@ -46,7 +46,9 @@ class Api::V1::OrganisationsController < ApplicationController
       render json: {status: false, errors: {"global": "User must be signed in"}}, status: 401
     else
       if organisation.viewable?(current_user)
-        render json: {status: true, data: organisation}, status: 200
+        org  = organisation.as_json()
+        org[:user_level] = organisation.user_level(current_user)
+        render json: {status: true, data: org}, status: 200
       else
         render json: {status: false, errors: {"global": "User not part of organsation"}}, status: 401
       end

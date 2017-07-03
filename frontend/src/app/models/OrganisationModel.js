@@ -9,6 +9,7 @@ class OrganisationModel extends BaseModel({
   slug: null,
   bio: "",
   tagline: "",
+  user_level: "",
   members: []
 }){
 

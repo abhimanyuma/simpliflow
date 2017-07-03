@@ -20,6 +20,17 @@ module Membership
     return response
   end
 
+
+
+
+  def accessor_level(accessor)
+    permission = self.permissions.where(actor_id: accessor, actor_type: accessor.class.to_s).first
+    return permission.level if permission
+    return nil
+  end
+  alias_method :user_level, :accessor_level
+
+
   def add_member(member)
     permission = self.permissions.create(actor_id: member.id, actor_type: member.class.to_s)
     if permission

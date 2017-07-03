@@ -29,15 +29,14 @@ class Organisation < ApplicationRecord
     return response
   end
 
-  def as_json(current_options)
-    if current_options[:methods]
-      current_options[:methods].push(:member_usernames)
-      super(current_options)
-    else
-      super(methods: [:members])
-    end
-  end
+  def as_json(current_options = {})
 
+    current_options[:methods] ||= []
+    current_options[:methods] = current_options[:methods] + [:members]
+
+    super(current_options)
+
+  end
 
   def generate_org_slug
     self.generate_slug(self.name)

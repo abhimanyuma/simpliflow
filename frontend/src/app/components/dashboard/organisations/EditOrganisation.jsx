@@ -119,7 +119,7 @@ class EditOrganisation extends React.Component {
           "name": "members",
           "label": "Members",
           "type": "selectlist",
-          "variable": ["members", "organisation_id"],
+          "variable": ["members", "organisation_id", "user_level"],
           "id": "search_members_edit_organisation",
           "access_type": "api",
           "search_path": "/users/search",
@@ -162,7 +162,7 @@ class EditOrganisation extends React.Component {
             <hr />
             <div className="row m2b">
              <div className="col">
-                <h4>Editing {this.props.organisation.name}</h4>
+                <h4>Editing {this.props.organisation.name} <small> {this.props.organisation.user_level} </small></h4>
               </div>
 
               <div className="col text-right">
