@@ -162,14 +162,15 @@ class EditOrganisation extends React.Component {
             <hr />
             <div className="row m2b">
              <div className="col">
-                <h4>Editing {this.props.organisation.name} <small> {this.props.organisation.user_level} </small></h4>
+                <h4>Editing {this.props.organisation.name} <small> {this.props.organisation.user_display_level()} </small></h4>
               </div>
-
+              { this.props.organisation.is_owner() &&
               <div className="col text-right">
                 <Link to={URL.Organisation.delete(this.props.organisation.slug)} className="btn btn-outline-danger">
                   <i className="fa fa-trash-o" /> Delete Organisation
                 </Link>
               </div>
+              }
             </div>
             <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>
           </div>

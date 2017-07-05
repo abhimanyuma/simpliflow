@@ -35,12 +35,17 @@ class SingleOrganisation extends React.Component {
           <div className="card-block">
             <div className="row m2b">
               <div className="col">
-                <h4>{this.props.organisation.name}</h4>
+                <h4>
+                  {this.props.organisation.name}
+                  <span className="badge badge-default m1l">{this.props.organisation.user_display_level()}</span>
+                </h4>
                 <small className="text-muted">{this.props.organisation.tagline}</small>
               </div>
+              {this.props.organisation.user_modifiable() &&
               <div className="col text-right">
                 <Link to={URL.Organisation.edit(this.props.organisation.slug)} className="btn btn-secondary">Edit Organisation</Link>
               </div>
+              }
             </div>
             <hr/>
             <span><strong>Members</strong></span>

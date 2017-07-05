@@ -4,7 +4,6 @@ import { fetch_object, create_object, delete_object, update_object } from '../co
 import { setLoadingModel, setLoadedModel, setOrganisation, setOrganisationErrors } from '../actions/OrganisationActions.js';
 
 class OrganisationModel extends BaseModel({
-  user_level: "member",
   name: null,
   slug: null,
   bio: "",
@@ -15,6 +14,29 @@ class OrganisationModel extends BaseModel({
 
   organisation_id() {
     return this.id
+  }
+
+  user_display_level() {
+    let level = this.user_level
+    switch (level) {
+      case "owner":
+        return "Owner"
+      case "admin":
+        return "Manager"
+      case "regular":
+        return "Member"
+    }
+  }
+
+  user_modifiable() {
+    if (this.user_level == "owner" || this.user_level == "admin") {
+      return true
+    }
+    return false
+  }
+
+  is_owner() {
+    return (this.user_level == "owner")
   }
 
   url() {
