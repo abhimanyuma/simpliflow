@@ -9,7 +9,13 @@ import {can_edit, can_make_member, can_make_admin, can_make_owner} from '../../.
 
 class ListItemComponent extends React.Component {
 
-
+  dropdown_click(action) {
+    if (action == "delete") {
+      this.props.delete_member(this.props.member.id)
+    } else {
+      this.props.edit_member(this.props.member.id, action)
+    }
+  }
 
 
   render() {
@@ -37,21 +43,29 @@ class ListItemComponent extends React.Component {
 
               {
                 can_make_member(this.props.user_level, this.props.member.level) &&
-                <a className="dropdown-item" href="#">Make Regular Member</a>
+                <a className="dropdown-item" href="#" onClick={() => this.dropdown_click('regular')}>Make Regular Member</a>
               }
               {
                 can_make_admin(this.props.user_level, this.props.member.level) &&
-                <a className="dropdown-item" href="#">Make Admin</a>
+                <a className="dropdown-item" href="#" onClick={() => this.dropdown_click('admin')} >Make Admin</a>
               }
               {
                 can_make_owner(this.props.user_level, this.props.member.level) &&
-                <a className="dropdown-item" href="#">Make Owner</a>
+                <a className="dropdown-item" href="#" onClick={() => this.dropdown_click('owner')}>Make Owner</a>
+              }
+              <div className="dropdown-divider"></div>
+              {
+                this.props.member.full_member &&
+                <a className="dropdown-item" href="#" onClick={() => this.dropdown_click('overview')}>Make Overview Member</a>
+              }
+              {
+                (!this.props.member.full_member) &&
+                <a className="dropdown-item" href="#" onClick={() => this.dropdown_click('full')}>Make Full Member</a>
               }
 
+
               <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">Make Full Member</a>
-              <div className="dropdown-divider"></div>
-              <a className="dropdown-item" href="#">Remove</a>
+              <a className="dropdown-item" onClick={() => this.dropdown_click('delete')}>Remove</a>
             </div>
           </div>
         </span>

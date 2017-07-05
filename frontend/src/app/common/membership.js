@@ -1,11 +1,11 @@
 export function user_level_to_number(membership_string) {
   switch (membership_string) {
     case "owner":
-      return 0
+      return 100
     case "admin":
       return 10
     case "regular":
-      return 100
+      return 1
   }
 }
 
@@ -13,7 +13,7 @@ export function can_edit(prospecitve_editor, member) {
   let ed_level = user_level_to_number(prospecitve_editor)
   let mem_level = user_level_to_number(member)
 
-  if (ed_level <= mem_level) {
+  if (ed_level >= mem_level) {
     return true
   } else {
     return false

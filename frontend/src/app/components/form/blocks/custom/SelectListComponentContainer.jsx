@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import SelectListComponent from './SelectListComponent.jsx';
 import { createSearchTerm, do_search, do_validation} from '../../../../actions/SearchTermActions.js';
-import { create_object, delete_object } from '../../../../common/common.js';
+import { create_object, delete_object, update_object} from '../../../../common/common.js';
 import { hydrate_string } from '../../../../common/common.js';
 
 import { List } from 'immutable';
@@ -62,8 +62,17 @@ let SelectListComponentContainer  = connect(
       }
     }
 
-    dispatch_functions["delete_value"] = (search_model, member_id) => {
-      if (member_id) {
+    dispatch_functions["set_errors"] = (error) => {
+      ownProps.set_errors(ownProps.config.key, error)
+    }
+
+
+    dispatch_functions["setup_autocomplete"] = () => {
+      dispatch(createSearchTerm(ownProps.config["id"], ownProps.config["search_path"], ownProps.config["api_variable"] ))
+    }
+
+    dispatch_functions["delete_member"] = (member_id) => {
+       if (member_id) {
         let success_cb = (members) => {
           let update_key = ownProps.config.variable[0];
           let update_value = {}
@@ -76,22 +85,43 @@ let SelectListComponentContainer  = connect(
           }
         }
         let url = `${ownProps.config.modify_path}/:id`
-        let data = {}
         let variable_state = ownProps.substate
         variable_state["id"] = member_id
         url = hydrate_string(url, variable_state)
-        delete_object(url, data, success_cb, error_cb)
+        delete_object(url, success_cb, error_cb)
       }
     }
 
-    dispatch_functions["set_errors"] = (error) => {
-      ownProps.set_errors(ownProps.config.key, error)
+    dispatch_functions["edit_member"] = (member_id, action) => {
+       if (member_id) {
+        let success_cb = (members) => {
+          let update_key = ownProps.config.variable[0];
+          let update_value = {}
+          update_value[update_key] = members
+          ownProps.update_state(update_value);
+        }
+        let error_cb = (errors) => {
+          if (errors && errors["global"]) {
+            dispatch_functions.set_errors(errors["global"])
+          }
+        }
+        let url = `${ownProps.config.modify_path}/:id`
+        let variable_state = ownProps.substate
+        variable_state["id"] = member_id
+        url = hydrate_string(url, variable_state)
+        let data = {}
+        if (action == "full") {
+          data["full_member"] = true
+        } else if (action == "overview") {
+          data["full_member"] = false
+        } else {
+          data["level"] = action
+        }
+
+        update_object(url, {"permission": data}, success_cb, error_cb)
+      }
     }
 
-
-    dispatch_functions["setup_autocomplete"] = () => {
-      dispatch(createSearchTerm(ownProps.config["id"], ownProps.config["search_path"], ownProps.config["api_variable"] ))
-    }
     return dispatch_functions;
   }) (SelectListComponent)
 

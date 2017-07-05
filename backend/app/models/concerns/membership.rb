@@ -11,7 +11,8 @@ module Membership
         id: permission_role.id,
         level: permission_role.level,
         role: permission_role.actor_type,
-        member_id: permission_role.actor_id
+        member_id: permission_role.actor_id,
+        full_member: permission_role.full_member
       }
       attributes = attributes.merge(permission_role.actor.member_attributes)
       attributes

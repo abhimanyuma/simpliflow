@@ -74,7 +74,13 @@ class SelectListComponent extends React.Component {
     let member_list = null
     if (this.props["members"]) {
       member_list = this.props["members"].map((member) =>
-          <ListItemComponent member={member} key={member.id} user_level={this.props.substate.user_level}/>
+          <ListItemComponent
+           member={member}
+           key={member.id}
+           user_level={this.props.substate.user_level}
+           delete_member={this.props.delete_member}
+           edit_member={this.props.edit_member}
+          />
         );
     }
 
