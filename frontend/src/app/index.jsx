@@ -35,6 +35,8 @@ import SingleOrganisationContainer from './components/dashboard/organisations/Si
 import EditOrganisationContainer from './components/dashboard/organisations/EditOrganisationContainer.jsx';
 import DeleteOrganisationContainer from './components/dashboard/organisations/DeleteOrganisationContainer.jsx';
 
+import TeamMain from './components/dashboard/teams/TeamMain.jsx';
+
 
 
 import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
@@ -90,6 +92,7 @@ render(
           <Route path=":org_slug/edit" component={EditOrganisationContainer} />
           <Route path=":org_slug/delete" component={DeleteOrganisationContainer} />
         </Route>
+        <Route path="organisations/:org_slug/teams" component={TeamMain} />
       </Route>
 
     </Router>

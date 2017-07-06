@@ -50,3 +50,12 @@ export class Organisation {
   }
 
 }
+
+export class Team {
+
+  static default_root(organisation_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/teams`)
+  }
+
+
+}
