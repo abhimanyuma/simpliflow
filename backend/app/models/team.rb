@@ -10,6 +10,8 @@ class Team < ApplicationRecord
 
   before_validation :generate_team_slug, on: :create
 
+  belongs_to :organisation
+
   def generate_team_slug
     self.generate_slug(self.name)
   end

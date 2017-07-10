@@ -53,10 +53,13 @@ export function setOrganisationErrors(org_slug: string, errors: Object): {type: 
 }
 
 
-export function getOrganisation(org_slug: string): Function {
+export function getOrganisation(org_slug: string, additional_attribs = {}): Function {
   return function(dispatch) {
     dispatch(requestOrganisation(org_slug));
     let url = `/organisations/${org_slug}`;
+    if (additional_attribs["teams"]) {
+      url = `/organisations/${org_slug}/?include_teams=true`;
+    }
     let success_cb = (data) => {
       dispatch(setOrganisation(data));
     }

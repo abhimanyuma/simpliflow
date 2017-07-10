@@ -8,6 +8,7 @@ import { routerReducer } from 'react-router-redux';
 import { user_organisations } from './UserOrganisationReducer.js';
 import { organisations } from './OrganisationReducer.js';
 import { search_terms } from './SearchTermReducer.js';
+import { teams } from './TeamReducer.js';
 
 let reducer = combineReducers({
   profile: profile,
@@ -16,6 +17,7 @@ let reducer = combineReducers({
   user_organisations: user_organisations,
   organisations: organisations,
   search_terms: search_terms,
+  teams: teams,
   routing: routerReducer
 });
 
