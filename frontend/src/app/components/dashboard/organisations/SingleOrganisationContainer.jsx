@@ -22,8 +22,6 @@ let SingleOrganisationContainer  = connect(
       response["organisation"] = state.organisations.get_model(org_slug)
     }
 
-    response["organisations"] = state.organisations
-
     return response
   },
   function mapDispatchToProps(dispatch, ownProps) {

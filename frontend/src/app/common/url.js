@@ -57,5 +57,9 @@ export class Team {
     return (`/dashboard/organisations/${organisation_slug}/teams`)
   }
 
+  static new(organisation_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/teams/new`)
+  }
+
 
 }

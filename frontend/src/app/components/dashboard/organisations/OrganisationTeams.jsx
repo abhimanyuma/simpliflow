@@ -15,7 +15,7 @@ class OrganisationTeams extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.teams) {
+    if (!this.props.teams || !this.props.teams.size) {
       this.props.get_teams()
     }
   }
@@ -46,7 +46,7 @@ class OrganisationTeams extends React.Component {
               <div className="col text-right">
                 <Link to={URL.Organisation.show(this.props.organisation.slug)} className="btn btn-success m2r"><i className="fa fa-left-arrow"></i>Back to {this.props.organisation.name}</Link>
                 { this.props.organisation.user_modifiable() &&
-                  <Link to={URL.Organisation.edit(this.props.organisation.slug)} className="btn btn-primary"><i className="fa fa-plus"></i>Add Team</Link>
+                  <Link to={URL.Team.new(this.props.organisation.slug)} className="btn btn-primary"><i className="fa fa-plus"></i>Add Team</Link>
                 }
               </div>
             </div>
