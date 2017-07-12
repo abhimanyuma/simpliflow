@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
       resources :organisations, only: [:show, :update, :destroy] do
         resources :permissions, only: [:create, :destroy, :update]
-        resources :teams, only: [:index]
+        resources :teams, only: [:index, :create]
       end
 
       resources :sessions, only: [:create, :destroy]

@@ -7,10 +7,10 @@ import NewTeam from './NewTeam.jsx';
 
 import {getOrganisation} from '../../../actions/OrganisationActions.js';
 
-import MainFormContainer from '../../form/MainFormContainer.jsx'
+
 
 import { setFormConfig } from '../../../actions/FormConfigActions.js';
-import { createNewFormState, setFormStateErrors } from '../../../actions/FormStateActions.js';
+import { createNewFormState, setFormStateErrors, setFormStateFromHash } from '../../../actions/FormStateActions.js';
 
 let NewTeamContainer  = connect(
   function mapStateToProps(state, ownProps) {
@@ -41,7 +41,11 @@ let NewTeamContainer  = connect(
       },
       set_form_state_errors: (state_key, errors) => {
         dispatch(setFormStateErrors(state_key, errors))
+      },
+      set_form_state_from_hash: (state_key, config, model, reset) => {
+        dispatch(setFormStateFromHash(state_key, config, model, reset ))
       }
+
     })
 
   }

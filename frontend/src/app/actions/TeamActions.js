@@ -36,13 +36,13 @@ export function setTeams(teams) {
 //   }
 // }
 
-// const SET_ORG = 'Organisation::Set';
-// export function setOrganisation(org: Object): {type: string, data: Object} {
-//   return {
-//     type: SET_ORG,
-//     data: org
-//   }
-// }
+const SET_TEAM = 'Team::Set';
+export function setTeam(team: Object): {type: string, data: Object} {
+  return {
+    type: SET_ORG,
+    data: team
+  }
+}
 
 // const REMOVE_ORG = 'Organisation::Remove';
 // export function removeOrganisation(org_slug: string): {type: string, org_slug: string} {
@@ -75,4 +75,26 @@ export function getOrganisationTeams(org_slug: string, additional_attribs = {}):
   }
 
 }
+
+export function createTeam(team_name, org_slug,redirect): Function {
+  return function(dispatch) {
+    let url = `/organisations/${org_slug}/teams`;
+    let success_cb = (data) => {
+      dispatch(setTeam(data))
+      if (redirect !== null) {
+        dispatch(push(redirect(org_slug,data["slug"])))
+      }
+    }
+    let error_cb = (errors) => {
+      console.log(errors)
+    }
+    let data = {
+      "team": {
+        "name": team_name
+      }
+    }
+    create_object(url, data, success_cb, error_cb)
+  }
+}
+
 

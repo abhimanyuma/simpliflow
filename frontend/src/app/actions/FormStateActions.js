@@ -31,6 +31,25 @@ export function setFormStateFromModel(id: ?string, form_config, model, reset) {
   return(setFormState(id, data, reset))
 }
 
+export function setFormStateFromHash(id: ?string, form_config, model_hash, reset) {
+  let els = form_config["elements"]
+  let variables = []
+  for (let el of els) {
+    if (el["variable"]) {
+      variables = variables.concat(el["variable"])
+    }
+  }
+
+  let data = {}
+
+  for (let variable of variables) {
+    if (variable in model_hash) {
+      data[variable] = model_hash[variable]
+    }
+  }
+  return(setFormState(id, data, reset))
+}
+
 const UPDATE_FORM_STATE = "FormState::Update"
 export function updateFormState(id: string, additional_data: Object) {
   return({

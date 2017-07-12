@@ -40,6 +40,10 @@ class Organisation < ApplicationRecord
     return teams_with_additional_info
   end
 
+  def create_team(team_name, user)
+    Team.create_new(self, team_name, user)
+  end
+
   def as_json(current_options = {})
 
     current_options[:methods] ||= []
