@@ -16,14 +16,13 @@ class Organisation < ApplicationRecord
   def self.get_user_organisations(actor_id, actor_type = "User")
     org_permissions =  Permission.joins("
       LEFT JOIN organisations ON
-      permissions.resource_type='Organisation' AND
       permissions.resource_id = organisations.id
     ").select("
       permissions.level,
       organisations.id as id,
       organisations.name org_name,
       organisations.slug as org_slug
-    ").where(actor_id: actor_id, actor_type: actor_type)
+    ").where(actor_id: actor_id, actor_type: actor_type, resource_type: self.to_s)
 
     response = org_permissions.as_json(only: [:level], methods: [:id, :org_name, :org_slug])
 
