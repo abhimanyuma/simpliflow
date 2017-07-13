@@ -46,13 +46,14 @@ export function setTeam(team: Object): {type: string, data: Object} {
   }
 }
 
-// const REMOVE_ORG = 'Organisation::Remove';
-// export function removeOrganisation(org_slug: string): {type: string, org_slug: string} {
-//   return {
-//     type: REMOVE_ORG,
-//     org_slug: org_slug
-//   }
-// }
+const REMOVE_TEAM = 'Organisation::TEAM';
+export function removeTeam(org_slug: string, team_slug: string): {type: string, org_slug: string} {
+  return {
+    type: REMOVE_TEAM,
+    org_slug: org_slug,
+    team_slug: team_slug
+  }
+}
 
 const SET_TEAM_ERRORS =  'Team::SetErrors';
 export function setTeamErrors(org_slug: string, team_slug: string, errors: Object): {type: string, errors: Object} {
@@ -117,6 +118,25 @@ export function createTeam(team_name, org_slug,redirect): Function {
 export function updateTeam(team, data): Function {
   return function(dispatch) {
     team.update(data, dispatch)
+  }
+
+}
+
+export function deleteTeam(org_slug: string, team_slug: string, redirect_url: string): Function {
+  return function(dispatch) {
+    dispatch(setLoadingModel(org_slug, team_slug))
+    let url = `/organisations/${org_slug}/teams/${team_slug}`;
+    let success_cb = (data) => {
+      dispatch(removeTeam(org_slug, team_slug));
+      if (redirect_url !== null) {
+        dispatch(push(redirect_url))
+      }
+    }
+    let error_cb = (errors) => {
+      dispatch(setLoadedModel(org_slug, team_slug))
+      dispatch(setTeamErrors(org_slug, team_slug, errors));
+    }
+    delete_object(url, success_cb, error_cb);
   }
 
 }

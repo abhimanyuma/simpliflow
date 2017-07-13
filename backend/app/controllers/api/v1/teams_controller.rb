@@ -109,6 +109,41 @@ class Api::V1::TeamsController < ApplicationController
 
   end
 
+  def destroy
+
+    if params[:organisation_id]
+      org = Organisation.find_by(id: params[:organisation_id]) || Organisation.find_by(slug: params[:organisation_id])
+      unless org
+        render json: {status: false, errors: {"global": ["No such organisation"]}}, status: 400
+        return
+      end
+
+      team = Team.where(organisation_id: org.id, id: params[:id]).first || Team.where(organisation_id: org.id, slug: params[:id]).first
+
+      removable = false
+      if team.present? and (org.owner?(current_user) || team.owner?(current_user))
+        removable = true
+      end
+
+      if team.blank?
+        render json: {status: false, errors: {"global": ["No such team"]}}, status: 404
+      elsif removable
+
+        if team.destroy
+          render json: {status: true, data: team}
+        else
+          render json: { status: false, errors: team.errors }, status: 400
+        end
+      else
+        render json: {status: false, errors: {"global": ["You do not have access to view this"]}}, status: 401
+      end
+    end
+
+  end
+
+
+
+
   private
 
   def team_params

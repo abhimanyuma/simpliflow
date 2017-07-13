@@ -165,7 +165,7 @@ class EditTeam extends React.Component {
               </div>
               { this.props.team.is_owner() &&
               <div className="col text-right">
-                <Link to={URL.Team.delete(this.props.team.slug)} className="btn btn-outline-danger">
+                <Link to={URL.Team.delete(this.props.team.organisation_slug, this.props.team.slug)} className="btn btn-outline-danger">
                   <i className="fa fa-trash-o" /> Delete Team
                 </Link>
               </div>

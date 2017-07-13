@@ -85,7 +85,7 @@ class Api::V1::OrganisationsController < ApplicationController
     elsif !current_user
       render json: {status: false, errors: {"global": "User must be signed in"}}, status: 401
     else
-      if organisation.modifiable?(current_user)
+      if organisation.owner?(current_user)
 
         if organisation.destroy
           render json: {status: true, data: organisation}, status: 200
