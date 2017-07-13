@@ -99,6 +99,13 @@ module Membership
   end
 
 
+  def with_user(user)
+    entity  = self.as_json()
+    entity[:user_level] = self.user_level(user)
+    return entity
+  end
+
+
 
   # def all_members
   #   return self.members("all")

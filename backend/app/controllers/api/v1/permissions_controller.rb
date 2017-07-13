@@ -7,15 +7,27 @@ class Api::V1::PermissionsController < ApplicationController
 
     valid = false
     entity = false
-    if perm_params[:member_username] and perm_params[:organisation_id] and perm_params[:team_id]
-      org = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
+
+    if params[:organisation_id]
+      org = Organisation.find_by(id: params[:organisation_id]) || Organisation.find_by(slug: params[:organisation_id])
 
       unless org
         render json: {status: false, errors: {"global": ["No such organisation"]}}, status: 400
         return
       end
 
-      team = Team.find_by(id: perm_params[:team_id]) || Team.find_by(slug: perm_params[:team_id])
+      if org.modifiable?(current_user)
+        valid = true
+        entity = org
+      else
+        render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
+        return
+      end
+
+    end
+
+    if perm_params[:team_id]
+      team = Team.find_by(id: params[:team_id]) || Team.find_by(slug: params[:team_id])
 
       unless team.modifiable?(current_user)
         render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
@@ -23,30 +35,19 @@ class Api::V1::PermissionsController < ApplicationController
       end
 
       valid = true
-
       entity = team
+    elsif params[:role_id]
+      role = Role.find_by(id: params[:team_id]) || Role.find_by(slug: params[:team_id])
 
-
-    elsif perm_params[:member_username] and perm_params[:organisation_id]
-      #This is from new member adding functionality
-
-      #Check if the current_user has permissions for the same
-
-      org = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
-
-      unless org
-        render json: {status: false, errors: {"global": ["No such organisation"]}}, status: 400
-        return
-      end
-
-      unless org.modifiable?(current_user)
+      unless role.modifiable?(current_user)
         render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
         return
       end
 
       valid = true
-      entity = org
+      entity = role
     end
+
 
     if valid and entity
       response = entity.add_user(perm_params[:member_username])
@@ -67,16 +68,18 @@ class Api::V1::PermissionsController < ApplicationController
   def destroy
 
     entity = nil
-   if perm_params[:team_id]
-      entity = Team.find_by(id: perm_params[:team_id]) || Team.find_by(slug: perm_params[:team_id])
-    elsif perm_params[:organisation_id]
-      entity = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
+    if params[:team_id]
+      entity = Team.find_by(id: params[:team_id]) || Team.find_by(slug: params[:team_id])
+    elsif params[:role_id]
+      entity = Role.find_by(id: params[:role_id]) || Role.find_by(slug: params[:role_id])
+    elsif params[:organisation_id]
+      entity = Organisation.find_by(id: params[:organisation_id]) || Organisation.find_by(slug: params[:organisation_id])
     end
 
 
-    if perm_params[:id]
+    if params[:id]
 
-      permission = Permission.find_by(id: perm_params[:id])
+      permission = Permission.find_by(id: params[:id])
 
       if permission.blank? || !permission.modifiable?(current_user)
         render json: {status: false, errors: {global: ["The user does not have enough rights to remove the member"]}}, status: 401
@@ -101,15 +104,17 @@ class Api::V1::PermissionsController < ApplicationController
 
     entity = nil
     if perm_params[:team_id]
-      entity = Team.find_by(id: perm_params[:team_id]) || Team.find_by(slug: perm_params[:team_id])
-    elsif perm_params[:organisation_id]
-      entity = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
+      entity = Team.find_by(id: params[:team_id]) || Team.find_by(slug: params[:team_id])
+    elsif params[:role_id]
+      entity = Role.find_by(id: params[:role_id]) || Role.find_by(slug: params[:role_id])
+    elsif params[:organisation_id]
+      entity = Organisation.find_by(id: params[:organisation_id]) || Organisation.find_by(slug: params[:organisation_id])
     end
 
 
-    if perm_params[:id]
+    if params[:id]
 
-      permission = Permission.find_by(id: perm_params[:id])
+      permission = Permission.find_by(id: params[:id])
 
       if permission.blank? || !permission.modifiable?(current_user)
         render json: {status: false, errors: {global: ["The user does not have enough rights to remove the member"]}}, status: 401
@@ -136,7 +141,7 @@ class Api::V1::PermissionsController < ApplicationController
 
   def perm_params
     params.permit(
-      :member_username, :organisation_id, :team_id, :id
+      :member_username
     )
   end
 

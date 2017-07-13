@@ -1,4 +1,5 @@
-class Team < ApplicationRecord
+class Role < ApplicationRecord
+
   include Slug
 
   include Membership
@@ -9,14 +10,13 @@ class Team < ApplicationRecord
   has_many :users, :through => :permissions, :source => :actor,
            :source_type => 'User'
 
-  before_validation :generate_team_slug, on: :create
+  before_validation :generate_role_slug, on: :create
 
   belongs_to :organisation
 
-  def generate_team_slug
+  def generate_role_slug
     self.generate_slug(self.name)
   end
-
 
   def as_json(current_options = {})
 
@@ -26,7 +26,5 @@ class Team < ApplicationRecord
     super(current_options)
 
   end
-
-
 
 end

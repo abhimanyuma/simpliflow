@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170705202616) do
+ActiveRecord::Schema.define(version: 20170713172101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,18 @@ ActiveRecord::Schema.define(version: 20170705202616) do
     t.index ["actor_type", "actor_id"], name: "index_permissions_on_actor_type_and_actor_id", using: :btree
     t.index ["resource_type", "resource_id", "level"], name: "index_permissions_on_resource_type_and_resource_id_and_level", using: :btree
     t.index ["resource_type", "resource_id"], name: "index_permissions_on_resource_type_and_resource_id", using: :btree
+  end
+
+  create_table "roles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.string   "bio"
+    t.integer  "organisation_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["name"], name: "index_roles_on_name", using: :btree
+    t.index ["organisation_id"], name: "index_roles_on_organisation_id", using: :btree
+    t.index ["slug"], name: "index_roles_on_slug", unique: true, using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
