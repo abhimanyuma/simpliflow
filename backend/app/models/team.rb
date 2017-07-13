@@ -22,18 +22,18 @@ class Team < ApplicationRecord
     return team
   end
 
-  def org_slug
+  def organisation_slug
     self.organisation.slug
   end
 
-  def org_name
+  def organisation_name
     self.organisation.name
   end
 
   def as_json(current_options = {})
 
     current_options[:methods] ||= []
-    current_options[:methods] = current_options[:methods] + [:members, :org_slug, :org_name]
+    current_options[:methods] = current_options[:methods] + [:members, :organisation_slug, :organisation_name]
 
     super(current_options)
 

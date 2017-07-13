@@ -7,12 +7,12 @@ import LoadingFormContainer from '../../common/LoadingFormContainer.jsx';
 import MainFormContainer from '../../form/MainFormContainer.jsx'
 
 
-import { updateOrganisation } from '../../../actions/OrganisationActions.js';
+import { updateTeam } from '../../../actions/TeamActions.js';
 
 import * as URL from '../../../common/url.js';
 
 
-class EditOrganisation extends React.Component {
+class EditTeam extends React.Component {
 
   constructor(props) {
     super(props);
@@ -23,21 +23,24 @@ class EditOrganisation extends React.Component {
     if (!this.props.organisation) {
       this.props.get_org()
     }
+    if (!this.props.team) {
+      this.props.get_team()
+    }
 
     this.config = this.get_config()
     this.config_key = this.config["id"]
     this.form_state_key = this.config_key
     this.props.set_form_config(this.config, this.config_key, false)
-    if (this.props.organisation) {
-      this.props.set_form_state_from_model(this.form_state_key, this.config, this.props.organisation, true)
+    if (this.props.team) {
+      this.props.set_form_state_from_model(this.form_state_key, this.config, this.props.team, true)
     } else {
       this.props.create_new_form_state(this.form_state_key)
     }
   }
 
   componentWillUpdate(nextProps) {
-    if (nextProps.organisation) {
-      this.props.set_form_state_from_model(this.form_state_key, this.config, nextProps.organisation, true)
+    if (nextProps.team) {
+      this.props.set_form_state_from_model(this.form_state_key, this.config, nextProps.team, true)
     } else {
       this.props.create_new_form_state(this.form_state_key)
     }
@@ -45,7 +48,7 @@ class EditOrganisation extends React.Component {
 
   get_config() {
     return {
-      "id" : "edit-organisation-form",
+      "id" : "edit-team-form",
       "hide_title": true,
       "elements":[
         {
@@ -68,6 +71,16 @@ class EditOrganisation extends React.Component {
           ]
         },
         {
+          "key": "organisation_slug",
+          "order": 4,
+          "name": "Organisation Slug",
+          "label": "Organisation",
+          "type": "text",
+          "variable": ["organisation_slug"],
+          "icon": "user",
+          "disabled": true,
+        },
+        {
           "key": "slug",
           "order": 2,
           "name": "slug",
@@ -82,20 +95,6 @@ class EditOrganisation extends React.Component {
             {
               type: "like",
               parameter: "username"
-            }
-          ]
-        },
-        {
-          "key": "tagline",
-          "order": 3,
-          "name": "tagline",
-          "label": "Tagline",
-          "type": "text",
-          "variable": ["tagline"],
-          "validation_rules": [
-            {
-              type: "max_length",
-              parameter: 500
             }
           ]
         },
@@ -119,27 +118,27 @@ class EditOrganisation extends React.Component {
           "name": "members",
           "label": "Members",
           "type": "selectlist",
-          "variable": ["members", "organisation_id", "user_level"],
-          "id": "search_members_edit_organisation",
+          "variable": ["members", "organisation_id", "team_id", "user_level"],
+          "id": "search_members_edit_team",
           "access_type": "api",
           "search_path": "/users/search",
           "api_variable": "term",
-          "modify_path" : "/organisations/:organisation_id/permissions",
+          "modify_path" : "/organisations/:organisation_id/team/:team_id/permissions",
           "modify_variable" : "member_username"
         },
         {
           "key": "submit",
           "order": 6,
           "type" : "submit",
-          "label": "Update Organisation",
+          "label": "Update Team",
           "callback": (form_state, form_state_key, dispatch={}) => {
             let data = {}
-            let org = this.props.organisation
+            let team = this.props.team
             data['name'] = form_state.get_data("name");
             data['slug'] = form_state.get_data("slug");
-            data['tagline'] = form_state.get_data("tagline");
-            data['bio'] = form_state.get_data("bio")
-            dispatch(updateOrganisation(org,data))
+            data['bio'] = form_state.get_data("bio");
+            data['organisation_slug'] = form_state.get_data("organisation_slug")
+            dispatch(updateTeam(team,data))
           }
         }
       ]
@@ -147,27 +146,27 @@ class EditOrganisation extends React.Component {
   }
 
   render() {
-    if (this.props.organisation) {
+    if (this.props.organisation && this.props.team) {
       return (
         <div className="card ">
           <div className="card-block">
             <div className="row m2b">
 
               <div className="col">
-                <Link to={URL.Organisation.show(this.props.organisation.slug)} className="btn btn-secondary">
-                  <i className="fa fa-arrow-circle-left" /> Back to Organisation
+                <Link to={URL.Team.default_root(this.props.team.organisation_slug)} className="btn btn-secondary">
+                  <i className="fa fa-arrow-circle-left" /> Back to Teams
                 </Link>
               </div>
             </div>
             <hr />
             <div className="row m2b">
              <div className="col">
-                <h4>Editing {this.props.organisation.name} <small> {this.props.organisation.user_display_level()} </small></h4>
+                <h4>Editing {this.props.team.name} <small> {this.props.team.user_display_level()} </small></h4>
               </div>
-              { this.props.organisation.is_owner() &&
+              { this.props.team.is_owner() &&
               <div className="col text-right">
-                <Link to={URL.Organisation.delete(this.props.organisation.slug)} className="btn btn-outline-danger">
-                  <i className="fa fa-trash-o" /> Delete Organisation
+                <Link to={URL.Team.delete(this.props.team.slug)} className="btn btn-outline-danger">
+                  <i className="fa fa-trash-o" /> Delete Team
                 </Link>
               </div>
               }
@@ -182,4 +181,4 @@ class EditOrganisation extends React.Component {
   }
 }
 
-export default EditOrganisation;
+export default EditTeam;

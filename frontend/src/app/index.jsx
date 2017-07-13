@@ -36,6 +36,7 @@ import EditOrganisationContainer from './components/dashboard/organisations/Edit
 import DeleteOrganisationContainer from './components/dashboard/organisations/DeleteOrganisationContainer.jsx';
 import OrganisationTeamsContainer from './components/dashboard/organisations/OrganisationTeamsContainer.jsx';
 import NewTeamContainer from './components/dashboard/teams/NewTeamContainer.jsx';
+import EditTeamContainer from './components/dashboard/teams/EditTeamContainer.jsx';
 
 import TeamMain from './components/dashboard/teams/TeamMain.jsx';
 
@@ -95,6 +96,7 @@ render(
           <Route path=":org_slug/delete" component={DeleteOrganisationContainer} />
           <Route path=":org_slug/teams" component={OrganisationTeamsContainer} />
           <Route path=":org_slug/teams/new" component={NewTeamContainer} />
+          <Route path=":org_slug/teams/:team_slug/edit" component={EditTeamContainer} />
         </Route>
         <Route path="teams" component={TeamMain} />
       </Route>

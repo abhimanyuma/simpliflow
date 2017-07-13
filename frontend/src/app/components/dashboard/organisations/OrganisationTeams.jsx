@@ -15,9 +15,7 @@ class OrganisationTeams extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.teams || !this.props.teams.size) {
-      this.props.get_teams()
-    }
+    this.props.get_teams()
   }
 
   render() {

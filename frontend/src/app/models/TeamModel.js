@@ -2,6 +2,9 @@
 import BaseModel from './BaseModel.js';
 import { fetch_object, create_object, delete_object, update_object } from '../common/common.js'
 
+import { setLoadingModel, setLoadedModel, setTeam, setTeamErrors } from '../actions/TeamActions.js';
+
+
 class TeamModel extends BaseModel({
   name: null,
   slug: null,
@@ -36,7 +39,29 @@ class TeamModel extends BaseModel({
   }
 
   url() {
-    return `/teams/${this.slug}`;
+    return `/organisations/${this.organisation_slug}/teams/${this.slug}`;
+  }
+
+  update(data, dispatch) {
+    let slug = this.slug
+    let org_slug = this.organisation_slug
+    dispatch(setLoadingModel(org_slug, slug))
+
+    let url = this.url()
+    let success_cb = (data) => {
+      dispatch(setTeam(data))
+    }
+
+    let error_cb = (errors) => {
+      dispatch(setLoadedModel(org_slug, slug))
+      dispatch(setTeamErrors(org_slug, slug, errors))
+    }
+
+    data = {
+      "team": data
+    }
+
+    update_object(url, data, success_cb, error_cb);
   }
 
 }

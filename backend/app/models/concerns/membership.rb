@@ -62,6 +62,18 @@ module Membership
 
   end
 
+  def owner?(actor)
+    perm = self.permissions.where(actor_id: actor.id, actor_type: actor.class.to_s).first
+
+    if perm.present? and perm.owner?
+      return true
+    else
+      return false
+    end
+
+  end
+
+
   def viewable?(actor)
     perm = self.permissions.where(actor_id: actor.id, actor_type: actor.class.to_s).first
 

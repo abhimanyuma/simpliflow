@@ -4,18 +4,20 @@ import { setOrganisationErrors } from './OrganisationActions.js'
 
 
 const SET_LOADED =  'Team::SetLoadedModel';
-export function setLoadedModel(team_slug): {type: string, team_slug: string} {
+export function setLoadedModel(org_slug, team_slug): {type: string, team_slug: string} {
   return {
     type: SET_LOADED,
-    team_slug: team_slug
+    team_slug: team_slug,
+    org_slug: org_slug
   }
 }
 
 const SET_LOADING =  'Team::SetLoadingModel';
-export function setLoadingModel(team_slug): {type: string, team_slug: string} {
+export function setLoadingModel(org_slug, team_slug): {type: string, team_slug: string} {
   return {
     type: SET_LOADING,
-    team_slug: team_slug
+    team_slug: team_slug,
+    org_slug: org_slug
   }
 }
 
@@ -39,7 +41,7 @@ export function setTeams(teams) {
 const SET_TEAM = 'Team::Set';
 export function setTeam(team: Object): {type: string, data: Object} {
   return {
-    type: SET_ORG,
+    type: SET_TEAM,
     data: team
   }
 }
@@ -52,17 +54,18 @@ export function setTeam(team: Object): {type: string, data: Object} {
 //   }
 // }
 
-// const SET_ORG_ERRORS =  'Organisation::SetErrors';
-// export function setOrganisationErrors(org_slug: string, errors: Object): {type: string, errors: Object} {
-//   return {
-//     type: SET_ORG_ERRORS,
-//     errors: errors,
-//     org_slug: org_slug
-//   }
-// }
+const SET_TEAM_ERRORS =  'Team::SetErrors';
+export function setTeamErrors(org_slug: string, team_slug: string, errors: Object): {type: string, errors: Object} {
+  return {
+    type: SET_TEAM_ERRORS,
+    errors: errors,
+    team_slug: team_slug,
+    org_slug: org_slug
+  }
+}
 
 
-export function getOrganisationTeams(org_slug: string, additional_attribs = {}): Function {
+export function getOrganisationTeams(org_slug: string): Function {
   return function(dispatch) {
     let url = `/organisations/${org_slug}/teams`;
     let success_cb = (data) => {
@@ -70,6 +73,20 @@ export function getOrganisationTeams(org_slug: string, additional_attribs = {}):
     }
     let error_cb = (errors) => {
       dispatch(setOrganisationErrors(org_slug, errors));
+    }
+    fetch_object(url, success_cb, error_cb);
+  }
+
+}
+
+export function getTeam(org_slug: string, team_slug: string): Function {
+  return function(dispatch) {
+    let url = `/organisations/${org_slug}/teams/${team_slug}`;
+    let success_cb = (data) => {
+      dispatch(setTeam(data));
+    }
+    let error_cb = (errors) => {
+      dispatch(setTeamErrors(org_slug, team_slug, errors));
     }
     fetch_object(url, success_cb, error_cb);
   }
@@ -95,6 +112,13 @@ export function createTeam(team_name, org_slug,redirect): Function {
     }
     create_object(url, data, success_cb, error_cb)
   }
+}
+
+export function updateTeam(team, data): Function {
+  return function(dispatch) {
+    team.update(data, dispatch)
+  }
+
 }
 
 
