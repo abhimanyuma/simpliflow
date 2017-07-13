@@ -15,6 +15,14 @@ class TeamModel extends BaseModel({
   members: []
 }){
 
+  team_id() {
+    return this.id
+  }
+
+  team_slug() {
+    return this.slug
+  }
+
   user_display_level() {
     let level = this.user_level
     switch (level) {

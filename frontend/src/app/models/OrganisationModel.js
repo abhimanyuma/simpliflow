@@ -16,6 +16,10 @@ class OrganisationModel extends BaseModel({
     return this.id
   }
 
+  organisation_slug() {
+    return this.slug
+  }
+
   user_display_level() {
     let level = this.user_level
     switch (level) {

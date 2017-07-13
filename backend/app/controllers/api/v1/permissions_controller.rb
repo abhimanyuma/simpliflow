@@ -4,12 +4,35 @@ class Api::V1::PermissionsController < ApplicationController
   include Filtering
 
   def create
-    if perm_params[:member_username] and perm_params[:organisation_id]
+
+    valid = false
+    entity = false
+    if perm_params[:member_username] and perm_params[:organisation_id] and perm_params[:team_id]
+      org = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
+
+      unless org
+        render json: {status: false, errors: {"global": ["No such organisation"]}}, status: 400
+        return
+      end
+
+      team = Team.find_by(id: perm_params[:team_id]) || Team.find_by(slug: perm_params[:team_id])
+
+      unless team.modifiable?(current_user)
+        render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
+        return
+      end
+
+      valid = true
+
+      entity = team
+
+
+    elsif perm_params[:member_username] and perm_params[:organisation_id]
       #This is from new member adding functionality
 
       #Check if the current_user has permissions for the same
 
-      org = Organisation.find_by(id: perm_params[:organisation_id])
+      org = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
 
       unless org
         render json: {status: false, errors: {"global": ["No such organisation"]}}, status: 400
@@ -21,13 +44,18 @@ class Api::V1::PermissionsController < ApplicationController
         return
       end
 
-      response = org.add_user(perm_params[:member_username])
+      valid = true
+      entity = org
+    end
+
+    if valid and entity
+      response = entity.add_user(perm_params[:member_username])
 
       if response
-        members = org.members
+        members = entity.members
         render json: {status: true, data: members}
       else
-        render json: {status: false, errors: {global: org.errors.full_messages}}, status: 400
+        render json: {status: false, errors: {global: entity.errors.full_messages}}, status: 400
       end
 
       return
@@ -39,8 +67,10 @@ class Api::V1::PermissionsController < ApplicationController
   def destroy
 
     entity = nil
-    if perm_params[:organisation_id]
-      entity = Organisation.find_by(id: perm_params[:organisation_id])
+   if perm_params[:team_id]
+      entity = Team.find_by(id: perm_params[:team_id]) || Team.find_by(slug: perm_params[:team_id])
+    elsif perm_params[:organisation_id]
+      entity = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
     end
 
 
@@ -70,8 +100,10 @@ class Api::V1::PermissionsController < ApplicationController
   def update
 
     entity = nil
-    if perm_params[:organisation_id]
-      entity = Organisation.find_by(id: perm_params[:organisation_id])
+    if perm_params[:team_id]
+      entity = Team.find_by(id: perm_params[:team_id]) || Team.find_by(slug: perm_params[:team_id])
+    elsif perm_params[:organisation_id]
+      entity = Organisation.find_by(id: perm_params[:organisation_id]) || Organisation.find_by(slug: perm_params[:organisation_id])
     end
 
 
@@ -104,7 +136,7 @@ class Api::V1::PermissionsController < ApplicationController
 
   def perm_params
     params.permit(
-      :member_username, :organisation_id, :id
+      :member_username, :organisation_id, :team_id, :id
     )
   end
 

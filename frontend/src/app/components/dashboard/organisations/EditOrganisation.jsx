@@ -119,12 +119,12 @@ class EditOrganisation extends React.Component {
           "name": "members",
           "label": "Members",
           "type": "selectlist",
-          "variable": ["members", "organisation_id", "user_level"],
+          "variable": ["members", "organisation_slug", "user_level"],
           "id": "search_members_edit_organisation",
           "access_type": "api",
           "search_path": "/users/search",
           "api_variable": "term",
-          "modify_path" : "/organisations/:organisation_id/permissions",
+          "modify_path" : "/organisations/:organisation_slug/permissions",
           "modify_variable" : "member_username"
         },
         {
