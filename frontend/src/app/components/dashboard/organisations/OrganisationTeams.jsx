@@ -24,7 +24,9 @@ class OrganisationTeams extends React.Component {
       let team_list = null
       if (this.props.teams) {
         team_list = this.props.teams.map((team) =>
-          <li className="list-group-item" key={team.id}>{team.name} </li>
+          <li className="list-group-item" key={team.id}>
+          <Link to={URL.Team.show(this.props.organisation.slug, team.slug)} >{team.name} </Link>
+          </li>
           );
       }
 

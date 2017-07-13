@@ -10,6 +10,7 @@ class TeamModel extends BaseModel({
   slug: null,
   bio: "",
   organisation_id: null,
+  organisation_name: null,
   organisation_slug: "",
   user_level: "",
   members: []

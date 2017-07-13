@@ -65,6 +65,10 @@ export class Team {
     return (`/dashboard/organisations/${organisation_slug}/teams/${team_slug}/delete`)
   }
 
+  static show(organisation_slug, team_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/teams/${team_slug}`)
+  }
+
   static edit(organisation_slug, team_slug) {
     return (`/dashboard/organisations/${organisation_slug}/teams/${team_slug}/edit`)
   }

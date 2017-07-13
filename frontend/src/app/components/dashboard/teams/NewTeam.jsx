@@ -90,7 +90,6 @@ class NewTeam extends React.Component {
   }
 
   componentWillMount() {
-    console.log("Activated")
      if (!this.props.organisation) {
       this.props.get_org()
     }

@@ -153,8 +153,8 @@ class EditTeam extends React.Component {
             <div className="row m2b">
 
               <div className="col">
-                <Link to={URL.Team.default_root(this.props.team.organisation_slug)} className="btn btn-secondary">
-                  <i className="fa fa-arrow-circle-left" /> Back to Teams
+                <Link to={URL.Team.show(this.props.team.organisation_slug, this.props.team.slug)} className="btn btn-secondary">
+                  <i className="fa fa-arrow-circle-left" /> Back to Team
                 </Link>
               </div>
             </div>

@@ -31,7 +31,6 @@ let EditTeamContainer  = connect(
 
      if (team_slug && state.teams && state.teams.get_model) {
       response["team"] = state.teams.get_model(`${org_slug}/${team_slug}`)
-      console.log("Macha")
     }
 
     return response
