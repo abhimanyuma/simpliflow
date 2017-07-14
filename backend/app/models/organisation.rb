@@ -12,6 +12,7 @@ class Organisation < ApplicationRecord
   before_validation :generate_org_slug, on: :create
 
   has_many :teams
+  has_many :roles
 
   def self.get_user_organisations(actor_id, actor_type = "User")
     org_permissions =  Permission.joins("
@@ -39,8 +40,22 @@ class Organisation < ApplicationRecord
     return teams_with_additional_info
   end
 
+  def get_org_roles()
+    roles = self.roles.as_json()
+    roles_with_additional_info = roles.map do |role|
+      role.merge({
+        organisation_slug: self.slug
+      })
+    end
+    return roles_with_additional_info
+  end
+
   def create_team(team_name, user)
     Team.create_new(self, team_name, user)
+  end
+
+  def create_role(role_name, user)
+    Role.create_new(self, role_name, user)
   end
 
   def as_json(current_options = {})

@@ -9,6 +9,7 @@ import { user_organisations } from './UserOrganisationReducer.js';
 import { organisations } from './OrganisationReducer.js';
 import { search_terms } from './SearchTermReducer.js';
 import { teams } from './TeamReducer.js';
+import { roles } from './RoleReducer.js';
 
 let reducer = combineReducers({
   profile: profile,
@@ -18,6 +19,7 @@ let reducer = combineReducers({
   organisations: organisations,
   search_terms: search_terms,
   teams: teams,
+  roles: roles,
   routing: routerReducer
 });
 

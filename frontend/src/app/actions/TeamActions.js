@@ -46,7 +46,7 @@ export function setTeam(team: Object): {type: string, data: Object} {
   }
 }
 
-const REMOVE_TEAM = 'Organisation::TEAM';
+const REMOVE_TEAM = 'Team::Remove';
 export function removeTeam(org_slug: string, team_slug: string): {type: string, org_slug: string} {
   return {
     type: REMOVE_TEAM,

@@ -57,7 +57,7 @@ export class Team {
     return (`/dashboard/organisations/${organisation_slug}/teams`)
   }
 
-  static new(organisation_slug) {
+  static create(organisation_slug) {
     return (`/dashboard/organisations/${organisation_slug}/teams/new`)
   }
 
@@ -71,6 +71,31 @@ export class Team {
 
   static edit(organisation_slug, team_slug) {
     return (`/dashboard/organisations/${organisation_slug}/teams/${team_slug}/edit`)
+  }
+
+
+}
+
+export class Role {
+
+  static default_root(organisation_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/roles`)
+  }
+
+  static create(organisation_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/roles/new`)
+  }
+
+  static delete(organisation_slug, role_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/roles/${role_slug}/delete`)
+  }
+
+  static show(organisation_slug, role_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/roles/${role_slug}`)
+  }
+
+  static edit(organisation_slug, role_slug) {
+    return (`/dashboard/organisations/${organisation_slug}/roles/${role_slug}/edit`)
   }
 
 

@@ -45,6 +45,7 @@ class SingleOrganisation extends React.Component {
 
               <div className="col text-right">
                 <Link to={URL.Team.default_root(this.props.organisation.slug)} className="btn btn-success m2r"><i className="fa fa-users"></i>Teams</Link>
+                <Link to={URL.Role.default_root(this.props.organisation.slug)} className="btn btn-success m2r"><i className="fa fa-users"></i>Roles</Link>
                 { this.props.organisation.user_modifiable() &&
                   <Link to={URL.Organisation.edit(this.props.organisation.slug)} className="btn btn-primary"><i className="fa fa-edit"></i>Edit Organisation</Link>
                 }

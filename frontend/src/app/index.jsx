@@ -34,7 +34,8 @@ import NewOrganisationContainer from './components/dashboard/organisations/NewOr
 import SingleOrganisationContainer from './components/dashboard/organisations/SingleOrganisationContainer.jsx';
 import EditOrganisationContainer from './components/dashboard/organisations/EditOrganisationContainer.jsx';
 import DeleteOrganisationContainer from './components/dashboard/organisations/DeleteOrganisationContainer.jsx';
-import OrganisationTeamsContainer from './components/dashboard/organisations/OrganisationTeamsContainer.jsx';
+
+import OrganisationSublevelContainer from './components/dashboard/organisations/OrganisationSublevelContainer.jsx';
 import NewTeamContainer from './components/dashboard/teams/NewTeamContainer.jsx';
 import SingleTeamContainer from './components/dashboard/teams/SingleTeamContainer.jsx';
 import EditTeamContainer from './components/dashboard/teams/EditTeamContainer.jsx';
@@ -96,11 +97,11 @@ render(
           <Route path=":org_slug" component={SingleOrganisationContainer} />
           <Route path=":org_slug/edit" component={EditOrganisationContainer} />
           <Route path=":org_slug/delete" component={DeleteOrganisationContainer} />
-          <Route path=":org_slug/teams" component={OrganisationTeamsContainer} />
-          <Route path=":org_slug/teams/new" component={NewTeamContainer} />
-          <Route path=":org_slug/teams/:team_slug" component={SingleTeamContainer} />
-          <Route path=":org_slug/teams/:team_slug/edit" component={EditTeamContainer} />
-          <Route path=":org_slug/teams/:team_slug/delete" component={DeleteTeamContainer} />
+          <Route path=":org_slug/:elem(teams)" component={OrganisationSublevelContainer} />
+          <Route path=":org_slug/:elem(teams)/new" component={NewTeamContainer} />
+          <Route path=":org_slug/:elem(teams)/:team_slug" component={SingleTeamContainer} />
+          <Route path=":org_slug/:elem(teams)/:team_slug/edit" component={EditTeamContainer} />
+          <Route path=":org_slug/:elem(teams)/:team_slug/delete" component={DeleteTeamContainer} />
         </Route>
         <Route path="teams" component={TeamMain} />
       </Route>
