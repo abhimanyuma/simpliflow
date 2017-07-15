@@ -99,8 +99,8 @@ export function createTeam(team_name, org_slug,redirect): Function {
     let url = `/organisations/${org_slug}/teams`;
     let success_cb = (data) => {
       dispatch(setTeam(data))
-      if (redirect !== null) {
-        dispatch(push(redirect(org_slug,data["slug"])))
+      if (redirect) {
+        dispatch(push(redirect(org_slug, data["slug"])))
       }
     }
     let error_cb = (errors) => {

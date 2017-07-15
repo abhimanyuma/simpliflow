@@ -38,9 +38,7 @@ import DeleteOrganisationContainer from './components/dashboard/organisations/De
 import OrganisationSublevelContainer from './components/dashboard/organisations/OrganisationSublevelContainer.jsx';
 
 import SingleSublevelContainer from './components/dashboard/sublevels/SingleSublevelContainer.jsx';
-
-
-import NewTeamContainer from './components/dashboard/teams/NewTeamContainer.jsx';
+import NewSublevelContainer from './components/dashboard/sublevels/NewSublevelContainer.jsx';
 
 import EditTeamContainer from './components/dashboard/teams/EditTeamContainer.jsx';
 import DeleteTeamContainer from './components/dashboard/teams/DeleteTeamContainer.jsx';
@@ -103,7 +101,8 @@ render(
           <Route path=":org_slug/delete" component={DeleteOrganisationContainer} />
           <Route path=":org_slug/teams" component={OrganisationSublevelContainer} type="teams" />
           <Route path=":org_slug/roles" component={OrganisationSublevelContainer} type="roles" />
-          <Route path=":org_slug/:elem(teams)/new" component={NewTeamContainer} />
+          <Route path=":org_slug/teams/new" component={NewSublevelContainer} type="teams"/>
+          <Route path=":org_slug/roles/new" component={NewSublevelContainer} type="roles"/>
           <Route path=":org_slug/teams/:sublevel_slug" component={SingleSublevelContainer} type="teams" />
           <Route path=":org_slug/roles/:sublevel_slug" component={SingleSublevelContainer} type="roles" />
           <Route path=":org_slug/:elem(teams)/:team_slug/edit" component={EditTeamContainer} />

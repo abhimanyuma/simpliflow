@@ -18,8 +18,6 @@ let OrganisationSublevelContainer  = connect(
     let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
     let type = ownProps.type || ownProps.route.type
 
-    console.log(type)
-
     if (org_slug) {
       response["org_slug"] = org_slug
     }

@@ -92,7 +92,7 @@ export function createRole(role_name, org_slug, redirect): Function {
     let success_cb = (data) => {
       dispatch(setRole(data))
       if (redirect !== null) {
-        dispatch(push(redirect(org_slug,data["slug"])))
+        dispatch(push(redirect(org_slug, data["slug"])))
       }
     }
     let error_cb = (errors) => {
