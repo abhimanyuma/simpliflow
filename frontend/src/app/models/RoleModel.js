@@ -2,7 +2,7 @@
 import BaseModel from './BaseModel.js';
 import { fetch_object, create_object, delete_object, update_object } from '../common/common.js'
 
-import { setLoadingModel, setLoadedModel, setTeam, setTeamErrors } from '../actions/RoleActions.js';
+import { setLoadingModel, setLoadedModel, setRole, setRoleErrors } from '../actions/RoleActions.js';
 
 
 class RoleModel extends BaseModel({

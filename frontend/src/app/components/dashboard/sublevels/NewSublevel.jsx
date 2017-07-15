@@ -53,7 +53,7 @@ class NewSublevel extends React.Component {
   get_config(type) {
     let title_type = this.display_text()
     return {
-      "id" : "new-sublevel-form",
+      "id" : `new-${type}-form`,
       "hide_title": true,
       "elements":[
         {
@@ -153,7 +153,7 @@ class NewSublevel extends React.Component {
                 <Link to={this.index_link(this.props.organisation.slug)} className="btn btn-success m2r"><i className="fa fa-users"></i>{this.display_text(true)}</Link>
               </div>
             </div>
-            <MainFormContainer form_config_key={this.get_config()["id"]} form_state_key={this.get_config()["id"]}/>
+            <MainFormContainer form_config_key={this.get_config(this.props.type)["id"]} form_state_key={this.get_config(this.props.type)["id"]}/>
           </div>
         </div>
       );

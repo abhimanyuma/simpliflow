@@ -12,7 +12,7 @@ export const roles = function(state: Object = new RoleCollection({}), action: Ob
   let org_slug = null
   let model = null
 
-  if (action.team_slug) {
+  if (action.role_slug) {
     role_slug = action.role_slug
   }
    if (action.org_slug) {

@@ -26,8 +26,13 @@ class Api::V1::PermissionsController < ApplicationController
 
     end
 
-    if perm_params[:team_id]
+    if params[:team_id]
       team = Team.find_by(id: params[:team_id]) || Team.find_by(slug: params[:team_id])
+
+      unless team
+        render json: {status: false, errors: {"global": ["No such team"]}}, status: 400
+        return
+      end
 
       unless team.modifiable?(current_user)
         render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
@@ -37,7 +42,12 @@ class Api::V1::PermissionsController < ApplicationController
       valid = true
       entity = team
     elsif params[:role_id]
-      role = Role.find_by(id: params[:team_id]) || Role.find_by(slug: params[:team_id])
+      role = Role.find_by(id: params[:role_id]) || Role.find_by(slug: params[:role_id])
+
+      unless role
+        render json: {status: false, errors: {"global": ["No such role"]}}, status: 400
+        return
+      end
 
       unless role.modifiable?(current_user)
         render json: {status: false, errors: {"global": ["User is not allowed to modify this"]}}, status: 401
@@ -54,7 +64,7 @@ class Api::V1::PermissionsController < ApplicationController
 
       if response
         members = entity.members
-        render json: {status: true, data: members}
+        render json: {status: true, data: members, entity: entity.class.to_s}
       else
         render json: {status: false, errors: {global: entity.errors.full_messages}}, status: 400
       end
@@ -103,7 +113,7 @@ class Api::V1::PermissionsController < ApplicationController
   def update
 
     entity = nil
-    if perm_params[:team_id]
+    if params[:team_id]
       entity = Team.find_by(id: params[:team_id]) || Team.find_by(slug: params[:team_id])
     elsif params[:role_id]
       entity = Role.find_by(id: params[:role_id]) || Role.find_by(slug: params[:role_id])
