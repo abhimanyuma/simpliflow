@@ -72,9 +72,9 @@ export function getOrganisationRoles(org_slug: string): Function {
 
 }
 
-export function getRoles(org_slug: string, role_slug: string): Function {
+export function getRole(org_slug: string, role_slug: string): Function {
   return function(dispatch) {
-    let url = `/organisations/${org_slug}/role/${role_slug}`;
+    let url = `/organisations/${org_slug}/roles/${role_slug}`;
     let success_cb = (data) => {
       dispatch(setRole(data));
     }

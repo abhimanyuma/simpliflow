@@ -16,7 +16,9 @@ let OrganisationSublevelContainer  = connect(
     let response = {"profile": state.profile}
 
     let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
-    let type = ownProps.elem || ownProps.routeParams.elem
+    let type = ownProps.type || ownProps.route.type
+
+    console.log(type)
 
     if (org_slug) {
       response["org_slug"] = org_slug
@@ -42,7 +44,7 @@ let OrganisationSublevelContainer  = connect(
       get_sublevels: () => {
         let org_slug = ownProps.org_slug || ownProps.routeParams.org_slug
         dispatch(getOrganisation(org_slug))
-        let type = ownProps.elem || ownProps.routeParams.elem
+        let type = ownProps.type || ownProps.route.type
 
         if (type == "teams") {
           dispatch(getOrganisationTeams(org_slug))
