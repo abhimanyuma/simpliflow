@@ -122,14 +122,14 @@ export function updateTeam(team, data): Function {
 
 }
 
-export function deleteTeam(org_slug: string, team_slug: string, redirect_url: string): Function {
+export function deleteTeam(org_slug: string, team_slug: string, redirect): Function {
   return function(dispatch) {
     dispatch(setLoadingModel(org_slug, team_slug))
     let url = `/organisations/${org_slug}/teams/${team_slug}`;
     let success_cb = (data) => {
       dispatch(removeTeam(org_slug, team_slug));
-      if (redirect_url !== null) {
-        dispatch(push(redirect_url))
+      if (redirect !== null) {
+        dispatch(push(redirect(org_slug)))
       }
     }
     let error_cb = (errors) => {

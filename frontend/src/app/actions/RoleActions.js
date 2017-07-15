@@ -114,14 +114,14 @@ export function updateRole(role, data): Function {
 
 }
 
-export function deleteRole(org_slug: string, role_slug: string, redirect_url: string): Function {
+export function deleteRole(org_slug: string, role_slug: string, redirect): Function {
   return function(dispatch) {
     dispatch(setLoadingModel(org_slug, role_slug))
     let url = `/organisations/${org_slug}/roles/${role_slug}`;
     let success_cb = (data) => {
       dispatch(removeRole(org_slug, role_slug));
-      if (redirect_url !== null) {
-        dispatch(push(redirect_url))
+      if (redirect !== null) {
+        dispatch(push(redirect(org_slug)))
       }
     }
     let error_cb = (errors) => {
