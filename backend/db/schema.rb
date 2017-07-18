@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170716132059) do
+ActiveRecord::Schema.define(version: 20170718172738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "components", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.boolean  "as_file"
+    t.string   "object_name"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["name"], name: "index_components_on_name", using: :btree
+    t.index ["object_name"], name: "index_components_on_object_name", using: :btree
+  end
+
+  create_table "form_elements", force: :cascade do |t|
+    t.string   "title"
+    t.text     "content"
+    t.string   "sub_title"
+    t.jsonb    "variable_mapping"
+    t.integer  "order_no"
+    t.integer  "state"
+    t.jsonb    "configuration_mapping"
+    t.integer  "screen_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.index ["screen_id"], name: "index_form_elements_on_screen_id", using: :btree
+  end
 
   create_table "forms", force: :cascade do |t|
     t.string   "title"
@@ -60,6 +85,16 @@ ActiveRecord::Schema.define(version: 20170716132059) do
     t.index ["name"], name: "index_roles_on_name", using: :btree
     t.index ["organisation_id"], name: "index_roles_on_organisation_id", using: :btree
     t.index ["slug"], name: "index_roles_on_slug", unique: true, using: :btree
+  end
+
+  create_table "screens", force: :cascade do |t|
+    t.string   "title"
+    t.string   "sub_title"
+    t.text     "content"
+    t.integer  "form_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["form_id"], name: "index_screens_on_form_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
