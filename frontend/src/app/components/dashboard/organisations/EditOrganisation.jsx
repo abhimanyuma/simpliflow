@@ -114,6 +114,14 @@ class EditOrganisation extends React.Component {
           ]
         },
         {
+          "key": "logo",
+          "order": 4,
+          "name": "logo",
+          "label": "Logo",
+          "type": "file",
+          "variable": ["logo"]
+        },
+        {
           "key": "members",
           "order": 5,
           "name": "members",

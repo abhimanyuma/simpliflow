@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721095750) do
+ActiveRecord::Schema.define(version: 20170721234355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,19 @@ ActiveRecord::Schema.define(version: 20170721095750) do
     t.jsonb    "variables"
     t.index ["name"], name: "index_components_on_name", using: :btree
     t.index ["object_name"], name: "index_components_on_object_name", using: :btree
+  end
+
+  create_table "file_stores", force: :cascade do |t|
+    t.integer  "state"
+    t.string   "hash"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "store_file_name"
+    t.string   "store_content_type"
+    t.integer  "store_file_size"
+    t.datetime "store_updated_at"
+    t.index ["hash"], name: "index_file_stores_on_hash", using: :btree
+    t.index ["store_file_name"], name: "index_file_stores_on_store_file_name", using: :btree
   end
 
   create_table "form_elements", force: :cascade do |t|
@@ -59,6 +72,7 @@ ActiveRecord::Schema.define(version: 20170721095750) do
     t.string   "tagline"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "logo_id"
     t.index ["slug"], name: "index_organisations_on_slug", unique: true, using: :btree
   end
 

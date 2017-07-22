@@ -57,3 +57,5 @@ gem 'devise_token_auth', :git => 'https://github.com/lynndylanhurley/devise_toke
 gem 'rack-cors'
 
 gem 'pundit'
+
+gem "paperclip", "~> 5.0.0"
