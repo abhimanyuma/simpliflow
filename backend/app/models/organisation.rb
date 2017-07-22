@@ -4,6 +4,8 @@ class Organisation < ApplicationRecord
 
   include Membership
 
+  include FileOperations
+
   has_many :permissions, as: :resource, dependent: :destroy
 
   has_many :users, :through => :permissions, :source => :actor,

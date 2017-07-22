@@ -1,4 +1,4 @@
 class FileStore < ApplicationRecord
-    has_attached_file :store
+    has_attached_file :attached_file
 
 end

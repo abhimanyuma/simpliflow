@@ -9,7 +9,8 @@ class OrganisationModel extends BaseModel({
   bio: "",
   tagline: "",
   user_level: "",
-  members: []
+  members: [],
+  logo: null,
 }){
 
   organisation_id() {

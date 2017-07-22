@@ -14,7 +14,7 @@ export default class FileComponentContainer extends React.Component {
   update_state(e) {
     let update_value = {};
     let update_key = this.props.config.variable[0];
-    update_value[update_key] = this.refs.file.value;
+    update_value[update_key] = this.refs.file.files[0];
     this.props.update_state(update_value);
   }
 
@@ -63,7 +63,7 @@ export default class FileComponentContainer extends React.Component {
       <div className={"form-group row " + error_class}>
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <input type="file" className="form-control" ref="file" placeholder={this.props.config["placeholder"] || ""} onInput={e=>{this.on_change(e)}} disabled={disabled}/>
+          <input type="file" className="form-control" ref="file" placeholder={this.props.config["placeholder"] || ""} onChange={e=>{this.on_change(e)}} disabled={disabled}/>
           {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
           <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>

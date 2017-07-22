@@ -29,15 +29,15 @@ ActiveRecord::Schema.define(version: 20170721234355) do
 
   create_table "file_stores", force: :cascade do |t|
     t.integer  "state"
-    t.string   "hash"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.string   "store_file_name"
-    t.string   "store_content_type"
-    t.integer  "store_file_size"
-    t.datetime "store_updated_at"
-    t.index ["hash"], name: "index_file_stores_on_hash", using: :btree
-    t.index ["store_file_name"], name: "index_file_stores_on_store_file_name", using: :btree
+    t.string   "file_hash"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.string   "attached_file_file_name"
+    t.string   "attached_file_content_type"
+    t.integer  "attached_file_file_size"
+    t.datetime "attached_file_updated_at"
+    t.index ["attached_file_file_name"], name: "index_file_stores_on_attached_file_file_name", using: :btree
+    t.index ["file_hash"], name: "index_file_stores_on_file_hash", using: :btree
   end
 
   create_table "form_elements", force: :cascade do |t|

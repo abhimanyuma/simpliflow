@@ -147,6 +147,7 @@ class EditOrganisation extends React.Component {
             data['slug'] = form_state.get_data("slug");
             data['tagline'] = form_state.get_data("tagline");
             data['bio'] = form_state.get_data("bio")
+            data['logo'] = form_state.get_data("logo")
             dispatch(updateOrganisation(org,data))
           }
         }

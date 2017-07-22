@@ -66,7 +66,12 @@ class Api::V1::OrganisationsController < ApplicationController
       if organisation.modifiable?(current_user)
         organisation.assign_attributes(org_params)
 
-        if organisation.save
+        file_failure = false
+        if org_file_params[:logo]
+          file_failure = !organisation.upload_file(org_file_params,:logo)
+        end
+
+        if organisation.save and !file_failure
           render json: {status: true, data: organisation}, status: 200
         else
           render json: { status: false, errors: organisation.errors }, status: 400
@@ -103,6 +108,12 @@ class Api::V1::OrganisationsController < ApplicationController
     def org_params
       params.require(:organisation).permit(
         :name, :slug, :tagline, :bio
+      )
+    end
+
+    def org_file_params
+      params.require(:organisation).permit(
+        :logo
       )
     end
 
