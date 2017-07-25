@@ -28,7 +28,7 @@ module Espresso
     config.api_only = true
     config.middleware.use ActionDispatch::Flash
 
-    config.autoload_paths += %W(\#{config.root}/lib)
+    config.autoload_paths += %W(#{config.root}/lib)
 
     config.generators do |g|
       g.test_framework :rspec, fixture: true
@@ -40,12 +40,7 @@ module Espresso
       g.helper = false
     end
 
-    config.middleware.insert_before 0, "Rack::Cors" do
-      allow do
-        origins 'flox.dev'
-        resource '*', :headers => :any, :methods => :any
-      end
-    end
+    config.middleware.insert_before Rack::Runtime, 'BadMultipartFormDataSanitizer'
 
   end
 end

@@ -61,7 +61,7 @@ class Api::V1::OrganisationsController < ApplicationController
     organisation = Organisation.find_by_slug(params[:id])
 
     unless !organisation
-      render json: {status: false, errors:{"global": "No such organisation"}, org_file_params: org_file_params.keys}, status: 404
+      render json: {status: false, errors:{"global": "No such organisation"}}, status: 404
       return
    end
 
@@ -69,6 +69,7 @@ class Api::V1::OrganisationsController < ApplicationController
       render json: {status: false, errors: {"global": "User not part of organsation"}}, status: 401
       return
     end
+
 
     unless org_file_params[:logo]
       organisation.assign_attributes(org_params)
@@ -83,6 +84,7 @@ class Api::V1::OrganisationsController < ApplicationController
   end
 
   def destroy
+
     organisation = Organisation.find_by_slug(params[:id])
 
     if !organisation
@@ -113,7 +115,7 @@ class Api::V1::OrganisationsController < ApplicationController
 
 
     def org_file_params
-      params.permit!
+      params.require(:logo)
     end
 
 end

@@ -87,6 +87,7 @@ GEM
     mimemagic (0.3.2)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
+    multipart-parser (0.1.1)
     nio4r (1.2.1)
     nokogiri (1.6.8)
       mini_portile2 (~> 2.1.0)
@@ -188,6 +189,7 @@ DEPENDENCIES
   factory_girl_rails
   ffaker
   listen (~> 3.0.5)
+  multipart-parser
   omniauth (>= 1.0.0)
   paperclip (~> 5.0.0)
   pg
