@@ -1,6 +1,8 @@
 class Api::V1::OrganisationsController < ApplicationController
 
   respond_to :json
+  respond_to :form_data, only: :update
+  include Filtering
 
   def index
 
@@ -58,28 +60,26 @@ class Api::V1::OrganisationsController < ApplicationController
   def update
     organisation = Organisation.find_by_slug(params[:id])
 
-    if !organisation
-      render json: {status: false, errors:{"global": "No such organisation"}}, status: 404
-    elsif !current_user
-      render json: {status: false, errors: {"global": "User must be signed in"}}, status: 401
-    else
-      if organisation.modifiable?(current_user)
-        organisation.assign_attributes(org_params)
+    unless !organisation
+      render json: {status: false, errors:{"global": "No such organisation"}, org_file_params: org_file_params.keys}, status: 404
+      return
+   end
 
-        file_failure = false
-        if org_file_params[:logo]
-          file_failure = !organisation.upload_file(org_file_params,:logo)
-        end
-
-        if organisation.save and !file_failure
-          render json: {status: true, data: organisation}, status: 200
-        else
-          render json: { status: false, errors: organisation.errors }, status: 400
-        end
-      else
-        render json: {status: false, errors: {"global": "User not part of organsation"}}, status: 401
-      end
+    unless organisation.modifiable?(current_user)
+      render json: {status: false, errors: {"global": "User not part of organsation"}}, status: 401
+      return
     end
+
+    unless org_file_params[:logo]
+      organisation.assign_attributes(org_params)
+    end
+
+    if organisation.save
+      render json: {status: true, data: organisation}, status: 200
+    else
+      render json: { status: false, errors: organisation.errors }, status: 400
+    end
+
   end
 
   def destroy
@@ -111,10 +111,9 @@ class Api::V1::OrganisationsController < ApplicationController
       )
     end
 
+
     def org_file_params
-      params.require(:organisation).permit(
-        :logo
-      )
+      params.permit!
     end
 
 end

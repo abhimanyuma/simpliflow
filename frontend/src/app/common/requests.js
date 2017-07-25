@@ -1,4 +1,4 @@
-// TODO: Change from object type
+ // TODO: Change from object type
 import { get_full_url, add_nonce } from './utils.js';
 import { get_auth_token } from './authentication.js';
 
@@ -35,6 +35,7 @@ function http_code_kind(code: number | string):string  {
   }
 }
 
+
 function ajax_request(method: string, url: string, options: Object): void {
   let full_url: string = get_full_url(url);
   full_url = add_nonce(full_url)
@@ -55,10 +56,24 @@ function ajax_request(method: string, url: string, options: Object): void {
       options.error_cb(errors, status, http_status);
     };
   })
-  req.open(method, full_url);
+
+
+
+  if (method == "FILE_PUT") {
+    req.open("PUT", full_url)
+    req.setRequestHeader("Content-Type", "multipart/form-data;charset=UTF-8");
+  } else {
+    req.open(method, full_url);
+    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+  }
+
   req.setRequestHeader("Authorization", get_auth_token());
-  req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-  if(options.data) {
+
+  if (method == "FILE_PUT") {
+    let formData = new FormData();
+    formData.append(options.file_attribute, options.file)
+    req.send(formData)
+  } else if(options.data) {
     req.send(JSON.stringify(options.data));
   } else {
     req.send();
@@ -89,6 +104,16 @@ export function delete_object(url: string, success_cb: Function, error_cb: Funct
     error_cb: error_cb,
   };
   ajax_request("DELETE", url, options);
+}
+
+export function upload_file(url: string, file: Object, success_cb: Function, error_cb: Function, additional_options)  {
+  let options = {
+    success_cb: success_cb,
+    error_cb: error_cb,
+    file: file,
+    file_attribute: additional_options.file_attribute
+  };
+  ajax_request("FILE_PUT", url, options);
 }
 
 export function update_object(url: string, data: Object, success_cb: Function, error_cb: Function) {

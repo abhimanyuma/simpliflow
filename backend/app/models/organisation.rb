@@ -18,6 +18,10 @@ class Organisation < ApplicationRecord
   has_many :teams
   has_many :roles
 
+  def file_attributes
+    return [:logo]
+  end
+
   def self.get_user_organisations(actor_id, actor_type = "User")
     org_permissions =  Permission.joins("
       LEFT JOIN organisations ON

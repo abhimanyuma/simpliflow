@@ -1,74 +1,34 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { debounce } from '../../../common/common.js';
+import { connect } from 'react-redux';
+import FileComponent from './FileComponent.jsx';
+import { List } from 'immutable';
 
-export default class FileComponentContainer extends React.Component {
+let FileComponentContainer  = connect(
+  function mapStateToProps(state, ownProps) {
 
-  constructor(props: any) {
-    super(props);
+    let props = {}
 
-    this.debounced_call = debounce((e) => {this.update_state(e)}, 100)
-  }
+    props["config"] = ownProps.config || {};
+    props["errors"] = ownProps.errors || {};
+    props["substate"] = ownProps.substate || {};
 
+    props["update_key"] = ownProps.config.variable[0];
+    props["update_state"] = ownProps.update_state
+    return(props);
+  },
+  function mapDispatchToProps(dispatch: Dispatch, ownProps) {
 
-  update_state(e) {
-    let update_value = {};
-    let update_key = this.props.config.variable[0];
-    update_value[update_key] = this.refs.file.files[0];
-    this.props.update_state(update_value);
-  }
+    let dispatch_functions = {}
+    let upload_action = ownProps.config.upload_action
 
-  on_change(e) {
-    this.debounced_call(e);
-  }
-
-  has_errors() {
-     if (this.props.errors.length && this.props.errors.length > 0) {
-       return true
-     } else {
-       return false
-     }
-  }
-
-  list_errors() {
-    return(this.props.errors.join(","));
-  }
-
-  is_disabled() {
-    return(this.props.config.disabled)
-  }
-
-  get_value() {
-    if (this.props.config["variable"] && this.props.config["variable"][0]) {
-      let key = this.props.config["variable"][0]
-      if (this.props.substate && this.props.substate[key]) {
-        return(this.props.substate[key])
-      }
-    }
-    return("");
-
-  }
-
-  render() {
-    let error_class = null
-    if (this.has_errors()) {
-      error_class = "has-danger"
-    }
-    let disabled = ""
-    if (this.is_disabled()) {
-      disabled = "disabled"
+    dispatch_functions["upload_file"] = (file, file_attribute) => {
+      let upload_object = ownProps.config.get_upload_object()
+      dispatch(upload_action(upload_object, file, file_attribute))
     }
 
-    return(
-      <div className={"form-group row " + error_class}>
-        <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
-        <div className="col-sm-8">
-          <input type="file" className="form-control" ref="file" placeholder={this.props.config["placeholder"] || ""} onChange={e=>{this.on_change(e)}} disabled={disabled}/>
-          {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
-          <small className="form-text text-muted">{this.props.config["help_text"]}</small>
-        </div>
-      </div>
-    );
-  }
 
-}
+    return dispatch_functions;
+  }) (FileComponent)
+
+export default FileComponentContainer;

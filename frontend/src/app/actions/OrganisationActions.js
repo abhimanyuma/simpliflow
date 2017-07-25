@@ -98,3 +98,10 @@ export function updateOrganisation(org, data): Function {
 
 }
 
+export function uploadFileOrganisation(org, file, file_attribute): Function {
+  return function(dispatch) {
+    org.update(file, dispatch, true, {"file_attribute": file_attribute}) //is_file = true
+  }
+
+}
+

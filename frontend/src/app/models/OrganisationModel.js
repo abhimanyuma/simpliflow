@@ -1,6 +1,6 @@
 // @flow
 import BaseModel from './BaseModel.js';
-import { fetch_object, create_object, delete_object, update_object } from '../common/common.js'
+import { fetch_object, create_object, delete_object, update_object, upload_file } from '../common/common.js'
 import { setLoadingModel, setLoadedModel, setOrganisation, setOrganisationErrors } from '../actions/OrganisationActions.js';
 
 class OrganisationModel extends BaseModel({
@@ -48,11 +48,13 @@ class OrganisationModel extends BaseModel({
     return `/organisations/${this.slug}`;
   }
 
-  update(data, dispatch) {
+
+  update(data, dispatch, is_file = false, options = {}) {
     let slug = this.slug
     dispatch(setLoadingModel(slug))
 
     let url = this.url()
+
     let success_cb = (data) => {
       dispatch(setOrganisation(data))
     }
@@ -62,14 +64,23 @@ class OrganisationModel extends BaseModel({
       dispatch(setOrganisationErrors(slug, errors))
     }
 
-    data = {
-      "organisation": data
+    //Rails 5 likes data within model variable
+    if(!is_file) {
+      data = {
+        "organisation": data
+      }
     }
 
-    update_object(url, data, success_cb, error_cb);
+    if (!is_file) {
+      update_object(url, data, success_cb, error_cb);
+    } else {
+      upload_file(url, data, success_cb, error_cb, options);
+    }
   }
 
 }
+
+
 
 export default OrganisationModel;
 
