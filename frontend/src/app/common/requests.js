@@ -61,7 +61,6 @@ function ajax_request(method: string, url: string, options: Object): void {
 
   if (method == "FILE_PUT") {
     req.open("PUT", full_url)
-    req.setRequestHeader("Content-Type", "multipart/form-data");
     req.setRequestHeader("X-File-Name", options.file.name);
     req.setRequestHeader("X-File-Size", options.file.size);
     req.setRequestHeader("X-File-Type", options.file.type);

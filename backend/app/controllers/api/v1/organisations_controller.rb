@@ -60,7 +60,7 @@ class Api::V1::OrganisationsController < ApplicationController
   def update
     organisation = Organisation.find_by_slug(params[:id])
 
-    unless !organisation
+    unless organisation
       render json: {status: false, errors:{"global": "No such organisation"}}, status: 404
       return
    end
@@ -70,13 +70,17 @@ class Api::V1::OrganisationsController < ApplicationController
       return
     end
 
+    upload_failed = false
 
-    unless org_file_params[:logo]
+    if org_file_params[:logo]
+      org_file_params[:logo].rewind
+      uploaded_failed = !organisation.upload_file(org_file_params[:logo], :logo)
+    else
       organisation.assign_attributes(org_params)
     end
 
-    if organisation.save
-      render json: {status: true, data: organisation}, status: 200
+    if organisation.save and !upload_failed
+      render json: {status: true, data: organisation, maximal: org_file_params[:logo].class.to_s}, status: 200
     else
       render json: { status: false, errors: organisation.errors }, status: 400
     end
@@ -115,7 +119,7 @@ class Api::V1::OrganisationsController < ApplicationController
 
 
     def org_file_params
-      params.require(:logo)
+      params.permit(:logo)
     end
 
 end

@@ -33,4 +33,8 @@ Rails.application.routes.draw do
 
   end
 
+  namespace :api do
+    resources :files, only: [:create]
+  end
+
 end

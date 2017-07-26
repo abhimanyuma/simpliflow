@@ -35,4 +35,6 @@ backend/.byebug_history
 backend/.idea
 backend/shared
 
+backend/public/system
+
 .idea

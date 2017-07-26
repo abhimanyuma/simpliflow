@@ -11,7 +11,7 @@ class Organisation < ApplicationRecord
   has_many :users, :through => :permissions, :source => :actor,
            :source_type => 'User'
 
-  belongs_to :logo, class_name: 'FileStore', primary_key: 'logo_id'
+  belongs_to :logo, class_name: 'FileStore'
 
   before_validation :generate_org_slug, on: :create
 

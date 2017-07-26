@@ -2,13 +2,15 @@ module FileOperations
   extend ActiveSupport::Concern
 
 
-  def upload_file(file, field = :file_store)
+  def upload_file(att_file, field = :file_store)
+    print(att_file)
+    fs = FileStore.new()
+    fs.attached_file = att_file
+    fs.save!
 
-    fs = FileStore.create({attached_file: file})
+    self["#{field}_id".to_sym] = fs.id
 
-    self[field] = fs
-
-    return self[field].present?
+    return self["#{field}_id".to_sym].present?
 
   end
 
