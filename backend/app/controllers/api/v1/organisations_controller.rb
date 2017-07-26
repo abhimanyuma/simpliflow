@@ -80,11 +80,7 @@ class Api::V1::OrganisationsController < ApplicationController
     end
 
     if organisation.save and !upload_failed
-      maximal = org_file_params.class.to_s
-      if org_file_params[:logo].class.to_s == "String"
-        maximal = org_file_params[:logo]
-      end
-      render json: {status: true, data: organisation, maximal: maximal }, status: 200
+      render json: {status: true, data: organisation}, status: 200
     else
       render json: { status: false, errors: organisation.errors }, status: 400
     end

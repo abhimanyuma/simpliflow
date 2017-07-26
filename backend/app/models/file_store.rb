@@ -2,10 +2,19 @@ class FileStore < ApplicationRecord
   has_attached_file :attached_file
   do_not_validate_attachment_file_type :attached_file
 
-  before_save :update_hash
+  after_create :update_hash_with_save
+  before_update :update_hash
 
   def update_hash
-    self.file_hash = Digest::SHA256.file(self.attached_file.path).hexdigest
+    updated_file = self.attached_file.queued_for_write[:original]
+    if updated_file.present? and updated_file.path.present?
+      self.file_hash = Digest::SHA256.file(updated_file.path).hexdigest
+    end
+  end
+
+  def update_hash_with_save
+    self.update_hash
+    self.save!
   end
 
   def nested_format
