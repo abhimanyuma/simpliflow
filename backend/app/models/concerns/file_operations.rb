@@ -3,7 +3,6 @@ module FileOperations
 
 
   def upload_file(att_file, field = :file_store)
-    print(att_file)
     fs = FileStore.new()
     fs.attached_file = att_file
     fs.save!
@@ -11,6 +10,15 @@ module FileOperations
     self["#{field}_id".to_sym] = fs.id
 
     return self["#{field}_id".to_sym].present?
+
+  end
+
+  def get_file_attributes(field = :file_store)
+    if self.respond_to?(field)
+      attributes = self.method(field).call.nested_format
+    else
+      nil
+    end
 
   end
 

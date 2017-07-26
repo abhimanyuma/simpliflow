@@ -71,8 +71,15 @@ class Organisation < ApplicationRecord
     current_options[:methods] ||= []
     current_options[:methods] = current_options[:methods] + [:members]
 
-    super(current_options)
+    response  = super(current_options)
+    response[:logo] = self.logo_attributes
 
+    return response
+
+  end
+
+  def logo_attributes
+    return(self.get_file_attributes(:logo))
   end
 
   def generate_org_slug

@@ -32,9 +32,5 @@ Rails.application.routes.draw do
     end
 
   end
-
-  namespace :api do
-    resources :files, only: [:create]
-  end
-
+  devise_for :users
 end
