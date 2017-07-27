@@ -23,7 +23,8 @@ class FileStore < ApplicationRecord
       size: self.attached_file_file_size,
       hash: self.file_hash,
       url: self.attached_file.url,
-      content_type: self.attached_file_content_type
+      content_type: self.attached_file_content_type,
+      source: "ONLINE"
     }
   end
 end

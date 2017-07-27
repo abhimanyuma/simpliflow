@@ -12,6 +12,7 @@ export default class FileComponentContainer extends React.Component {
   on_change(e) {
     let update_value = {};
     update_value[this.props.update_key] = this.refs.file.files[0];
+    update_value[this.props.update_key]["source"] = "LOCAL"
     this.props.update_state(update_value);
   }
 
@@ -67,7 +68,6 @@ export default class FileComponentContainer extends React.Component {
       <div className="col-sm-8">
         <div className="flex-row">
           <input type="file" className="form-control" ref="file" placeholder={this.props.config["placeholder"] || ""} onChange={e=>{this.on_change(e)}} disabled={disabled}/>
-          <button className="btn btn-primary m2l" onClick={(e)=>{this.on_upload_button_click(e)}}>Upload File</button>
           {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
           <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>
@@ -82,7 +82,8 @@ export default class FileComponentContainer extends React.Component {
         <div className="col-sm-8">
           <span className="form-control d-flex justify-content-between">
             <a target="_blank" href={public_link(file_details["url"])}>{file_details["name"]} {human_file_size(file_details["size"])}</a>
-            <button className="btn btn-primary btn-sm " onClick={(e)=>{this.on_delete_button_click(e)}}>Remove File</button>
+            {file_details["source"] && (file_details["source"] == "LOCAL") && <button className="btn btn-primary btn-sm " onClick={(e)=>{this.on_upload_button_click(e)}}>Upload File</button>}
+            {file_details["source"] && (file_details["source"] == "ONLINE") && <button className="btn btn-primary btn-sm " onClick={(e)=>{this.on_delete_button_click(e)}}>Remove File</button>}
           </span>
         </div>
       )
