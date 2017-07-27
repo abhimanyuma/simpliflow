@@ -1,7 +1,0 @@
-files-s3:
-  production:
-
-  dev:
-    ami_id: AKIAJBOF7O7YAS4SJJBA
-    ami_secret: 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
-

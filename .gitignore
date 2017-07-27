@@ -37,4 +37,6 @@ backend/shared
 
 backend/public/system
 
+backend/config/paperclip.yml
+
 .idea

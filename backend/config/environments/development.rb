@@ -51,6 +51,14 @@ Rails.application.configure do
     end
   end
 
+  config.paperclip_defaults = {
+    storage: :s3,
+    bucket: 'simpliflow-file-repo-dev',
+    s3_permissions: :private,
+    s3_credentials: Rails.root.join('config','paperclip.yml'),
+    s3_region: 'us-east-1'
+  }
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 

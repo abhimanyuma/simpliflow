@@ -92,6 +92,6 @@ export function human_file_size(bytes, si = false) {
     return bytes.toFixed(1)+' '+units[u];
 }
 
-export function public_link (link) {
+export function public_link(link) {
   return link
 }
