@@ -21,10 +21,16 @@ let FileComponentContainer  = connect(
 
     let dispatch_functions = {}
     let upload_action = ownProps.config.upload_action
+    let remove_action = ownProps.config.remove_action
 
     dispatch_functions["upload_file"] = (file, file_attribute) => {
       let upload_object = ownProps.config.get_upload_object()
       dispatch(upload_action(upload_object, file, file_attribute))
+    }
+
+    dispatch_functions["remove_file"] = (file_attribute) => {
+      let remove_object = ownProps.config.get_upload_object()
+      dispatch(remove_action(remove_object, file_attribute))
     }
 
 

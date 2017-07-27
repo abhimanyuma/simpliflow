@@ -48,6 +48,10 @@ class OrganisationModel extends BaseModel({
     return `/organisations/${this.slug}`;
   }
 
+  file_url(file_attribute) {
+    return `${this.url()}/${file_attribute}`;
+  }
+
 
   update(data, dispatch, is_file = false, options = {}) {
     let slug = this.slug
@@ -76,6 +80,24 @@ class OrganisationModel extends BaseModel({
     } else {
       upload_file(url, data, success_cb, error_cb, options);
     }
+  }
+
+  remove_file(file_attribute, dispatch) {
+    let slug = this.slug
+    dispatch(setLoadingModel(slug))
+
+    let url = this.file_url(file_attribute)
+
+    let success_cb = (data) => {
+      dispatch(setOrganisation(data))
+    }
+
+    let error_cb = (errors) => {
+      dispatch(setLoadedModel(slug))
+      dispatch(setOrganisationErrors(slug, errors))
+    }
+
+    delete_object(url, success_cb, error_cb);
   }
 
 }

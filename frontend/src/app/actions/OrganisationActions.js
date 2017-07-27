@@ -105,3 +105,10 @@ export function uploadFileOrganisation(org, file, file_attribute): Function {
 
 }
 
+export function removeFileOrganisation(org, file_attribute): Function {
+  return function(dispatch) {
+    org.remove_file(file_attribute, dispatch) //is_file = true
+  }
+
+}
+

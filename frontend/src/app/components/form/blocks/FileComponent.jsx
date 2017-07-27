@@ -39,7 +39,7 @@ export default class FileComponentContainer extends React.Component {
 
   on_delete_button_click(e) {
     e.preventDefault()
-    console.log("Macha")
+    this.props.remove_file(this.props.update_key)
   }
 
   get_value() {

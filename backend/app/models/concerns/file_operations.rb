@@ -22,5 +22,24 @@ module FileOperations
 
   end
 
+  def deattach_file(field = :file_store)
+    return false unless self.respond_to?(field)
+    fs = self.method(field).call
+    return false unless fs.present?
+    deleted_fs = fs.destroy
+    self["#{field}_id".to_sym] = nil
+    self.save
+    return (self.save and deleted_fs.present?)
+
+  end
+
+  def file_exists?(field = :file_store)
+    return false unless self.respond_to?(field)
+    fs = self.method(field).call
+    return false unless fs.present?
+    return true
+
+  end
+
 
 end

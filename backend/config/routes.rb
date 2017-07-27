@@ -25,6 +25,8 @@ Rails.application.routes.draw do
         resources :roles do
           resources :permissions, only: [:create, :destroy, :update]
         end
+
+        delete :logo, on: :member, to: 'organisations#destroy_logo'
       end
 
       resources :sessions, only: [:create, :destroy]

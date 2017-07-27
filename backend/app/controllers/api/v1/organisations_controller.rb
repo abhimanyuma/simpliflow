@@ -87,6 +87,10 @@ class Api::V1::OrganisationsController < ApplicationController
 
   end
 
+  def destroy_logo
+    destroy_file(:logo)
+  end
+
   def destroy
 
     organisation = Organisation.find_by_slug(params[:id])
@@ -120,6 +124,31 @@ class Api::V1::OrganisationsController < ApplicationController
 
     def org_file_params
       params.permit(:logo)
+    end
+
+    def destroy_file(file_attribute)
+      organisation = Organisation.find_by_slug(params[:id])
+
+      unless organisation
+        render json: {status: false, errors:{"global": "No such organisation"}}, status: 404
+        return
+      end
+
+      unless organisation.modifiable?(current_user)
+        render json: {status: false, errors: {"global": "User not part of organsation"}}, status: 401
+        return
+      end
+
+      unless organisation.file_exists?(file_attribute)
+        render json: {status: false, errors: {"global": "There exists no file to remove"}}, status: 404
+        return
+      end
+
+      if organisation.deattach_file(file_attribute)
+        render json: {status: true, data: organisation}, status: 200
+      else
+        render json: { status: false, errors: organisation.errors }, status: 400
+      end
     end
 
 end

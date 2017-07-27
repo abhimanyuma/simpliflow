@@ -7,7 +7,7 @@ import LoadingFormContainer from '../../common/LoadingFormContainer.jsx';
 import MainFormContainer from '../../form/MainFormContainer.jsx'
 
 
-import { updateOrganisation, uploadFileOrganisation } from '../../../actions/OrganisationActions.js';
+import { updateOrganisation, uploadFileOrganisation, removeFileOrganisation } from '../../../actions/OrganisationActions.js';
 
 import * as URL from '../../../common/url.js';
 
@@ -121,6 +121,7 @@ class EditOrganisation extends React.Component {
           "type": "file",
           "variable": ["logo"],
           "upload_action": uploadFileOrganisation,
+          "remove_action": removeFileOrganisation,
           "get_upload_object": () => {
             return this.props.organisation
           }
