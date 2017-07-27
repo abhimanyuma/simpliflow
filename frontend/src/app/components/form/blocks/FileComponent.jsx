@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { debounce } from '../../../common/common.js';
+import { debounce, human_file_size, public_link } from '../../../common/common.js';
 
 export default class FileComponentContainer extends React.Component {
 
@@ -37,6 +37,11 @@ export default class FileComponentContainer extends React.Component {
     this.props.upload_file(upload_file, this.props.update_key)
   }
 
+  on_delete_button_click(e) {
+    e.preventDefault()
+    console.log("Macha")
+  }
+
   get_value() {
     if (this.props.config["variable"] && this.props.config["variable"][0]) {
       let key = this.props.update_key
@@ -58,17 +63,36 @@ export default class FileComponentContainer extends React.Component {
       disabled = "disabled"
     }
 
-    return(
-      <div className={"form-group row " + error_class}>
-        <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
-        <div className="col-sm-8">
-          <div className="flex-row">
-            <input type="file" className="form-control" ref="file" placeholder={this.props.config["placeholder"] || ""} onChange={e=>{this.on_change(e)}} disabled={disabled}/>
-            <button className="btn btn-primary m2l" onClick={(e)=>{this.on_upload_button_click(e)}}>Upload File</button>
-          </div>
+    let input_component =  (
+      <div className="col-sm-8">
+        <div className="flex-row">
+          <input type="file" className="form-control" ref="file" placeholder={this.props.config["placeholder"] || ""} onChange={e=>{this.on_change(e)}} disabled={disabled}/>
+          <button className="btn btn-primary m2l" onClick={(e)=>{this.on_upload_button_click(e)}}>Upload File</button>
           {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
           <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>
+      </div>
+    )
+
+    let display_component = null
+
+    if (this.get_value()) {
+      let file_details = this.get_value()
+      display_component = (
+        <div className="col-sm-8">
+          <span className="form-control d-flex justify-content-between">
+            <a target="_blank" href={public_link(file_details["url"])}>{file_details["name"]} {human_file_size(file_details["size"])}</a>
+            <button className="btn btn-primary btn-sm " onClick={(e)=>{this.on_delete_button_click(e)}}>Remove File</button>
+          </span>
+        </div>
+      )
+    }
+
+
+    return(
+      <div className={"form-group row " + error_class}>
+        <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
+        {display_component || input_component}
       </div>
     );
   }

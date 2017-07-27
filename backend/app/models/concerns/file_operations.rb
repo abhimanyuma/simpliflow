@@ -14,11 +14,11 @@ module FileOperations
   end
 
   def get_file_attributes(field = :file_store)
-    if self.respond_to?(field)
-      attributes = self.method(field).call.nested_format
-    else
-      nil
-    end
+
+    return nil unless self.respond_to?(field)
+    fs = self.method(field).call
+    return nil unless fs.present?
+    fs.nested_format
 
   end
 
