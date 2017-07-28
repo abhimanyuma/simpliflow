@@ -71,18 +71,28 @@ class Api::V1::OrganisationsController < ApplicationController
     end
 
     upload_failed = false
+    update_action = "update"
 
     if org_file_params[:logo]
+      update_action = "upload"
       org_file_params[:logo].rewind if org_file_params[:logo].respond_to?(:rewind)
-      uploaded_failed = !organisation.upload_file(org_file_params[:logo], :logo)
+      upload_failed = !organisation.upload_file(org_file_params[:logo], :logo)
     else
       organisation.assign_attributes(org_params)
     end
 
-    if organisation.save and !upload_failed
-      render json: {status: true, data: organisation}, status: 200
+    if update_action == "upload"
+      if upload_failed
+        render json: { status: false, errors: organisation.errors, error_empty: organisation.errors.empty? }, status: 400
+      else
+        render json: {status: true, data: organisation}, status: 200
+      end
     else
-      render json: { status: false, errors: organisation.errors }, status: 400
+      if organisation.save!
+        render json: {status: true, data: organisation}, status: 200
+      else
+        render json: { status: false, errors: organisation.errors}, status: 400
+      end
     end
 
   end

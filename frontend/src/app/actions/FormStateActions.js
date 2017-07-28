@@ -19,16 +19,21 @@ export function createNewFormState(id: ?string) {
 }
 
 export function setFormStateFromModel(id: ?string, form_config, model, reset) {
-  let els = form_config["elements"]
-  let variables = []
-  for (let el of els) {
-    if (el["variable"]) {
-      variables = variables.concat(el["variable"])
+  return function(dispatch) {
+    let els = form_config["elements"]
+    let variables = []
+    for (let el of els) {
+      if (el["variable"]) {
+        variables = variables.concat(el["variable"])
+      }
+    }
+
+    let data = model.multi_get(variables)
+    dispatch(setFormState(id, data, reset))
+    if (model.errors) {
+      dispatch(setFormStateErrors(id, model.errors))
     }
   }
-
-  let data = model.multi_get(variables)
-  return(setFormState(id, data, reset))
 }
 
 export function setFormStateFromHash(id: ?string, form_config, model_hash, reset) {

@@ -25,7 +25,7 @@ export default class FileComponentContainer extends React.Component {
   }
 
   list_errors() {
-    return(this.props.errors.join(","));
+    return(this.props.errors.join(", "));
   }
 
   is_disabled() {
@@ -68,9 +68,9 @@ export default class FileComponentContainer extends React.Component {
       <div className="col-sm-8">
         <div className="flex-row">
           <input type="file" className="form-control" ref="file" placeholder={this.props.config["placeholder"] || ""} onChange={e=>{this.on_change(e)}} disabled={disabled}/>
-          {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
-          <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>
+        {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
+        <small className="form-text text-muted">{this.props.config["help_text"]}</small>
       </div>
     )
 

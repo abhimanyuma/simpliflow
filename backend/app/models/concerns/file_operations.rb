@@ -3,6 +3,9 @@ module FileOperations
 
 
   def upload_file(att_file, field = :file_store)
+
+    file_valid = file_valid?(att_file, field)
+    return false unless file_valid
     fs = FileStore.new()
     fs.attached_file = att_file
     fs.save!
@@ -39,6 +42,11 @@ module FileOperations
     return false unless fs.present?
     return true
 
+  end
+
+  def file_valid?(att_file, field)
+    return true unless self.respond_to?("#{field}_valid?".to_sym)
+    return self.method("#{field}_valid?".to_sym).call(att_file)
   end
 
 

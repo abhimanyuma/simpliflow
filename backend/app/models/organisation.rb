@@ -18,6 +18,8 @@ class Organisation < ApplicationRecord
   has_many :teams
   has_many :roles
 
+  MAX_LOGO_SIZE = 2.megabytes
+
   def file_attributes
     return [:logo]
   end
@@ -80,6 +82,18 @@ class Organisation < ApplicationRecord
 
   def logo_attributes
     return(self.get_file_attributes(:logo))
+  end
+
+  def logo_valid?(logo_file)
+    if logo_file.size >= MAX_LOGO_SIZE
+      self.errors.add(:logo, :invalid, message: "Logo must be smaller than 2MiB.")
+    end
+
+    unless ["image/png", "image/jpg", "image/jpeg", "image/gif"].include?(logo_file.content_type)
+      self.errors.add(:logo, :invalid, message: "Logo must be GIF, PNG, JPEG or JPG")
+    end
+
+    return self.errors.empty?
   end
 
   def generate_org_slug
