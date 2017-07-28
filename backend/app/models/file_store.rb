@@ -5,6 +5,8 @@ class FileStore < ApplicationRecord
   after_create :update_hash_with_save
   before_update :update_hash
 
+  EXPIRE_TIME = 15.minutes
+
   def update_hash
     updated_file = self.attached_file.queued_for_write[:original]
     if updated_file.present? and updated_file.path.present?
@@ -22,7 +24,7 @@ class FileStore < ApplicationRecord
       name: self.attached_file_file_name,    #No, file_file is not an error
       size: self.attached_file_file_size,
       hash: self.file_hash,
-      url: self.attached_file.url,
+      url: self.attached_file.expiring_url(EXPIRE_TIME),
       content_type: self.attached_file_content_type,
       source: "ONLINE"
     }
