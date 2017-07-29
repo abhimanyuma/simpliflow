@@ -5,8 +5,6 @@ class FileStore < ApplicationRecord
   after_create :update_hash_with_save
   before_update :update_hash
 
-  before_save :custom_validator
-
   EXPIRE_TIME = 15.minutes
 
   def update_hash

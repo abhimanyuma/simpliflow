@@ -12,7 +12,7 @@ module FileOperations
 
     self["#{field}_id".to_sym] = fs.id
 
-    return self["#{field}_id".to_sym].present?
+    return self.save!
 
   end
 
