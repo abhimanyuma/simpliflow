@@ -100,3 +100,22 @@ export class Role {
 
 
 }
+
+
+export class Form {
+
+ static default_root() {
+    return ("/dashboard/forms")
+  }
+
+  static new_form() {
+    return (Form.default_root() + "/new")
+  }
+
+  static show(uuid) {
+    return (Form.default_root() + `/${uuid}`)
+  }
+
+
+}
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170721234355) do
+ActiveRecord::Schema.define(version: 20170729183621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,29 @@ ActiveRecord::Schema.define(version: 20170721234355) do
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.index ["screen_id"], name: "index_form_elements_on_screen_id", using: :btree
+  end
+
+  create_table "form_permissions", force: :cascade do |t|
+    t.integer  "resource_id"
+    t.string   "resource_type"
+    t.integer  "user_id"
+    t.integer  "organisation_id"
+    t.integer  "team_id"
+    t.integer  "role_id"
+    t.integer  "permission",              default: 0
+    t.integer  "action",                  default: 0
+    t.integer  "priority",                default: 0
+    t.json     "additional_restrictions"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.index ["organisation_id", "role_id"], name: "org_role_index", using: :btree
+    t.index ["organisation_id", "team_id"], name: "org_team_index", using: :btree
+    t.index ["organisation_id"], name: "index_form_permissions_on_organisation_id", using: :btree
+    t.index ["resource_id", "resource_type"], name: "resource_full_index", using: :btree
+    t.index ["role_id"], name: "index_form_permissions_on_role_id", using: :btree
+    t.index ["team_id", "role_id"], name: "team_role_index", using: :btree
+    t.index ["team_id"], name: "index_form_permissions_on_team_id", using: :btree
+    t.index ["user_id"], name: "index_form_permissions_on_user_id", using: :btree
   end
 
   create_table "forms", force: :cascade do |t|

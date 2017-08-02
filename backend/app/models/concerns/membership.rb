@@ -105,7 +105,16 @@ module Membership
     return entity
   end
 
+  module ClassMethods
+    def all_entities(user)
+      Permission.where(actor_id: user.id, actor_type: user.class.to_s, resource_type: self.to_s)
+    end
 
+    def all_entity_levels(user)
+      all_entities(user).pluck(:resource_id, :level).to_h
+    end
+
+  end
 
   # def all_members
   #   return self.members("all")

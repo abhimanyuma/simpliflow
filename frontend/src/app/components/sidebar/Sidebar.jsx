@@ -12,7 +12,7 @@ class SideBar extends React.Component {
             <a className="nav-link active" href="#">Overview <span className="sr-only">(current)</span></a>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">Forms</a>
+            <Link to="/dashboard/forms" className="nav-link">Forms</Link>
           </li>
           <li className="nav-item">
             <a className="nav-link" href="#">Dashboards</a>

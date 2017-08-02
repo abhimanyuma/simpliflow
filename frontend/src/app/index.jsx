@@ -26,9 +26,12 @@ import SignupPage from './components/signup/SignupPage.jsx';
 
 
 import DashboardHome from './components/dashboard/DashboardHome.jsx';
+import OrganisationMain from './components/dashboard/organisations/OrganisationMain.jsx';
+import FormMain from './components/dashboard/forms/FormMain.jsx';
+
+
 
 import ProfileContainer from './components/dashboard/profile/ProfileContainer.jsx';
-import OrganisationMain from './components/dashboard/organisations/OrganisationMain.jsx';
 import OrganisationsContainer from './components/dashboard/organisations/OrganisationsContainer.jsx';
 import NewOrganisationContainer from './components/dashboard/organisations/NewOrganisationContainer.jsx';
 import SingleOrganisationContainer from './components/dashboard/organisations/SingleOrganisationContainer.jsx';
@@ -107,7 +110,7 @@ render(
           <Route path=":org_slug/teams/:sublevel_slug/delete" component={DeleteSublevelContainer} type="teams"/>
           <Route path=":org_slug/roles/:sublevel_slug/delete" component={DeleteSublevelContainer} type="roles"/>
         </Route>
-        <Route path="forms" >
+        <Route path="forms" component={FormMain}>
           <IndexRoute component={FormsContainer} />
         </Route>
       </Route>

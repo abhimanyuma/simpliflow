@@ -35,82 +35,62 @@ export function setForm(form: Object): {type: string, data: Object} {
   }
 }
 
-const REMOVE_FORM = 'Form::Remove';
-export function removeForm(org_slug: string): {type: string, org_slug: string} {
+const SET_FORMS =  'Form::SetMultiple';
+export function setForms(forms) {
   return {
-    type: REMOVE_ORG,
-    org_slug: org_slug
+    type: SET_FORMS,
+    data: forms
   }
 }
 
-const SET_ORG_ERRORS =  'Organisation::SetErrors';
-export function setOrganisationErrors(org_slug: string, errors: Object): {type: string, errors: Object} {
+const REMOVE_FORM = 'Form::Remove';
+export function removeForm(form_uuid: string): {type: string, form_uuid: string} {
+  return {
+    type: REMOVE_ORG,
+    form_uuid: form_uuid
+  }
+}
+
+const SET_FORM_ERRORS =  'Form::SetErrors';
+export function setFormErrors(form_uuid: string, errors: Object): {type: string, errors: Object} {
   return {
     type: SET_ORG_ERRORS,
     errors: errors,
-    org_slug: org_slug
+    form_uuid: form_uuid
   }
 }
 
 
-export function getOrganisation(org_slug: string, additional_attribs = {}): Function {
+export function getForms(): Function {
   return function(dispatch) {
-    dispatch(requestOrganisation(org_slug));
-    let url = `/organisations/${org_slug}`;
-    if (additional_attribs["teams"]) {
-      url = `/organisations/${org_slug}/?include_teams=true`;
-    }
+    let url = `/forms`;
     let success_cb = (data) => {
-      dispatch(setOrganisation(data));
+      dispatch(setForms(data));
     }
     let error_cb = (errors) => {
-      dispatch(setLoadedModel(org_slug))
-      dispatch(setOrganisationErrors(org_slug, errors));
+      console.log(errors)
     }
     fetch_object(url, success_cb, error_cb);
   }
 
 }
 
-export function deleteOrganisation(org_slug: string, redirect_url: string): Function {
+export function getForm(form_uuid: string, additional_attribs = {}): Function {
   return function(dispatch) {
-    dispatch(setLoadingModel(org_slug))
-    let url = `/organisations/${org_slug}`;
+    dispatch(requestForm(form_uuid));
+    let url = `/forms/${form_uuid}`;
     let success_cb = (data) => {
-      dispatch(removeOrganisation(org_slug));
-      if (redirect_url !== null) {
-        dispatch(push(redirect_url))
-      }
+      dispatch(setForm(data));
     }
     let error_cb = (errors) => {
-      dispatch(setLoadedModel(org_slug))
-      dispatch(setOrganisationErrors(org_slug, errors));
+      dispatch(setLoadedModel(form_uuid))
+      dispatch(setFormErrors(form_uuid, errors));
     }
-    delete_object(url, success_cb, error_cb);
+    fetch_object(url, success_cb, error_cb);
   }
 
 }
 
-export function updateOrganisation(org, data): Function {
-  return function(dispatch) {
-    org.update(data, dispatch)
-  }
-
-}
-
-export function uploadFileOrganisation(org, file, file_attribute): Function {
-  return function(dispatch) {
-    org.update(file, dispatch, true, {"file_attribute": file_attribute}) //is_file = true
-  }
-
-}
-
-export function removeFileOrganisation(org, file_attribute): Function {
-  return function(dispatch) {
-    org.remove_file(file_attribute, dispatch) //is_file = true
-  }
-
-}
 
 const CREATE_FORM_CONFIG = 'Form::SetLocal';
 export function setFormLocal(config: any, id: string, reset: boolean = true) {
