@@ -7,7 +7,7 @@ import ErrorPanel from '../common/ErrorPanel.jsx';
 import { validate } from '../../common/common.js';
 
 type MainFormProps = {
-  form_config: any
+  main_form: any
 }
 
 class MainForm extends React.Component {
@@ -19,8 +19,8 @@ class MainForm extends React.Component {
   get_elements() {
 
     let element_object = []
-    if (this.props.form_config.get("elements")) {
-     element_object = this.props.form_config.get("elements")
+    if (this.props.main_form.get("elements")) {
+     element_object = this.props.main_form.get("elements")
     }
     return (element_object);
   }
@@ -45,7 +45,7 @@ class MainForm extends React.Component {
 
   check_errors() {
     let total_validation_rules = []
-    let elements = this.props.form_config.get("elements");
+    let elements = this.props.main_form.get("elements");
 
     for (let element of elements) {
 
@@ -67,7 +67,7 @@ class MainForm extends React.Component {
       }
     }
 
-    let global_validation_rules = this.props.form_config.get("validation_rules")
+    let global_validation_rules = this.props.main_form.get("validation_rules")
     if (global_validation_rules) {
       for (let global_rule of global_validation_rules) {
         total_validation_rules.push(Object.assign({}, global_rule))
@@ -78,7 +78,7 @@ class MainForm extends React.Component {
       this.props.set_errors(this.props.form_state_key, error_values)
     } else {
       this.props.set_errors(this.props.form_state_key, {})
-      this.props.on_submit(this.props.form_state, this.props.form_state_key, this.props.form_config)
+      this.props.on_submit(this.props.form_state, this.props.form_state_key, this.props.main_form)
     }
   }
 
@@ -103,14 +103,14 @@ class MainForm extends React.Component {
   }
 
   render() {
-    if (this.props.form_config && this.props.form_state) {
+    if (this.props.main_form && this.props.form_state) {
       let disabled = this.props.form_state.disabled || ""
 
       return(
         <div className="card">
-          {!this.props.form_config.get("hide_title") &&
+          {!this.props.main_form.get("hide_title") &&
             <h3 className="card-header">
-              {this.props.form_config.get("title")}
+              {this.props.main_form.get("title")}
             </h3>
           }
           <div className="card-block">

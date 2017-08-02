@@ -42,6 +42,7 @@ import NewSublevelContainer from './components/dashboard/sublevels/NewSublevelCo
 import EditSublevelContainer from './components/dashboard/sublevels/EditSublevelContainer.jsx';
 import DeleteSublevelContainer from './components/dashboard/sublevels/DeleteSublevelContainer.jsx';
 
+import FormsContainer from './components/dashboard/forms/FormsContainer.jsx';
 
 import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 
@@ -105,6 +106,9 @@ render(
           <Route path=":org_slug/roles/:sublevel_slug/edit" component={EditSublevelContainer} type="roles"/>
           <Route path=":org_slug/teams/:sublevel_slug/delete" component={DeleteSublevelContainer} type="teams"/>
           <Route path=":org_slug/roles/:sublevel_slug/delete" component={DeleteSublevelContainer} type="roles"/>
+        </Route>
+        <Route path="forms" >
+          <IndexRoute component={FormsContainer} />
         </Route>
       </Route>
 

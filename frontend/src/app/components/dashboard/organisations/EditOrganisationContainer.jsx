@@ -7,7 +7,7 @@ import EditOrganisation from './EditOrganisation.jsx';
 
 import {getOrganisation} from '../../../actions/OrganisationActions.js';
 
-import { setFormConfig } from '../../../actions/FormConfigActions.js';
+import { setFormLocal } from '../../../actions/FormActions.js';
 import { createNewFormState, setFormStateErrors, setFormStateFromModel } from '../../../actions/FormStateActions.js';
 
 let EditOrganisationContainer  = connect(
@@ -34,7 +34,7 @@ let EditOrganisationContainer  = connect(
         dispatch(getOrganisation(org_slug))
       },
       set_form_config: (config_base, config_key, reset) => {
-        dispatch(setFormConfig(config_base, config_key, reset))
+        dispatch(setFormLocal(config_base, config_key, reset))
       },
       create_new_form_state: (state_key) => {
         dispatch(createNewFormState(state_key))

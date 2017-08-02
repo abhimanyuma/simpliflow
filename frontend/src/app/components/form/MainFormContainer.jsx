@@ -3,7 +3,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 import MainForm from './MainForm.jsx';
-import { setFormConfig } from '../../actions/FormConfigActions.js';
 import { connect } from 'react-redux';
 import { createFormStateFromInitialState, createNewFormState, updateFormState, setFormStateErrors } from '../../actions/FormStateActions.js';
 
@@ -17,9 +16,9 @@ let MainFormContainer  = connect(
     props["config_key"] = ownProps.form_config_key || null;
     props["form_state_key"] = ownProps.form_state_key || props["config_key"];
 
-    let form_config = state.form_config && (typeof(state.form_config.get) === "function")
-    if (form_config) {
-      props["form_config"] = state.form_config.get(props["config_key"])
+    let main_form = state.forms && (typeof(state.forms.get) === "function")
+    if (main_form) {
+      props["main_form"] = state.forms.get(props["config_key"])
     }
 
     let form_state = state.form_state && (typeof(state.form_state.get) === "function")
@@ -40,9 +39,9 @@ let MainFormContainer  = connect(
       dispatch(updateFormState(form_state_key, update_value))
     }
 
-    dispatch_functions["on_submit"] = (form_state, form_state_key, form_config) => {
-      if (form_config && form_config.get && form_config.get("elements")) {
-        for (let element of form_config.get("elements")) {
+    dispatch_functions["on_submit"] = (form_state, form_state_key, main_form) => {
+      if (main_form && main_form.get && main_form.get("elements")) {
+        for (let element of main_form.get("elements")) {
           if (element["type"] === "submit" && element["callback"]) {
             element["callback"](form_state, form_state_key, dispatch)
             break;

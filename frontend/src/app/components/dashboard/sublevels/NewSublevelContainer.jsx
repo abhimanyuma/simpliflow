@@ -9,7 +9,7 @@ import {getOrganisation} from '../../../actions/OrganisationActions.js';
 
 
 
-import { setFormConfig } from '../../../actions/FormConfigActions.js';
+import { setFormLocal } from '../../../actions/FormActions.js';
 import { createNewFormState, setFormStateErrors, setFormStateFromHash } from '../../../actions/FormStateActions.js';
 
 let NewSublevelContainer  = connect(
@@ -34,7 +34,7 @@ let NewSublevelContainer  = connect(
         dispatch(getOrganisation(org_slug))
       },
       set_form_config: (config_base, config_key) => {
-        dispatch(setFormConfig(config_base, config_key))
+        dispatch(setFormLocal(config_base, config_key))
       },
       create_new_form_state: (state_key) => {
         dispatch(createNewFormState(state_key))

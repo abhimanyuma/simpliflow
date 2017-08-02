@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import ChangeProfile from './ChangeProfile.jsx';
 
-import { setFormConfig } from '../../../../actions/FormConfigActions.js';
+import { setFormLocal } from '../../../../actions/FormActions.js';
 import { createNewFormState, setFormStateErrors } from '../../../../actions/FormStateActions.js';
 
 let ChangeProfileContainer  = connect(
@@ -18,7 +18,7 @@ let ChangeProfileContainer  = connect(
   function mapDispatchToProps(dispatch) {
     return {
       set_form_config: (config_base, config_key) => {
-        dispatch(setFormConfig(config_base, config_key))
+        dispatch(setFormLocal(config_base, config_key))
       },
       create_new_form_state: (state_key) => {
         dispatch(createNewFormState(state_key))

@@ -3,7 +3,7 @@
 import {combineReducers} from 'redux';
 import { profile } from './ProfileReducer.js';
 import { form_state } from './FormStateReducer.js';
-import { form_config } from './FormConfigReducer.js';
+import { forms } from './FormReducer.js';
 import { routerReducer } from 'react-router-redux';
 import { user_organisations } from './UserOrganisationReducer.js';
 import { organisations } from './OrganisationReducer.js';
@@ -14,7 +14,7 @@ import { roles } from './RoleReducer.js';
 let reducer = combineReducers({
   profile: profile,
   form_state: form_state,
-  form_config: form_config,
+  forms: forms,
   user_organisations: user_organisations,
   organisations: organisations,
   search_terms: search_terms,

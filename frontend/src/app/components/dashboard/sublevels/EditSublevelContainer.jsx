@@ -9,7 +9,7 @@ import {getOrganisation} from '../../../actions/OrganisationActions.js';
 import {getTeam} from '../../../actions/TeamActions.js';
 import {getRole} from '../../../actions/RoleActions.js';
 
-import { setFormConfig } from '../../../actions/FormConfigActions.js';
+import { setFormLocal } from '../../../actions/FormActions.js';
 import { createNewFormState, setFormStateErrors, setFormStateFromModel } from '../../../actions/FormStateActions.js';
 
 let EditSublevelContainer  = connect(
@@ -56,7 +56,7 @@ let EditSublevelContainer  = connect(
         }
       },
       set_form_config: (config_base, config_key, reset) => {
-        dispatch(setFormConfig(config_base, config_key, reset))
+        dispatch(setFormLocal(config_base, config_key, reset))
       },
       create_new_form_state: (state_key) => {
         dispatch(createNewFormState(state_key))

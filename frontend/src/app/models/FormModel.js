@@ -3,7 +3,7 @@ import BaseModel from './BaseModel.js';
 
 import {List} from 'immutable';
 
-class FormConfigModel extends BaseModel({
+class FormModel extends BaseModel({
   title: "",
   elements: new List([]),
   hide_title: false
@@ -12,6 +12,6 @@ class FormConfigModel extends BaseModel({
 
 }
 
-export default FormConfigModel;
+export default FormModel;
 
 
