@@ -54,6 +54,7 @@ class NewSublevel extends React.Component {
     let title_type = this.display_text()
     return {
       "id" : `new-${type}-form`,
+      "source": "LOCAL",
       "hide_title": true,
       "elements":[
         {

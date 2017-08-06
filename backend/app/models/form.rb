@@ -8,7 +8,14 @@ class Form < ApplicationRecord
     self.uuid = SecureRandom.uuid
   end
 
+  def source
+    "ONLINE"
+  end
 
+  def as_json(options)
+    options[:methods] ||= [:source]
+    super(options)
+  end
 
   def self.get_user_forms(user)
     #Get User directly dependent ones

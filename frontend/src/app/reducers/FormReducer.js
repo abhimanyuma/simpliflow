@@ -41,7 +41,6 @@ export const forms = function(state: Object = new FormCollection({}), action: Ob
         break;
       case "SetMultiple":
         for (let single_form of action.data) {
-          console.log(single_form)
           uuid = single_form["uuid"]
           state = state.set("models", state.models.set(uuid, new FormModel(single_form)))
           model = state.models.get(uuid)

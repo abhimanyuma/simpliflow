@@ -11,7 +11,7 @@ let FormsContainer  = connect(
   function mapStateToProps(state) {
     return {
       profile: state.profile,
-      forms: state.forms.get("models"),
+      forms: state.forms.get_global_forms(),
     }
   },
   function mapDispatchToProps(dispatch) {

@@ -21,6 +21,7 @@ class SignupForm extends React.Component {
     return {
       "id" : "signup-form",
       "title" : "Signup",
+      "source": "LOCAL",
       "elements":[
         {
           "key": "username",

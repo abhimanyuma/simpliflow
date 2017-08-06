@@ -21,6 +21,7 @@ class NewOrganisation extends React.Component {
   get_config() {
     return {
       "id" : "new-organisation-form",
+      "source": "LOCAL",
       "hide_title": true,
       "elements":[
         {

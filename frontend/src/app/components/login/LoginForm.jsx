@@ -26,6 +26,7 @@ class LoginForm extends React.Component {
   get_config() {
     return {
       "id" : "login-form",
+      "source": "LOCAL",
       "title" : "Login",
       "elements":[
         {

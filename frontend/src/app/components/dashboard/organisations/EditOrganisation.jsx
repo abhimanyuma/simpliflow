@@ -46,6 +46,7 @@ class EditOrganisation extends React.Component {
   get_config() {
     return {
       "id" : "edit-organisation-form",
+      "source": "LOCAL",
       "hide_title": true,
       "elements":[
         {

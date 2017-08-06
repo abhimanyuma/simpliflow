@@ -75,6 +75,7 @@ class EditSublevel extends React.Component {
   get_config(type) {
     return {
       "id" : `edit-${type}-form`,
+      "source": "LOCAL",
       "hide_title": true,
       "elements":[
         {
