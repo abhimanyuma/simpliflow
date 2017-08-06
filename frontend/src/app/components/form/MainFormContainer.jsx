@@ -16,9 +16,9 @@ let MainFormContainer  = connect(
     props["config_key"] = ownProps.form_config_key || null;
     props["form_state_key"] = ownProps.form_state_key || props["config_key"];
 
-    let main_form = state.forms && (typeof(state.forms.get) === "function")
+    let main_form = state.forms && (typeof(state.forms.get_model) === "function")
     if (main_form) {
-      props["main_form"] = state.forms.get(props["config_key"])
+      props["main_form"] = state.forms.get_model(props["config_key"])
     }
 
     let form_state = state.form_state && (typeof(state.form_state.get) === "function")
