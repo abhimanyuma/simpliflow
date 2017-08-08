@@ -47,6 +47,11 @@ export const forms = function(state: Object = new FormCollection({}), action: Ob
           state = state.set("models", state.models.set(uuid, model.set_loaded()))
         }
         break;
+      case "Set":
+        state = state.set("models", state.models.set(uuid, new FormModel(action.data)))
+        model = state.models.get(uuid)
+        state = state.set("models", state.models.set(uuid, model.set_loaded()))
+        break;
 
       default:
         break;

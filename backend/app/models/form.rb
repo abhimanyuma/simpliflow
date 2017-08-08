@@ -13,6 +13,7 @@ class Form < ApplicationRecord
   end
 
   def as_json(options)
+    options[:except] ||= [:id]
     options[:methods] ||= [:source]
     super(options)
   end
@@ -50,6 +51,32 @@ class Form < ApplicationRecord
     )
 
     return Form.where(id: get_possible_form_ids)
+
+  end
+
+
+  def permissible_for_user?(user)
+    #Get User directly dependent ones
+    frp = FormPermission.where(resource_type:self.class.to_s, resource_id: self.id).to_a
+
+    user_org_ids = frp.map(&:organisation_id).compact
+    user_org_permissions = Organisation.all_entity_levels(user, user_org_ids)
+    #Get Team ones
+    user_team_ids = frp.map(&:team_id).compact
+    user_team_permissions = Team.all_entity_levels(user, user_team_ids)
+    #Get Role ones
+    user_role_ids = frp.map(&:role_id).compact
+    user_role_permissions = Role.all_entity_levels(user)
+
+    permissible = FormPermission.permissible_for_form?(frp, user,
+      {
+      org_permissions: user_org_permissions,
+      team_permissions: user_team_permissions,
+      role_permissions: user_role_permissions
+      }
+    )
+
+    return permissible
 
   end
 

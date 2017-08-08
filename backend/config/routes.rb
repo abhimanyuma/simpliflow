@@ -29,7 +29,7 @@ Rails.application.routes.draw do
         delete :logo, on: :member, to: 'organisations#destroy_logo'
       end
 
-      resources :forms, only: [:index]
+      resources :forms, only: [:index, :show]
 
       resources :sessions, only: [:create, :destroy]
 

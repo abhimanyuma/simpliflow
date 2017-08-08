@@ -106,12 +106,16 @@ module Membership
   end
 
   module ClassMethods
-    def all_entities(user)
-      Permission.where(actor_id: user.id, actor_type: user.class.to_s, resource_type: self.to_s)
+    def all_entities(user, selected_ids)
+      if selected_ids.nil?
+        Permission.where(actor_id: user.id, actor_type: user.class.to_s, resource_type: self.to_s)
+      else
+        Permission.where(actor_id: user.id, actor_type: user.class.to_s, resource_type: self.to_s, resource_id: selected_ids)
+      end
     end
 
-    def all_entity_levels(user)
-      all_entities(user).pluck(:resource_id, :level).to_h
+    def all_entity_levels(user, selected_ids = nil)
+      all_entities(user, selected_ids).pluck(:resource_id, :level).to_h
     end
 
   end

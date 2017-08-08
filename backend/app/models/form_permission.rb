@@ -72,23 +72,29 @@ class FormPermission < ApplicationRecord
 
   end
 
+  def self.permissible_for_form?(frp_array, user, user_permissions)
+    permissible = false
+    frp_array.each do |frp|
+      current_perm = frp.permissible?(user, user_permissions)
+      if frp.nil?
+        next
+      elsif current_perm == false
+        permissible = false
+        break;
+      elsif current_perm == true
+        permissible = true
+        break;
+      end
+    end
+    return permissible
+
+  end
+
   def self.find_permissible(frp_map, user, user_permissions)
     permissible_ids = []
     frp_map.each do |form_id, frp_array|
-      permissible = false
-      frp_array.each do |frp|
-        current_perm = frp.permissible?(user, user_permissions)
-        if frp.nil?
-          next
-        elsif current_perm == false
-          permissible = false
-          break;
-        elsif current_perm == true
-          permissible = true
-          break;
-        end
-      end
-      permissible_ids << form_id
+      permissible = FormPermission.permissible_for_form?(frp_array, user, user_permissions)
+      permissible_ids << form_id if permissible
     end
     return permissible_ids
   end
