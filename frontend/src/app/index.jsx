@@ -46,6 +46,8 @@ import EditSublevelContainer from './components/dashboard/sublevels/EditSublevel
 import DeleteSublevelContainer from './components/dashboard/sublevels/DeleteSublevelContainer.jsx';
 
 import FormsContainer from './components/dashboard/forms/FormsContainer.jsx';
+import SingleFormContainer from './components/dashboard/forms/SingleFormContainer.jsx';
+
 
 import { syncHistoryWithStore, routerActions, routerMiddleware } from 'react-router-redux'
 
@@ -112,6 +114,7 @@ render(
         </Route>
         <Route path="forms" component={FormMain}>
           <IndexRoute component={FormsContainer} />
+          <Route path=":form_id" component={SingleFormContainer} />
         </Route>
       </Route>
 

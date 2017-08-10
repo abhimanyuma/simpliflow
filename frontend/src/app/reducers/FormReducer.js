@@ -48,11 +48,35 @@ export const forms = function(state: Object = new FormCollection({}), action: Ob
         }
         break;
       case "Set":
+        uuid = action.data.id || action.data.uuid
         state = state.set("models", state.models.set(uuid, new FormModel(action.data)))
         model = state.models.get(uuid)
         state = state.set("models", state.models.set(uuid, model.set_loaded()))
         break;
-
+      case "Set":
+        uuid = action.data.id || action.data.uuid
+        state = state.set("models", state.models.set(uuid, new FormModel(action.data)))
+        model = state.models.get(uuid)
+        state = state.set("models", state.models.set(uuid, model.set_loaded()))
+        break;
+      case "SetErrors":
+        model = state.models.get(uuid)
+        if (model) {
+          state = state.set("models", state.models.set(uuid, model.set_errors(action.errors)))
+        }
+        break;
+      case "SetLoadedModel":
+        model = state.models.get(uuid)
+        state = state.set("models", state.models.set(uuid, model.set_loaded()))
+        break;
+      case "SetLoadingModel":
+        model = state.models.get(uuid)
+        state = state.set("models", state.models.set(uuid, model.set_loading()))
+        break;
+      case "UnsetErrors":
+        model = state.models.get(uuid)
+        state = state.set("models", state.models.set(uuid, model.unset_errors()))
+        break;
       default:
         break;
    }
