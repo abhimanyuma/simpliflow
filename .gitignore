@@ -1,14 +1,14 @@
-frontend/node_modules/
-frontend/dist/
-frontend/bower_components/
-frontend/.sass-cache/
-frontend/.DS_Store
-frontend/assets/eot
-frontend/assets/woff2
-frontend/assets/woff
-frontend/assets/ttf
-frontend/assets/svg
-frontend/npm-debug.log
+admin_console/node_modules/
+admin_console/dist/
+admin_console/bower_components/
+admin_console/.sass-cache/
+admin_console/.DS_Store
+admin_console/assets/eot
+admin_console/assets/woff2
+admin_console/assets/woff
+admin_console/assets/ttf
+admin_console/assets/svg
+admin_console/npm-debug.log
 
 # See https://help.github.com/articles/ignoring-files for more about ignoring files.
 #
