@@ -2,7 +2,7 @@ FROM ruby:2.3
 
 
 RUN apt-get update -qq && apt-get install -y build-essential libpq-dev postgresql-client
-ENV RAILS_ROOT /var/www/docker_example
+ENV RAILS_ROOT /var/www/api_backend
 RUN mkdir -p $RAILS_ROOT/tmp/pids
 RUN mkdir -p $RAILS_ROOT/config/shared/sockets
 
