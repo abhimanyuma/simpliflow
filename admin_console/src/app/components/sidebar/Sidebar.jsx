@@ -6,7 +6,7 @@ class SideBar extends React.Component {
 
   render () {
     return(
-      <nav className="col-sm-3 col-md-2 hidden-xs-down bg-faded sidebar">
+      <nav className="col-sm-3 col-md-2 col hidden-xs-down bg-faded sidebar">
         <ul className="nav nav-pills flex-column">
           <li className="nav-item">
             <a className="nav-link active" href="#">Overview <span className="sr-only">(current)</span></a>

@@ -16,7 +16,7 @@ class Dashboard extends React.Component {
         <div className="container-fluid">
           <div className="row">
             <SideBar />
-            <main className="col-sm-9 offset-sm-3 col-md-10 offset-md-2 pt-3">
+            <main className="col-9">
               {this.props.children}
             </main>
           </div>
