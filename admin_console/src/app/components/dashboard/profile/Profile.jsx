@@ -30,16 +30,18 @@ class Profile extends React.Component {
         <h1>Profile</h1>
         <div className="col-lg-6 col-md-9 col-sm-12">
           <div className="card ">
-            <div className="card-block">
+            <div className="card-body">
               <h4 className="card-title">{this.props.profile.get("name") || "User"}</h4>
-              <table className="table  table-bordered">
+            </div>
+            <div className="card-body">
+              <table className="table mb-0 table-bordered">
                 <tbody>
                   <tr>
                     <th scope="row">Email</th>
                     <td>{this.props.profile.get("email")}</td>
                     <td><Link to={URL.Profile.edit_email()} className="btn btn-secondary btn-block btn-outline">Change</Link></td>
                   </tr>
-                   <tr>
+                    <tr>
                     <th scope="row">Username</th>
                     <td>{this.props.profile.get("username")}</td>
                     <td><Link to={URL.Profile.edit_username()}  className="btn btn-secondary btn-block btn-outline">Change</Link></td>

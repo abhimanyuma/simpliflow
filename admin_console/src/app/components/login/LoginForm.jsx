@@ -114,7 +114,7 @@ class LoginForm extends React.Component {
             <h3 className="card-header">
               You are already logged in
             </h3>
-            <div className="card-block">
+            <div className="card-body">
               <p className="card-text">
                 You are alread logged in as&nbsp;
                 {this.props.profile.get("name") || this.props.profile.get("username")}.</p>

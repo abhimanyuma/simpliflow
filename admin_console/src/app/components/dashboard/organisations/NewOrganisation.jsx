@@ -68,7 +68,7 @@ class NewOrganisation extends React.Component {
   render() {
     return (
       <div className="card ">
-        <div className="card-block">
+        <div className="card-body">
           <div className="row m2b">
             <div className="col">
               <h4>New Organisations</h4>

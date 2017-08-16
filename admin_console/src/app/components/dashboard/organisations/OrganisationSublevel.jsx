@@ -61,7 +61,7 @@ class OrganisationSublevel extends React.Component {
 
       return (
         <div className="card ">
-          <div className="card-block">
+          <div className="card-body">
             <div className="row m2b">
               <div className="col">
                 <h4>

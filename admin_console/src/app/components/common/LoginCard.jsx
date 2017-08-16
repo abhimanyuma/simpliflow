@@ -13,7 +13,7 @@ class LoginCard extends React.Component {
   render () {
     return (
       <div className="card m2v p2">
-        <div className="card-block">
+        <div className="card-body">
           <h4 className="card-title">Already't have an account?</h4>
           <p className="card-text">
             Go to the login page to login

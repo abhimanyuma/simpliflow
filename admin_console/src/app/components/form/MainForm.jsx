@@ -113,9 +113,9 @@ class MainForm extends React.Component {
               {this.props.main_form.get("title")}
             </h3>
           }
-          <div className="card-block">
+          <div className="card-body">
             {this.props.form_state.has_errors() && <ErrorPanel errors={this.get_errors(["global"])} />}
-            <form onSubmit={(e) => this.props.on_submit(e)}>
+            <form onSubmit={(e) => this.props.on_submit(e)} className="p2" >
               <fieldset disabled={disabled} >
                 {this.get_elements().map((object, key) => {
                   return(<FormComponentContainer config={object} substate={this.get_substate(object)} key={key} errors={this.get_errors(object["variable"])} update_state={(value) => this.update_state(value)}

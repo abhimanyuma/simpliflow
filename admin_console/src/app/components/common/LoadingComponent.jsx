@@ -16,7 +16,7 @@ class Workspace extends React.Component {
             <h3 className="card-header">
               Loading
             </h3>
-            <div className="card-block">
+            <div className="card-body">
               <div className="progress">
                 <div className="progress-bar progress-bar-striped progress-bar-animated loading-bar-75" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" ></div>
               </div>

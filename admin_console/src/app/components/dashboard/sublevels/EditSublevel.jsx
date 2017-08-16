@@ -180,7 +180,7 @@ class EditSublevel extends React.Component {
     if (this.props.sublevel) {
       return (
         <div className="card ">
-          <div className="card-block">
+          <div className="card-body">
             <div className="row m2b">
 
               <div className="col">
