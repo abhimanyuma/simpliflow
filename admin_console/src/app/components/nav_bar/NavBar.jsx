@@ -14,7 +14,7 @@ class NavBar extends React.Component {
           <span className="navbar-toggler-icon"></span>
         </button>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
         <Logo show_logo={this.props.show_logo}/>
         <div className="collapse navbar-collapse" id="navbarCollapse">

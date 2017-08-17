@@ -3,6 +3,7 @@ class Form < ApplicationRecord
   before_create :set_uuid
 
   enum level: [ :regular, :admin, :owner]
+  enum content_type: [ :plain_text, :markdown, :rich_text]
 
   def set_uuid
     self.uuid = SecureRandom.uuid

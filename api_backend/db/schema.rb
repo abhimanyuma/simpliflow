@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170729183621) do
+ActiveRecord::Schema.define(version: 20170817090836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,8 +83,9 @@ ActiveRecord::Schema.define(version: 20170729183621) do
     t.text     "content"
     t.integer  "organisation_id"
     t.string   "uuid"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "content_type",    default: 0
     t.index ["organisation_id"], name: "index_forms_on_organisation_id", using: :btree
   end
 
