@@ -119,8 +119,13 @@ export class Form {
   static show(uuid) {
     return (Form.default_root() + `/${uuid}`)
   }
-   static edit_header(uuid) {
+
+  static edit_header(uuid) {
     return (Form.default_root() + `/${uuid}/edit_header`)
+  }
+
+  static edit_content(uuid) {
+    return (Form.default_root() + `/${uuid}/edit_content`)
   }
 
 

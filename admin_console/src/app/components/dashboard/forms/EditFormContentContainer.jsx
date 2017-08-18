@@ -3,12 +3,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import EditFormHeader from './EditFormHeader.jsx';
+import EditFormContent from './EditFormContent.jsx';
 
 import { setFormLocal } from '../../../actions/FormActions.js';
 import { createNewFormState, setFormStateErrors, setFormStateFromModel } from '../../../actions/FormStateActions.js';
 
-let EditFormHeaderContainer  = connect(
+let EditFormContentContainer  = connect(
   function mapStateToProps(state, ownProps) {
     let response = {"profile": state.profile}
     let form = ownProps.form
@@ -33,6 +33,6 @@ let EditFormHeaderContainer  = connect(
       }
     });
   }
-)(EditFormHeader);
-export default EditFormHeaderContainer;
+)(EditFormContent);
+export default EditFormContentContainer;
 

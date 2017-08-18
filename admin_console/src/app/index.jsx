@@ -116,6 +116,7 @@ render(
           <IndexRoute component={FormsContainer} />
           <Route path=":form_id" component={SingleFormContainer} />
           <Route path=":form_id/edit_header" component={SingleFormContainer} action="edit_header"/>
+          <Route path=":form_id/edit_content" component={SingleFormContainer} action="edit_content"/>
         </Route>
       </Route>
 

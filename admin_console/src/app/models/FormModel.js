@@ -13,6 +13,7 @@ class FormModel extends BaseModel({
   source: "LOCAL",
   sub_title: "",
   content: "",
+  content_type: "plain_text",
   organisation_id: null,
   uuid: "",
   hide_title: false

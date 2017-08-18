@@ -17,9 +17,6 @@ class ContentBox extends React.Component {
         <div className="row reset-row-margin">
           {this.props.content}
         </div>
-         <div className="row reset-row-margin d-flex justify-content-end ">
-          <i className="fa fa-edit fa-lg" />
-        </div>
       </div>
     )
   }
