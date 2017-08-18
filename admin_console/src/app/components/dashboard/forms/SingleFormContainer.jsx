@@ -13,6 +13,8 @@ let SingleFormContainer  = connect(
   function mapStateToProps(state, ownProps) {
     let response = {"profile": state.profile}
     let form_id = ownProps.form_id || ownProps.routeParams.form_id
+    response["action"] = ownProps.action || ownProps.route.action
+
 
     if (form_id) {
       response["form_id"] = form_id

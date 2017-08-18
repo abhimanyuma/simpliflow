@@ -6,7 +6,7 @@ const SET_LOADED =  'Form::SetLoadedModel';
 export function setLoadedModel(form_uuid): {type: string, form_uuid: string} {
   return {
     type: SET_LOADED,
-    form_uuid: form_uuid
+    uuid: form_uuid
   }
 }
 
@@ -14,7 +14,7 @@ const SET_LOADING =  'Form::SetLoadingModel';
 export function setLoadingModel(form_uuid): {type: string, form_uuid: string} {
   return {
     type: SET_LOADING,
-    form_uuid: form_uuid
+    uuid: form_uuid
   }
 }
 
@@ -23,7 +23,7 @@ export function requestForm(form_uuid: string, refresh: boolean = true): {type: 
   return {
     type: REQUEST_FORM,
     refresh: refresh,
-    form_uuid: form_uuid
+    uuid: form_uuid
   }
 }
 
@@ -47,16 +47,16 @@ const REMOVE_FORM = 'Form::Remove';
 export function removeForm(form_uuid: string): {type: string, form_uuid: string} {
   return {
     type: REMOVE_ORG,
-    form_uuid: form_uuid
+    uuid: form_uuid
   }
 }
 
 const SET_FORM_ERRORS =  'Form::SetErrors';
 export function setFormErrors(form_uuid: string, errors: Object): {type: string, errors: Object} {
   return {
-    type: SET_ORG_ERRORS,
+    type: SET_FORM_ERRORS,
     errors: errors,
-    form_uuid: form_uuid
+    uuid: form_uuid
   }
 }
 
@@ -101,5 +101,12 @@ export function setFormLocal(config: any, id: string, reset: boolean = true) {
     id: id
   };
   return response
+}
+
+export function updateForm(form, data): Function {
+  return function(dispatch) {
+    form.update(data, dispatch)
+  }
+
 }
 

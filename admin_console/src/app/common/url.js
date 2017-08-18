@@ -112,8 +112,15 @@ export class Form {
     return (Form.default_root() + "/new")
   }
 
+  static delete(uuid) {
+    return (Form.default_root() + `/${uuid}/delete`)
+  }
+
   static show(uuid) {
     return (Form.default_root() + `/${uuid}`)
+  }
+   static edit_header(uuid) {
+    return (Form.default_root() + `/${uuid}/edit_header`)
   }
 
 

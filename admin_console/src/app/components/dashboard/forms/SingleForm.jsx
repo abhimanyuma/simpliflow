@@ -6,6 +6,9 @@ import { Link } from 'react-router';
 import LoadingFormContainer from '../../common/LoadingFormContainer.jsx';
 import ContentBox from '../../common/ContentBox.jsx';
 
+import FormHeader from './FormHeader.jsx';
+import EditFormHeaderContainer from './EditFormHeaderContainer.jsx';
+
 import * as URL from '../../../common/url.js';
 
 class SingleForm extends React.Component {
@@ -16,29 +19,22 @@ class SingleForm extends React.Component {
   }
 
   componentWillMount() {
-    if (!this.props.organisation) {
+    if (!this.props.form) {
       this.props.get_form()
     }
   }
 
   render() {
     if (this.props.form) {
-
+      let header_elem = null;
+      if (this.props.action == "edit_header") {
+        header_elem = <EditFormHeaderContainer form={this.props.form} />
+      } else {
+        header_elem = <FormHeader form={this.props.form} />
+      }
       return (
         <div className="card ">
-          <div className="card-body">
-            <div className="row m2b">
-              <div className="col">
-                <h4 className="card-title">
-                  {this.props.form.title}
-                </h4>
-                <h6 className="card-subtitle">
-                  {this.props.form.sub_title}1
-                </h6>
-              </div>
-            </div>
-            <hr/>
-          </div>
+          { header_elem }
           <div className="card-body">
             <ContentBox content={this.props.form.content} content_type={this.props.form.content_type} />
           </div>
