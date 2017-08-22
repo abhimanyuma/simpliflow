@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { debounce } from '../../../common/common.js';
-import { TrixEditor } from "react-trix";
+import TrixEditor from "../../custom/TrixEditor.jsx";
 
 
 export default class RichTextComponentContainer extends React.Component {
@@ -60,6 +60,7 @@ export default class RichTextComponentContainer extends React.Component {
   handleEditorReady(editor) {
     // this is a reference back to the editor if you want to
     // do editing programatically
+    console.log("The editor is ", editor)
     editor.insertString(this.editor_state.content);
   }
 
@@ -76,7 +77,7 @@ export default class RichTextComponentContainer extends React.Component {
       <div className={"form-group row " + error_class}>
         <label className="col-sm-4 col-form-label">{this.props.config["label"]}</label>
         <div className="col-sm-8">
-          <TrixEditor onChange={this.handleChange} onEditorReady={(editor) => {this.handleEditorReady(editor)}} />
+          <TrixEditor />
           {this.has_errors() && <div className="form-control-feedback">{this.list_errors()}</div>}
           <small className="form-text text-muted">{this.props.config["help_text"]}</small>
         </div>

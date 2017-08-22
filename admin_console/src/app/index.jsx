@@ -6,6 +6,8 @@ import { Router, IndexRoute, Route, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
 import Bootstrap from 'bootstrap/dist/js/bootstrap.js';
 
+
+
 import Workspace from './components/Workspace.jsx';
 import Dashboard from './components/Dashboard.jsx';
 

@@ -14,6 +14,7 @@ $fa-font-path: "~font-awesome/fonts";
 @import 'base';
 @import 'mixins';
 @import 'custom';
+@import 'trix';
 
 @import './components/user_button.scss';
 @import './components/footer.scss';
