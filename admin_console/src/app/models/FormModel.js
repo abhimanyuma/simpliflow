@@ -6,6 +6,9 @@ import {List} from 'immutable';
 import { fetch_object, create_object, delete_object, update_object, upload_file } from '../common/common.js'
 import { setLoadingModel, setLoadedModel, setForm, setFormErrors } from '../actions/FormActions.js';
 
+import { push } from 'react-router-redux'
+
+
 
 class FormModel extends BaseModel({
   title: "",
@@ -22,7 +25,7 @@ class FormModel extends BaseModel({
   url() {
     return `/forms/${this.uuid}`;
   }
-  update(data, dispatch) {
+  update(data, dispatch, redirect = null) {
     let uuid = this.uuid
     dispatch(setLoadingModel(uuid))
 
@@ -30,6 +33,9 @@ class FormModel extends BaseModel({
 
     let success_cb = (data) => {
       dispatch(setForm(data))
+      if (redirect) {
+        dispatch(push(redirect))
+      }
     }
 
     let error_cb = (errors) => {

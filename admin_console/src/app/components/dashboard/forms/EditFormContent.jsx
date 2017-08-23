@@ -63,7 +63,8 @@ class EditFormContent extends React.Component {
             let form = this.props.form
             data['content'] = form_state.get_data("content");
             data['content_type'] = form_state.get_data("content_type");
-            dispatch(updateForm(form,data))
+            let url = URL.Form.show(this.props.form.uuid)
+            dispatch(updateForm(form,data, url))
           }
         }
       ]

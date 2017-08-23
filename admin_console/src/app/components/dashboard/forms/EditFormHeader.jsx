@@ -87,7 +87,8 @@ class EditFormHeader extends React.Component {
             let form = this.props.form
             data['title'] = form_state.get_data("title");
             data['sub_title'] = form_state.get_data("sub_title");
-            dispatch(updateForm(form,data))
+            let url = URL.Form.show(this.props.form.uuid)
+            dispatch(updateForm(form,data, url))
           }
         }
       ]

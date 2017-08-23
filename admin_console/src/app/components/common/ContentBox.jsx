@@ -13,10 +13,7 @@ class ContentBox extends React.Component {
   render() {
     return (
       <div>
-
-        <div className="row reset-row-margin">
-          {this.props.content}
-        </div>
+        <div className="row reset-row-margin" dangerouslySetInnerHTML={{__html: this.props.content}}/>
       </div>
     )
   }

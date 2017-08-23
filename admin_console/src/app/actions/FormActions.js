@@ -103,9 +103,9 @@ export function setFormLocal(config: any, id: string, reset: boolean = true) {
   return response
 }
 
-export function updateForm(form, data): Function {
+export function updateForm(form, data, redirect = null): Function {
   return function(dispatch) {
-    form.update(data, dispatch)
+    form.update(data, dispatch, redirect)
   }
 
 }
