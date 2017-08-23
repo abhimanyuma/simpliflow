@@ -1,3 +1,112 @@
-trix-toolbar {
-  display: none;
+.custom-trix-toolbar {
+  .trix-button-row {
+    @extend .d-flex;
+    @extend .justify-content-between;
+  }
+  .trix-button-group {
+    @extend .btn-group;
+
+  }
+  .trix-button {
+    @extend .btn;
+    @extend .btn-outline-secondary;
+    font-size: 0;
+  }
+
+  .trix-button.trix-active {
+    @extend .btn;
+    @extend .btn-primary;
+    font-size: 0;
+  }
+
+  .trix-button--icon {
+    &:before {
+      @extend .fa;
+      font-size: initial;
+    }
+  }
+
+  .trix-button--icon-bold {
+    &:before {
+      @extend .fa-bold;
+    }
+  }
+
+  .trix-button--icon-italic {
+    &:before {
+      @extend .fa-italic;
+    }
+  }
+
+  .trix-button--icon-strike {
+    &:before {
+      @extend .fa-strikethrough;
+    }
+  }
+
+  .trix-button--icon-link {
+    &:before {
+      @extend .fa-link;
+    }
+  }
+
+  .trix-button--icon-heading-1 {
+    &:before {
+      @extend .fa-header;
+    }
+  }
+
+  .trix-button--icon-quote {
+    &:before {
+      @extend .fa-quote-right;
+    }
+  }
+
+  .trix-button--icon-code {
+    &:before {
+      @extend .fa-code;
+    }
+  }
+
+  .trix-button--icon-bullet-list {
+    &:before {
+      @extend .fa-list-ul;
+    }
+  }
+
+  .trix-button--icon-number-list {
+    &:before {
+      @extend .fa-list-ol;
+    }
+  }
+
+  .trix-button--icon-decrease-nesting-level {
+    &:before {
+      @extend .fa-outdent;
+    }
+  }
+
+  .trix-button--icon-increase-nesting-level {
+    &:before {
+      @extend .fa-indent;
+    }
+  }
+
+  .trix-button--icon-undo{
+    &:before {
+      @extend .fa-undo;
+    }
+  }
+
+  .trix-button--icon-redo{
+    &:before {
+      @extend .fa-repeat;
+    }
+  }
+}
+
+trix-editor {
+  border: 1px solid #868e96;
+  border-radius: 4px;
+  min-height: 4em;
 }
