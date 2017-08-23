@@ -2,18 +2,19 @@
   .trix-button-row {
     @extend .d-flex;
     @extend .justify-content-between;
+    margin-bottom: 10px;
   }
   .trix-button-group {
     @extend .btn-group;
 
   }
-  .trix-button {
+  button.trix-button {
     @extend .btn;
     @extend .btn-outline-secondary;
     font-size: 0;
   }
 
-  .trix-button.trix-active {
+  button.trix-button.trix-active {
     @extend .btn;
     @extend .btn-primary;
     font-size: 0;
@@ -23,6 +24,32 @@
     &:before {
       @extend .fa;
       font-size: initial;
+    }
+  }
+
+  input.trix-button {
+    @extend .btn;
+    @extend .btn-outline-secondary;
+  }
+
+  input.trix-button--dialog {
+    &:before {
+      @extend .fa;
+      font-size: initial;
+    }
+  }
+
+  .trix-dialog__link-fields {
+    @extend .form-group;
+
+    .trix-input {
+      @extend .form-control;
+      margin-bottom: 10px;
+    }
+  }
+  input.trix-button--dialog {
+    &:before {
+      @extend .fa-link;
     }
   }
 
@@ -103,10 +130,16 @@
       @extend .fa-repeat;
     }
   }
+
+
+
 }
+
+
 
 trix-editor {
   border: 1px solid #868e96;
   border-radius: 4px;
   min-height: 4em;
+  padding: 5px;
 }

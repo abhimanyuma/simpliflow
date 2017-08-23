@@ -4,7 +4,7 @@ import 'trix/dist/trix-core.js';
 import React from 'react';
 import { Link } from 'react-router';
 import LoadingFormContainer from '../common/LoadingFormContainer.jsx';
-
+import { generateUnsafeUniqueId } from '../../common/common.js'
 
 
 class TrixEditor extends React.Component {
@@ -12,6 +12,8 @@ class TrixEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {}
+    this.component_id = generateUnsafeUniqueId()
+
   }
 
   componentWillMount() {
@@ -59,8 +61,8 @@ class TrixEditor extends React.Component {
               /*Yes it is class and not className because this is a element that will
             be modified by trix-core.js */
             }
-            <trix-toolbar id="custom-trix-toolbar-instance" class="custom-trix-toolbar m4b"></trix-toolbar>
-            <trix-editor toolbar="custom-trix-toolbar-instance"></trix-editor>
+            <trix-toolbar id={`custom-trix-toolbar-instance-${this.component_id}`} class="custom-trix-toolbar m4b"></trix-toolbar>
+            <trix-editor toolbar={`custom-trix-toolbar-instance-${this.component_id}`}></trix-editor>
           </div>
       </div>
     )

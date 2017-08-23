@@ -41,7 +41,7 @@ export function get_full_url(partial: string): string {
 }
 
 
-export function generateUnsafeUniqueId(length: number):string {
+export function generateUnsafeUniqueId(length: number = 12):string {
 
   let result: string = ''
   let charMap = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_';
