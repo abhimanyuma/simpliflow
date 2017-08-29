@@ -95,3 +95,21 @@ export function human_file_size(bytes, si = false) {
 export function public_link(link) {
   return link
 }
+
+export function text_to_html(text) {
+    // 1: Plain Text Search
+    text = text.replace(/&/g, "&amp;").
+    replace(/</g, "&lt;").
+    replace(/>/g, "&gt;");
+
+    // 2: Line Breaks
+    text = text.replace(/\r\n?|\n/g, "<br>");
+
+    // 3: Paragraphs
+    text = text.replace(/<br>\s*<br>/g, "</p><p>");
+
+    // 4: Wrap in Div Tags
+    text = "<div>" + text + "</div>";
+
+    return text;
+}

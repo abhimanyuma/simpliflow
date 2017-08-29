@@ -16,6 +16,7 @@
     "bootstrap": "^4.0.0-beta",
     "bulma": "^0.2.3",
     "font-awesome": "^4.6.3",
+    "html-to-text": "^3.3.0",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.1.1",
@@ -28,8 +29,10 @@
     "redux-auth-wrapper": "^1.0.0",
     "redux-logger": "^2.7.0",
     "redux-thunk": "^2.1.0",
+    "remove-markdown": "https://github.com/simpliflow-io/remove-markdown.git",
+    "simplemde": "^1.11.2",
+    "textversionjs": "^1.0.2",
     "trix": "https://github.com/simpliflow-io/trix.git#0.11.0"
-
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",

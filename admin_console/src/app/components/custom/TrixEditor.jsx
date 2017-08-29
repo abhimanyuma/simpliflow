@@ -16,23 +16,33 @@ class TrixEditor extends React.Component {
 
   }
 
-  componentWillMount() {
-     document.addEventListener("trix-initialize", (event) => {
-       let trix_editor = document.querySelector("trix-editor").editor
-       window.ed = trix_editor
-       this.setState({"trix_editor": trix_editor})
-       if (this.props.content) {
-         trix_editor.insertHTML(this.props.content)
-       }
-     })
+  componentDidMount() {
+    let elem = this.refs.custom_trix_reference
 
-     document.addEventListener("trix-change", (event) => {
-       if (this.state.trix_editor && event.target) {
-         if (this.props.onChange) {
-           this.props.onChange(event.target.value)
-         }
-       }
-     })
+    this.init_function = (event) => {
+      let trix_editor = document.querySelector("trix-editor").editor
+      this.setState({"trix_editor": trix_editor})
+      if (this.props.content) {
+        trix_editor.insertHTML(this.props.content)
+      }
+    }
+
+    this.change_function = (event) => {
+      if (this.state.trix_editor && event.target) {
+        if (this.props.onChange) {
+          this.props.onChange(event.target.value)
+        }
+      }
+    }
+
+    elem.addEventListener("trix-initialize", this.init_function)
+    elem.addEventListener("trix-change", this.change_function)
+  }
+
+  componentWillUnmount() {
+    let elem = this.refs.custom_trix_reference
+    elem.removeEventListener("trix-initialize", this.init_function)
+    elem.removeEventListener("trix-change", this.change_function)
   }
 
   render() {
@@ -44,7 +54,7 @@ class TrixEditor extends React.Component {
             be modified by trix-core.js */
             }
             <trix-toolbar id={`custom-trix-toolbar-instance-${this.component_id}`} class="custom-trix-toolbar m4b"></trix-toolbar>
-            <trix-editor toolbar={`custom-trix-toolbar-instance-${this.component_id}`}></trix-editor>
+            <trix-editor ref={`custom_trix_reference`} toolbar={`custom-trix-toolbar-instance-${this.component_id}`}></trix-editor>
           </div>
       </div>
     )
