@@ -4,7 +4,6 @@ import { debounce, text_to_html } from '../../../common/common.js';
 import TrixEditor from "../../custom/TrixEditor.jsx";
 import MarkdownEditor from "../../custom/MarkdownEditor.jsx";
 import ModalComponent from '../../common/ModalComponent.jsx';
-import removeMd from 'remove-markdown';
 import createTextVersion from 'textversionjs';
 import marked from 'marked';
 
