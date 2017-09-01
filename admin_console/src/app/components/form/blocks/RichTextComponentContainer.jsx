@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router';
 import { debounce, text_to_html } from '../../../common/common.js';
 import TrixEditor from "../../custom/TrixEditor.jsx";
+import MarkdownEditor from "../../custom/MarkdownEditor.jsx";
 import ModalComponent from '../../common/ModalComponent.jsx';
 import removeMd from 'remove-markdown';
 import createTextVersion from 'textversionjs';
+import marked from 'marked';
 
 
 export default class RichTextComponentContainer extends React.Component {
@@ -29,15 +31,20 @@ export default class RichTextComponentContainer extends React.Component {
   }
 
   change_content(current_type, new_type) {
-    if (current_type == "rich_text" && new_type == "plain_text") {
+    if (current_type == "rich_text" ) {
       let html_content = this.state.editor.content
-      let plain_text_content = createTextVersion(this.state.editor.content)
-      return plain_text_content
+      let text_content = createTextVersion(this.state.editor.content)
+      return text_content
     } else if (current_type == "plain_text" && new_type == "rich_text") {
       let plain_text_content = this.state.editor.content
       let html_content = text_to_html(plain_text_content)
       return html_content
-
+    } else if (current_type == "markdown" && new_type == "rich_text") {
+      let markdown_content = this.state.editor.content
+      let html_content = marked(markdown_content)
+      return html_content
+    } else {
+      return this.state.editor.content
     }
   }
 
@@ -117,6 +124,10 @@ export default class RichTextComponentContainer extends React.Component {
             <textarea type="text" defaultValue={this.state.editor.content} className="form-control" ref="text" placeholder={this.props.config["placeholder"] || ""} onInput={e=>{this.on_change(e)}}>
 
             </textarea>
+          }
+          {
+            (this.state.editor.content_type == "markdown") &&
+            <MarkdownEditor content={this.state.editor.content} onChange={(val) => {this.on_change(val)}}/>
           }
           {
             (this.state.editor.content_type == "rich_text") &&
