@@ -1,12 +1,21 @@
 class Form < ApplicationRecord
 
+  include Sanitizer
+
   before_create :set_uuid
+
+  before_save :sanitize_content
 
   enum level: [ :regular, :admin, :owner]
   enum content_type: [ :plain_text, :markdown, :rich_text]
 
   def set_uuid
     self.uuid = SecureRandom.uuid
+  end
+
+  def sanitize_content
+    self.content_sanitize_attributes([:content])
+
   end
 
   def source
