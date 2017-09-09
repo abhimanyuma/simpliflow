@@ -9,6 +9,7 @@ import ContentBox from '../../common/ContentBox.jsx';
 import FormHeader from './FormHeader.jsx';
 import EditFormHeaderContainer from './EditFormHeaderContainer.jsx';
 import EditFormContentContainer from './EditFormContentContainer.jsx';
+import AddComponentContainer from './AddComponentContainer.jsx';
 
 import * as URL from '../../../common/url.js';
 
@@ -29,6 +30,7 @@ class SingleForm extends React.Component {
     if (this.props.form) {
       let header_elem = null;
       let content_elem = null;
+      let add_component_elem = null;
       if (this.props.action == "edit_header") {
         header_elem = <EditFormHeaderContainer form={this.props.form} />
       } else {
@@ -46,15 +48,21 @@ class SingleForm extends React.Component {
         content_elem = <EditFormContentContainer form={this.props.form} />
       }
 
+      if (this.props.action == "add_component") {
+        add_component_elem = <AddComponentContainer />
+      } else {
+         add_component_elem = <div className="card-body">
+            <div className="d-flex justify-content-center">
+              <Link to={URL.Form.add_component(this.props.form.uuid)} type="button" className="btn btn-primary"><i className="fa fa-plus-circle m1r" />Add Component</Link>
+            </div>
+          </div>
+      }
+
       return (
         <div className="card ">
           { header_elem }
           { content_elem }
-          <div className="card-body">
-            <div className="d-flex justify-content-center">
-              <button type="button" className="btn btn-primary"><i className="fa fa-plus-circle m1r" />Add Component</button>
-            </div>
-          </div>
+          { add_component_elem }
         </div>
       );
     } else {

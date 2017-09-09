@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170817090836) do
+ActiveRecord::Schema.define(version: 20170901151145) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20170817090836) do
     t.integer  "screen_id"
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
+    t.integer  "component_id"
+    t.index ["component_id"], name: "index_form_elements_on_component_id", using: :btree
     t.index ["screen_id"], name: "index_form_elements_on_screen_id", using: :btree
   end
 
@@ -172,4 +174,5 @@ ActiveRecord::Schema.define(version: 20170817090836) do
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
+  add_foreign_key "form_elements", "components"
 end

@@ -128,6 +128,10 @@ export class Form {
     return (Form.default_root() + `/${uuid}/edit_content`)
   }
 
+  static add_component(uuid) {
+    return (Form.default_root() + `/${uuid}/add_component`)
+  }
+
 
 }
 
