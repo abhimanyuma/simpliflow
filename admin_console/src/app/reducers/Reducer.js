@@ -10,6 +10,7 @@ import { organisations } from './OrganisationReducer.js';
 import { search_terms } from './SearchTermReducer.js';
 import { teams } from './TeamReducer.js';
 import { roles } from './RoleReducer.js';
+import { components } from './ComponentReducer.js';
 
 let reducer = combineReducers({
   profile: profile,
@@ -20,6 +21,7 @@ let reducer = combineReducers({
   search_terms: search_terms,
   teams: teams,
   roles: roles,
+  components: components,
   routing: routerReducer
 });
 

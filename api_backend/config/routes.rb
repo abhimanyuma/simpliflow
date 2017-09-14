@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
       resources :forms, only: [:index, :show, :update]
 
+      resources :components, only: [:index]
+
       resources :sessions, only: [:create, :destroy]
 
     end
