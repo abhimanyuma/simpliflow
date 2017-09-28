@@ -49,7 +49,7 @@ class SingleForm extends React.Component {
       }
 
       if (this.props.action == "add_component") {
-        add_component_elem = <AddComponentContainer />
+        add_component_elem = <AddComponentContainer form_id={this.props.form.uuid}/>
       } else {
          add_component_elem = <div className="card-body">
             <div className="d-flex justify-content-center">

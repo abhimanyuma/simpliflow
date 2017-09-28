@@ -21,16 +21,19 @@ class AddComponent extends React.Component {
     this.props.get_components()
   }
 
+  on_add_click(event, id) {
+    this.props.add_new_component(id)
+  }
+
   render() {
 
-    if (this.props.components) {
-      console.log(this.props.components)
+    if (this.props.components && this.props.form) {
       let component_rows = this.props.components.valueSeq().map((value, index) => {
-        console.log("From here", value, index)
           return(
             <tr key={index}>
               <td>{ value.get("name") }</td>
               <td>{ value.get("description") }</td>
+              <td> <button className="btn btn-secondary" onClick={(e) => {this.on_add_click(e, value.get("id"))}}><i className="fa fa-plus" /></button></td>
             </tr>
             );
       })
@@ -43,6 +46,7 @@ class AddComponent extends React.Component {
                 <tr>
                   <th>Component</th>
                   <th>Description</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>

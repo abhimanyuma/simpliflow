@@ -91,6 +91,21 @@ export function getForm(form_uuid: string, additional_attribs = {}): Function {
 
 }
 
+export function addComponent(form_uuid: string, component_id ): Function {
+  return function(dispatch) {
+    let url = `/forms/${form_uuid}/component/${component_id}`;
+    let success_cb = (data) => {
+      dispatch(setForm(data));
+    }
+    let error_cb = (errors) => {
+      dispatch(setLoadedModel(form_uuid))
+      dispatch(setFormErrors(form_uuid, errors));
+    }
+    fetch_object(url, success_cb, error_cb);
+  }
+
+}
+
 
 const CREATE_FORM_CONFIG = 'Form::SetLocal';
 export function setFormLocal(config: any, id: string, reset: boolean = true) {

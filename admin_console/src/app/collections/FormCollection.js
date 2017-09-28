@@ -7,7 +7,6 @@ class FormCollection extends BaseCollection({
 }){
   get_global_forms () {
     models = self.get("models")
-
   }
 
   get_global_forms() {

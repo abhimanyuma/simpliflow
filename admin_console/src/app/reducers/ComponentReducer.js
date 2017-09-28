@@ -21,7 +21,6 @@ export const components = function(state: Object = new ComponentCollection({}), 
     switch (method) {
       case "SetMultiple":
         for (let single_component of action.data) {
-          console.log("Logging here")
           id = single_component["id"]
           state = state.set("models", state.models.set(id, new ComponentModel(single_component)))
           model = state.models.get(id)
